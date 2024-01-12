@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ScoreZoneApp from './root/App.tsx'
+import ScoreZoneApp from './root'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
