@@ -7,7 +7,7 @@ function AppWrapper () {
   return (
     <main className='app-wrapper'>
       {t('common.cancel')}
-      {/* <Outlet /> */}
+      <Outlet />
     </main>
   )
 }

@@ -2,9 +2,11 @@ import React, { Suspense } from "react"
 import { RouteObject } from "react-router-dom"
 import ErrorPage from "./ErrorPage"
 
+import FootballRoutes from '@/views/football/Routes'
+
 const AppWrapper = React.lazy(() => import('./App'))
 
-export const routes: RouteObject[] = [
+const routes: RouteObject[] = [
   // {
   //   path: '/',
   //   element: <div>Hello!</div>,
@@ -18,6 +20,10 @@ export const routes: RouteObject[] = [
       </Suspense>
     ),
     errorElement: <ErrorPage />,
-    children: []
+    children: [
+      ...FootballRoutes
+    ]
   }
 ]
+
+export default routes
