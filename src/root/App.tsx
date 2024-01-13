@@ -1,14 +1,15 @@
-import { useState } from 'react'
-import './App.css'
+import { useTranslation } from 'react-i18next'
+import { Outlet } from 'react-router-dom'
 
-function ScoreZoneApp () {
-  const [count, setCount] = useState(0)
+function AppWrapper () {
+  const { t } = useTranslation()
 
   return (
-    <div>
-      <h1>Helloo </h1>
-    </div>
+    <main className='app-wrapper'>
+      {t('common.cancel')}
+      <Outlet />
+    </main>
   )
 }
 
-export default ScoreZoneApp
+export default AppWrapper
