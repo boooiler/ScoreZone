@@ -1,8 +1,29 @@
 @import './variables';
 
-#root {
+#app-root {
   display: flex;
   height: 100vh;
   position: relative;
   background: $primary-color;
+
+  .app-wrapper{
+    flex-grow: 1;
+    padding: 65px 60px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+
+    @media #{$mhlg} {
+        padding: 50px;
+    }
+    @media #{$mxxxl} {
+        padding: 30px 40px;
+    }
+    @media #{$mxl} {
+        padding-top: 90px;
+    }
+    @media #{$mmd} {
+        padding: 90px 15px 30px;
+    }
+  }
 }

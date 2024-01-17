@@ -1,1 +1,24 @@
-$primary-color: purple;
+$primary-color: #3b3a3a;
+
+$white-color: #fff;
+
+
+/* VARIABLES FOR MEDIA QUERIES */
+$mxs: "only screen and (max-width : 400px)";
+$msm: "only screen and (max-width : 575px)";
+$sm: "only screen and (min-width : 576px)";
+$mmd: "only screen and (max-width : 767px)";
+$md: "only screen and (min-width : 768px)";
+$mlg: "only screen and (max-width : 991px)";
+$lg: "only screen and (min-width : 992px)";
+$mxl: "only screen and (max-width : 1199px)";
+$xl: "only screen and (min-width : 1200px)";
+$msl: "only screen and (max-width : 1299px)";
+$sl: "only screen and (min-width : 1300px)";
+$mxxl: "only screen and (max-width : 1429px)";
+$xxl: "only screen and (min-width : 1430px)";
+$mxxxl: "only screen and (max-width : 1499px)";
+$xxxl: "only screen and (min-width : 1500px)";
+$mhlg: "only screen and (max-width : 1799px)";
+$hlg: "only screen and (min-width : 1800px)";
+$hxlg: "only screen and (min-width : 1921px)";
