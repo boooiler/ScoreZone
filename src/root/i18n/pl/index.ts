@@ -1,9 +1,9 @@
-import { common } from "./common"
-import { errors } from "./errors"
-
-const polishTranslations = {
-  common,
-  errors
+const root = {
+  menu: {
+    football: "Piłka nożna",
+    basketball: "Koszykówka",
+    volleyball: "Siatkówka"
+  }
 }
 
-export default polishTranslations
+export default root

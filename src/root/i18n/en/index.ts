@@ -1,9 +1,9 @@
-import { common } from "./common"
-import { errors } from "./errors"
-
-const englishTranslations = {
-  common,
-  errors
+const root = {
+  menu: {
+    football: "Football",
+    basketball: "Basketball",
+    volleyball: "Volleyball"
+  }
 }
 
-export default englishTranslations
+export default root
