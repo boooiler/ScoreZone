@@ -1,13 +1,8 @@
-import { useEffect } from "react"
 import { useFootballTeams } from "../api/footballQuery"
 import './styles.scss'
 
 export const Football = () => {
   const { data: teams, isLoading } = useFootballTeams()
-
-  useEffect(() => {
-    console.log(teams)
-  }, [teams])
 
   return (
     <div>
