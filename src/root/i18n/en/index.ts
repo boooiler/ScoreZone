@@ -2,7 +2,8 @@ const root = {
   menu: {
     football: "Football",
     basketball: "Basketball",
-    volleyball: "Volleyball"
+    volleyball: "Volleyball",
+    handball: "Handball"
   }
 }
 

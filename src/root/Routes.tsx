@@ -2,6 +2,8 @@ import React, { Suspense } from "react"
 import { Navigate, RouteObject } from "react-router-dom"
 import ErrorPage from "./ErrorPage"
 import FootballRoutes from '@/views/football/Routes'
+import VolleyballRoutes from '@/views/volleyball/Routes'
+import HandballRoutes from '@/views/handball/Routes'
 
 const AppWrapper = React.lazy(() => import('./App'))
 
@@ -20,7 +22,9 @@ const routes: RouteObject[] = [
     ),
     errorElement: <ErrorPage />,
     children: [
-      ...FootballRoutes
+      ...FootballRoutes,
+      ...VolleyballRoutes,
+      ...HandballRoutes
     ]
   }
 ]
