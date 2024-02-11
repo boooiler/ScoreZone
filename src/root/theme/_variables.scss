@@ -1,6 +1,14 @@
 $primary-color: #3b3a3a;
 
+$purple-dark-color: #0c0311;
+$green-dark-color: #020e07;
+$green-light-color: #179c4f;
+$green-light-color-2: #27a729;
 $white-color: #fff;
+$black-color: #000;
+
+$font-header: "Onest";
+$font-text: "Inter";
 
 
 /* VARIABLES FOR MEDIA QUERIES */
@@ -22,3 +30,13 @@ $xxxl: "only screen and (min-width : 1500px)";
 $mhlg: "only screen and (max-width : 1799px)";
 $hlg: "only screen and (min-width : 1800px)";
 $hxlg: "only screen and (min-width : 1921px)";
+
+@font-face {
+    font-family: "Onest";
+    src: url("/fonts/Onest-variable.ttf");
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-variable.ttf");
+}
