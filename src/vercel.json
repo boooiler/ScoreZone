@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-        {
-            "source": "/football-api/:path*",
-            "destination": "${process.env.VITE_API_URL_FOOTBALL}/:path*"
-        }
-    ]
-}

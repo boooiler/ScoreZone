@@ -17,15 +17,7 @@ export default defineConfig({
     }]
   },
   server: {
-    port: 3001,
-    open: true,
-    proxy: {
-      '/football-api': {
-        target: process.env.VITE_API_URL_FOOTBALL,
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/football-api/, '')
-      }
-    }
+    port: 3001
   },
   preview: {
     port: 3001
