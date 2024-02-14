@@ -9,10 +9,41 @@
   background-color: $green-dark-color;
   color: $white-color;
 
+  &.page-volleyball {
+    background-color: #191204;
+  }
+
+  &.page-handball {
+    background-color: #110314;
+  }
+
   .app-outlet {
     flex-grow: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
+    // overflow-x: hidden;
+    // overflow-y: auto;
     position: relative;
+    display: flex;
+    overflow: hidden;
+
+    .left-sidebar {
+      max-width: 600px;
+      width: calc(100% / 5);
+      height: 100%;
+      border-right: 1px solid rgba($white-color, .3);
+      padding: 20px 12px;
+    }
+
+    .page-wrapper {
+      overflow-x: hidden;
+      overflow-y: auto;
+      flex-grow: 1;
+      padding: 20px 12px;
+    }
+
+    .favorite-teams {
+      width: 60px;
+      border-left: 1px solid rgba($white-color, .3);
+      padding: 20px 6px;
+    }
   }
 }

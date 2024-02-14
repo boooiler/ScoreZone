@@ -14,6 +14,7 @@ function AppWrapper () {
       <NavigationBar />
       <section className='app-outlet'>
         <Outlet />
+        <section className='favorite-teams'></section>
       </section>
     </main>
   )

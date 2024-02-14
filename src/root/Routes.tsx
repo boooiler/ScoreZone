@@ -4,6 +4,7 @@ import ErrorPage from "./ErrorPage"
 import FootballRoutes from '@/views/football/Routes'
 import VolleyballRoutes from '@/views/volleyball/Routes'
 import HandballRoutes from '@/views/handball/Routes'
+import Loader from "@/shared/components/loader"
 
 const AppWrapper = React.lazy(() => import('./App'))
 
@@ -16,7 +17,7 @@ const routes: RouteObject[] = [
   {
     path: '/',
     element: (
-      <Suspense>
+      <Suspense fallback={<Loader />}>
         <AppWrapper />
       </Suspense>
     ),

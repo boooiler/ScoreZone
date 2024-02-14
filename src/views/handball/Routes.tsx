@@ -1,3 +1,4 @@
+import Loader from "@/shared/components/loader"
 import React, { Suspense } from "react"
 import { RouteObject } from "react-router-dom"
 
@@ -7,7 +8,7 @@ const routes: RouteObject[] = [
   {
     path: 'handball',
     element: (
-      <Suspense fallback={<div>loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Handball />
       </Suspense>
     )
