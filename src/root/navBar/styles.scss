@@ -13,19 +13,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 12px 6px;
-    --menu-color: black;
-
-    .page-football & {
-        --menu-color: green;
-    }
-
-    .page-volleyball & {
-        --menu-color: orange;
-    }
-
-    .page-handball & {
-        --menu-color: pink;
-    }
 
     &:before {
         content: '';
@@ -34,7 +21,7 @@
         left: 0;
         width: 100%;
         height: 10px;
-        background: var(--menu-color);
+        background: var(--main-color);
         // border-radius: 0 0 6px 6px;
         transition: all .5s;
     }
@@ -51,7 +38,7 @@
             position: absolute;
             top: 0;
             height: 50px;
-            background: var(--menu-color);
+            background: var(--main-color);
             transition: all .5s;
             z-index: -1;
 
@@ -59,7 +46,7 @@
             &:after {
                 content: '';
                 mask: url(/images/subtract.svg) center no-repeat;
-                background: var(--menu-color);
+                background: var(--main-color);
                 position: absolute;
                 top: 0;
                 height: 100%;

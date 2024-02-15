@@ -7,14 +7,22 @@
   height: 100vh;
   position: relative;
   background-color: $green-dark-color;
+  --main-color: $black-color;
   color: $white-color;
+
+  &.page-football {
+    background-color: #191204;
+    --main-color: #{$green-light-color};
+  }
 
   &.page-volleyball {
     background-color: #191204;
+    --main-color: orange;
   }
 
   &.page-handball {
     background-color: #110314;
+    --main-color: pink;
   }
 
   .app-outlet {
@@ -26,8 +34,9 @@
     overflow: hidden;
 
     .left-sidebar {
-      max-width: 600px;
-      width: calc(100% / 5);
+      // max-width: 600px;
+      // width: calc(100% / 5);
+      width: 240px;
       height: 100%;
       border-right: 1px solid rgba($white-color, .3);
       padding: 20px 12px;
