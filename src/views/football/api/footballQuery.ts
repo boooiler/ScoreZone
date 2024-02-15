@@ -26,6 +26,7 @@ export function useFootballTeams (
       country_id,
       country
     }],
+    enabled: !!season,
     queryFn: async ({ queryKey }) => {
       const { data } = await axios.get(`${apiUrl}/teams`, {
         headers,
@@ -57,6 +58,7 @@ export function useFootballLeagues (
       type,
       current
     }],
+    retry: 3,
     queryFn: async () => {
       if (!id || id.length === 0) {
         return []
@@ -69,27 +71,35 @@ export function useFootballLeagues (
       })
 
       const responses: AxiosResponse<any>[] = await Promise.all(promises)
-      // console.log(responses.map(response => response.data).filter(data => data.response.length > 0))
       const leagueDatas: any[] = []
 
       responses.forEach((response) => {
         if (response.data.response && response.data.response.length > 0) {
-          leagueDatas.push(response.data.response[0]) // Dodaj dane ligi do tablicy
+          leagueDatas.push(response.data.response[0]) 
         }
       })
 
       return leagueDatas
+    }
+  })
+}
 
-      // let data = responses.map(response => response.data).map(d => d.response[0])
-      // if(id.length > 1){
-      //   const responses: AxiosResponse = await Promise.all(promises)
-      // }
-      // const data = responses.map(response => response.data).filter(data => data.response.length > 0)
-      // TODO: dodać obsługę błędu skończenia się darmowych requestów
-      // return responses.map(response => response.data).filter(data => data.response.length > 0)
-      // return responses
-      // const nonEmptyResponses = responses.filter(response => response.data.response.length > 0)
-      // return nonEmptyResponses.map(response => response.data.response)
+export function useFootballStandings (
+  season: number,
+  league: number
+) {
+  return useQuery({
+    queryKey: ['football_standings', { 
+      season, 
+      league
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${apiUrl}/standings`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data
     }
   })
 }
