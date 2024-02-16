@@ -16,6 +16,28 @@ export const FootballStandings = ({ league, season }: Props) => {
     }
   }, [standingsData])
 
+  const splitForm = (form: any) => {
+    return form.split("").map((letter: string, index: number) => (
+      <span 
+        key={index} 
+        style={{
+          width: "20px",
+          height: "20px",
+          display: "inline-flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "12px",
+          fontWeight: "600",
+          fontFamily: "Onest",
+          borderRadius: "6px",
+          background: letter === "W" ? "green" : letter === "L" ? "red" : "orange"
+        }}
+      >
+        {letter}
+      </span>
+    ))
+  }
+
   return (
     <>
       <h2>Tabela</h2>
@@ -60,7 +82,11 @@ export const FootballStandings = ({ league, season }: Props) => {
               <td style={{ padding: "0 14px", textAlign: "center" }}>{all.goals.for}:{all.goals.against}</td>
               <td style={{ padding: "0 14px", textAlign: "center" }}>{goalsDiff}</td>
               <td style={{ padding: "0 14px", textAlign: "center" }}>{points}</td>
-              <td style={{ padding: "0 14px", textAlign: "center" }}>{form}</td>
+              <td style={{ padding: "0 14px", textAlign: "center" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                  {splitForm(form)}
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

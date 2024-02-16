@@ -34,7 +34,7 @@ export const FootballTopLeagues = () => {
   return (
     <section>
       <h3>Popularne ligi:</h3>
-      <section className="top-leagues" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <section className="top-leagues" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {leagues.map((l: any) => {
           // console.log(l)
           const { league, country } = l
@@ -46,29 +46,30 @@ export const FootballTopLeagues = () => {
               style={{ 
                 cursor: "pointer",
                 display: "flex",
-                alignItems: "center"
+                alignItems: "center",
+                borderRadius: "6px",
+                padding: "6px 10px 6px 8px",
+                background:"rgba(255, 255, 255, 0.1)",
+                border: isActive(league.id) ? "1px solid #0bbe35" : "unset",
+                borderLeft: isActive(league.id) ? "4px solid #0bbe35" : "unset"
               }}
             >
               <img
                 src={league.logo}
                 alt="logo"
                 style={{
-                  width: "45px",
-                  height: "45px",
+                  width: "40px",
+                  height: "40px",
                   objectFit: "contain",
                   marginRight: "15px",
                   background: "#fff",
-                  padding: "6px",
+                  padding: "4px",
                   borderRadius: "6px"
                 } as React.CSSProperties}
               />
-              <div
-                style={{ 
-                  cursor: "pointer"
-                }}
-              >
+              <div>
                 <p style={{ margin: 0, fontWeight: "bold", color: isActive(league.id) ? "var(--main-color)" : "inherit" }}>{league.name}</p>
-                <i style={{ fontSize: "12px", color: "#d8d8d8" }}>{country.name}</i>
+                <i style={{ fontSize: "11px", color: "#d8d8d8" }}>{country.name}</i>
               </div>
             </div>
           )

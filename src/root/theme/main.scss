@@ -6,22 +6,22 @@
   flex-direction: column;
   height: 100vh;
   position: relative;
-  background-color: $green-dark-color;
+  background: #191d26;
   --main-color: $black-color;
   color: $white-color;
 
   &.page-football {
-    background-color: #191204;
+    // background-color: #191204;
     --main-color: #{$green-light-color};
   }
 
   &.page-volleyball {
-    background-color: #191204;
+    // background-color: #191204;
     --main-color: orange;
   }
 
   &.page-handball {
-    background-color: #110314;
+    // background-color: #110314;
     --main-color: pink;
   }
 
