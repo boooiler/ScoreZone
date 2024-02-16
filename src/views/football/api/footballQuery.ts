@@ -104,6 +104,50 @@ export function useFootballStandings (
   })
 }
 
+export function useFootballFixtures (
+  id?: number,
+  league?: number,
+  season?: number,
+  status?: string, //"NS" | "NS-PST-FT"
+  live?: string, // "all" | "id-id"
+  team?: number,
+  ids?: string, // "id-id-id"
+  date?: string,
+  last?: number,
+  next?: number,
+  from?: string,
+  to?: string,
+  round?: string,
+  venue?: number
+) {
+  return useQuery({
+    queryKey: ['football_fixtures', { 
+      id,
+      season, 
+      league,
+      team,
+      ids,
+      live,
+      date,
+      last,
+      next,
+      from, 
+      to,
+      round,
+      status,
+      venue
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${apiUrl}/fixtures`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data
+    }
+  })
+}
+
 export function useFootballCountries () {
   return useQuery({
     queryKey: ['football_countries'],

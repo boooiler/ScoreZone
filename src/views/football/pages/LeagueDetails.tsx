@@ -4,6 +4,7 @@ import './styles.scss'
 import { useParams } from "react-router-dom"
 import FootballTopLeagues from "../components/FootballTopLeagues"
 import { FootballStandings } from "../components/FootballStandings"
+import { FootballFixtures } from "../components/FootballFixtures"
 
 export const LeagueDetails = () => {
   const { leagueId } = useParams()
@@ -30,6 +31,9 @@ export const LeagueDetails = () => {
         ) : (
           <>
             <h1>{leagueInfo && leagueInfo.league.name}</h1>
+            <section className="fixtures">
+              <FootballFixtures league={Number(leagueId)} season={leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
+            </section>
             <section className="standings">
               <FootballStandings league={Number(leagueId)} season={leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
             </section>

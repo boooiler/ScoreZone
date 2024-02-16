@@ -51,7 +51,8 @@ export const FootballTopLeagues = () => {
                 padding: "6px 10px 6px 8px",
                 background:"rgba(255, 255, 255, 0.1)",
                 border: isActive(league.id) ? "1px solid #0bbe35" : "unset",
-                borderLeft: isActive(league.id) ? "4px solid #0bbe35" : "unset"
+                borderLeft: isActive(league.id) ? "4px solid #0bbe35" : "unset",
+                boxShadow: isActive(league.id) ? "0 0px 14px -6px var(--main-color)" : "unset"
               }}
             >
               <img
