@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { topFootballLeagues } from "../model/mockupLeagues"
+import { FootballLeague } from "../model/league"
 
 export const FootballTopLeagues = () => {
   const navigate = useNavigate()
@@ -35,12 +36,12 @@ export const FootballTopLeagues = () => {
     <section>
       <h3>Popularne ligi:</h3>
       <section className="top-leagues" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        {leagues.map((l: any) => {
+        {leagues.map((l: FootballLeague) => {
           // console.log(l)
           const { league, country } = l
           return (
             <div 
-              className={`league ${isActive(league.id) ? 'active' : ''}`} 
+              className={`league ${isActive(`${league.id}`) ? 'active' : ''}`} 
               key={league.id} 
               onClick={() => navigate(`/football/leagues/${league.id}`)}
               style={{ 
@@ -49,10 +50,10 @@ export const FootballTopLeagues = () => {
                 alignItems: "center",
                 borderRadius: "6px",
                 padding: "6px 10px 6px 8px",
-                background:"rgba(255, 255, 255, 0.1)",
-                border: isActive(league.id) ? "1px solid #0bbe35" : "unset",
-                borderLeft: isActive(league.id) ? "4px solid #0bbe35" : "unset",
-                boxShadow: isActive(league.id) ? "0 0px 14px -6px var(--main-color)" : "unset"
+                background:"#30343c",
+                border: isActive(`${league.id}`) ? "1px solid #0bbe35" : "unset",
+                borderLeft: isActive(`${league.id}`) ? "4px solid #0bbe35" : "unset",
+                boxShadow: isActive(`${league.id}`) ? "0 0px 14px -6px var(--main-color)" : "unset"
               }}
             >
               <img
@@ -69,7 +70,7 @@ export const FootballTopLeagues = () => {
                 } as React.CSSProperties}
               />
               <div>
-                <p style={{ margin: 0, fontWeight: "bold", color: isActive(league.id) ? "var(--main-color)" : "inherit" }}>{league.name}</p>
+                <p style={{ margin: 0, fontWeight: "bold", color: isActive(`${league.id}`) ? "var(--main-color)" : "inherit" }}>{league.name}</p>
                 <i style={{ fontSize: "11px", color: "#d8d8d8" }}>{country.name}</i>
               </div>
             </div>

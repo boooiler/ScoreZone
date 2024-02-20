@@ -1,0 +1,58 @@
+@import '@/root/theme/variables';
+
+.standings {
+    position: relative;
+    padding: 20px;
+
+    table {
+        width: 100%;
+        background: $gray-medium-color;
+        padding: 20px 0px;
+        border-radius: 10px;
+        border-collapse: collapse;
+
+        thead {
+
+            th {
+                padding: 20px 0;
+
+                &.th-team {
+                    text-align: left;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                border-top: 1px solid $gray-light-color;
+
+                td {
+                    padding: 10px 14px;
+                    text-align: center;
+
+                    &.td-team {
+                        padding: 10px 20px 10px 0;
+
+                        .team {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                            margin: 10px 0;
+
+                            &:hover {
+                                text-decoration: underline;
+                                cursor: pointer;
+                            }
+
+                            img {
+                                width: 20px;
+                                height: 20px;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,6 @@
-export const topFootballLeagues = [
+import { FootballLeague } from "./league"
+
+export const topFootballLeagues: FootballLeague[] = [
   { // World Cup 1
     "league": {
       "id": 1,

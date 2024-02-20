@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
+import { FootballStandings } from "../model/standings"
 
 const apiKey = import.meta.env.VITE_API_KEY
 const apiHost = import.meta.env.VITE_API_HOST_FOOTBALL
@@ -7,34 +8,6 @@ const apiUrl = 'https://v3.football.api-sports.io'
 const headers = {
   "x-rapidapi-key": apiKey,
   "x-rapidapi-host": apiHost
-}
-
-export function useFootballTeams (
-  id?: string,
-  league?: number,
-  season?: number,
-  name?: string,
-  country_id?: number,
-  country?: string
-) {
-  return useQuery({
-    queryKey: ['football_teams', {
-      id,
-      league,
-      season,
-      name,
-      country_id,
-      country
-    }],
-    enabled: !!season,
-    queryFn: async ({ queryKey }) => {
-      const { data } = await axios.get(`${apiUrl}/teams`, {
-        headers,
-        params: queryKey[1] as AxiosRequestConfig<any>
-      })
-      return data
-    }
-  })
 }
 
 export function useFootballLeagues (
@@ -99,7 +72,7 @@ export function useFootballStandings (
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })
-      return data
+      return data.response[0] as FootballStandings
     }
   })
 }
@@ -143,7 +116,7 @@ export function useFootballFixtures (
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })
-      return data
+      return data.response
     }
   })
 }
@@ -154,6 +127,33 @@ export function useFootballCountries () {
     queryFn: async () => {
       const { data } = await axios.get(`${apiUrl}/countries`, {
         headers
+      })
+      return data
+    }
+  })
+}
+
+export function useFootballTeams (
+  id?: number,
+  season?: number,
+  league?: number,
+  name?: string,
+  country_id?: number,
+  country?: string
+) {
+  return useQuery({
+    queryKey: ['football_teams', {
+      id,
+      season,
+      league,
+      name,
+      country_id,
+      country
+    }],
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${apiUrl}/teams`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
       })
       return data
     }

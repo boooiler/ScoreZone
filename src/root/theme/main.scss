@@ -6,7 +6,7 @@
   flex-direction: column;
   height: 100vh;
   position: relative;
-  background: #191d26;
+  background: $primary-color;
   --main-color: $black-color;
   color: $white-color;
 
@@ -38,7 +38,7 @@
       // width: calc(100% / 5);
       width: 240px;
       height: 100%;
-      border-right: 1px solid rgba($white-color, .3);
+      border-right: 1px solid $gray-light-color;
       padding: 20px 12px;
     }
 
@@ -51,7 +51,7 @@
 
     .favorite-teams {
       width: 60px;
-      border-left: 1px solid rgba($white-color, .3);
+      border-left: 1px solid $gray-light-color;
       padding: 20px 6px;
     }
   }

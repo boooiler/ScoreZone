@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 export const Leagues = () => {
   const { leagueId } = useParams()
   const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(undefined, [Number(leagueId)])
-  const { data: teams, isLoading: isLoadingTeams } = useFootballTeams(undefined, Number(leagueId), 2023)
+  const { data: teams, isLoading: isLoadingTeams } = useFootballTeams(undefined, 2023, Number(leagueId))
 
   useEffect(() => {
     console.log(teams)

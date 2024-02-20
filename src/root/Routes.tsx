@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
   {
     path: '/',
     element: (
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader fullscreen />}>
         <AppWrapper />
       </Suspense>
     ),
