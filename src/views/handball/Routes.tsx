@@ -8,7 +8,7 @@ const routes: RouteObject[] = [
   {
     path: 'handball',
     element: (
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader fullscreen />}>
         <Handball />
       </Suspense>
     )

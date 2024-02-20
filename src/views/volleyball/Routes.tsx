@@ -8,8 +8,16 @@ const routes: RouteObject[] = [
   {
     path: 'volleyball',
     element: (
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader fullscreen />}>
         <Volleyball />
+      </Suspense>
+    )
+  },
+  {
+    path: 'volleyball/leagues/:leagueId',
+    element: (
+      <Suspense fallback={<Loader fullscreen />}>
+        {/* <LeagueDetails /> */}
       </Suspense>
     )
   }

@@ -1,11 +1,18 @@
+import TopLeagues from '@/shared/components/topLeagues'
 import './styles.scss'
 
 export const Handball = () => {
 
   return (
-    <div>
-      <h1>Piłka ręczna</h1>
-    </div>
+    <>
+      <section className="left-sidebar">
+        <TopLeagues leagueIds={[]} sport="handball" />
+      </section>
+      <section className="page-wrapper">
+        <h1 style={{ position: "sticky", top: "0" }}>Piłka ręczna</h1>
+        {/* <div style={{ height: "200vh", background: "red" }}></div> */}
+      </section>
+    </>
   )
 }
 
