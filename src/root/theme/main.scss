@@ -37,6 +37,7 @@
       // max-width: 600px;
       // width: calc(100% / 5);
       width: 240px;
+      min-width: 240px;
       height: 100%;
       border-right: 1px solid $gray-light-color;
       padding: 20px 12px;
@@ -47,6 +48,35 @@
       overflow-y: auto;
       flex-grow: 1;
       padding: 20px 12px;
+
+      .tabs {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+
+        .tab {
+          cursor: pointer;
+          padding: 10px 16px 8px;
+          background: $gray-medium-color;
+          border-radius: 6px;
+          transition: all .3s;
+          font-family: $font-header;
+          font-size: 14px;
+
+          &:hover {
+            background: $gray-light-color;
+          }
+
+          &.active {
+            box-shadow: 0 0px 12px -2px var(--main-color);
+            border: 1px solid var(--main-color);
+            background: var(--main-color);
+          }
+        }
+      }
     }
 
     .favorite-teams {

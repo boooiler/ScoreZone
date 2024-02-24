@@ -3,30 +3,29 @@ import { useFootballFixtures } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
 import { FootballFixture, FootballFixtureMatchDay } from "../../model/fixtures"
 import "./styles.scss"
+import moment from "moment"
+import { useNavigate } from "react-router-dom"
 
 interface Props {
     league: number
     season: number
     fixturesType: "planned" | "finished"
+    team?: number
 }
-export const FootballFixtures = ({ league, season, fixturesType }: Props) => {
-  const { data: fixturesData, isLoading } = useFootballFixtures(undefined, league, season, "TBD-NS-PST-CANC-ABD-AWD")
-  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useFootballFixtures(undefined, league, season, "FT-AET-PEN-LIVE-WO")
+export const FootballFixtures = ({ league, season, fixturesType, team }: Props) => {
+  const navigate = useNavigate()
+  const { data: fixturesData, isLoading } = useFootballFixtures(undefined, league, season, "TBD-NS-PST-CANC-ABD-AWD", undefined, team)
+  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useFootballFixtures(undefined, league, season, "FT-AET-PEN-LIVE-WO", undefined, team)
   const [fixtures, setFixtures] = useState<FootballFixtureMatchDay>()
-  const [finishedFixtures, setFinishedFixtures] = useState<FootballFixtureMatchDay>()
+  // const [finishedFixtures, setFinishedFixtures] = useState<FootballFixtureMatchDay>()
 
   useEffect(() => {
-    if(fixturesData) {
-      console.log(groupFixtures(fixturesData))
-      setFixtures(groupFixtures(fixturesData))
+    if(fixturesData && finishedFixturesData && fixturesType) {
+      const sortedFinishedFixtures = finishedFixturesData.sort().reverse()
+      const fixtures = fixturesType === "planned" ? fixturesData : sortedFinishedFixtures
+      setFixtures(groupFixtures(fixtures))
     }
-  }, [fixturesData])
-
-  useEffect(() => {
-    if(finishedFixturesData) {
-      setFinishedFixtures(groupFixtures(finishedFixturesData))
-    }
-  }, [finishedFixturesData])
+  }, [fixturesData, finishedFixturesData, fixturesType])
 
   const groupFixtures = (fixtures: FootballFixture[]) => {
     const groupedFixtures = fixtures.reduce((acc: any, fixture: FootballFixture) => {
@@ -42,97 +41,89 @@ export const FootballFixtures = ({ league, season, fixturesType }: Props) => {
 
   return (
     <>
-      {fixturesType === "planned" ? (
-        <>
-          <h2 style={{ marginTop: 0 }}>Mecze do rozegrania</h2>
-          <div>
-            {isLoading || !fixtures ? (
-              <Loader />
-            ) : Object.keys(fixtures).map((round: string, index: number) => (
-              <div key={index}>
-                <h4>{round}</h4>
-                {fixtures[round].map((fixture: FootballFixture) => (
-                  <div key={fixture.fixture.id} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div className="team">
-                      <img
-                        src={fixture.teams.home.logo}
-                        alt="logo"
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          objectFit: "contain",
-                          marginRight: "5px"
-                        } as React.CSSProperties}
-                      />
-                      <span>{fixture.teams.home.name}</span>
-                    </div>
-                - : -
-                    <div className="team">
-                      <img
-                        src={fixture.teams.away.logo}
-                        alt="logo"
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          objectFit: "contain",
-                          marginRight: "5px"
-                        } as React.CSSProperties}
-                      />
-                      <span>{fixture.teams.away.name}</span>
-                    </div>
+      <section className="fixtures-wrapper">
+        {isLoading || !fixtures ? (
+          <Loader />
+        ) : Object.keys(fixtures).map((round: string, index: number) => (
+          <div key={index} className="fixtures-wrapper--round">
+            <h4>{round}</h4>
+            {fixtures[round]
+              .sort((a: FootballFixture, b: FootballFixture) => new Date(a.fixture.date).getTime() - new Date(b.fixture.date).getTime())
+              .map((fixture: FootballFixture) => (
+                <div 
+                  key={fixture.fixture.id} 
+                  className="fixtures-wrapper--round__score"
+                  onClick={() => navigate(`/football/fixtures/${fixture.fixture.id}`)}
+                >
+                  <div className="match-date">
+                    <b>{moment(fixture.fixture.date).format("HH:mm")}</b>
+                    <p>{moment(fixture.fixture.date).format("DD/MM/YY")}</p>
                   </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <>
-          <h2>Mecze zakończone</h2>
-          <div>
-            {isLoadingFinishedFixtures || !finishedFixtures ? (
-              <Loader />
-            ) : Object.keys(finishedFixtures).reverse().map((round: any) => (
-              <div key={round}>
-                <h4>{round}</h4>
-                {finishedFixtures[round].map((fixture: any) => (
-                  <div key={fixture.fixture.id} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div className="team">
-                      <img
-                        src={fixture.teams.home.logo}
-                        alt="logo"
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          objectFit: "contain",
-                          marginRight: "5px"
-                        } as React.CSSProperties}
-                      />
-                      <span>{fixture.teams.home.name}</span>
-                    </div>
-                    <div className="score">
-                      {fixture.goals.home} : {fixture.goals.away}
-                    </div>
-                    <div className="team">
-                      <img
-                        src={fixture.teams.away.logo}
-                        alt="logo"
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          objectFit: "contain",
-                          marginRight: "5px"
-                        } as React.CSSProperties}
-                      />
-                      <span>{fixture.teams.away.name}</span>
-                    </div>
+                  <div className="team">
+                    <img
+                      src={fixture.teams.home.logo}
+                      alt="team logo"
+                    />
+                    <span>{fixture.teams.home.name}</span>
                   </div>
-                ))}
-              </div>
-            ))}
+                  <div className="score">
+                    {fixturesType === 'finished' ? (
+                      <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>
+                    ) : (
+                      <><div>-</div> : <div>-</div></>
+                    )}
+                  </div>
+                  <div className="team">
+                    <span>{fixture.teams.away.name}</span>
+                    <img
+                      src={fixture.teams.away.logo}
+                      alt="team logo"
+                    />
+                  </div>
+                </div>
+              ))}
           </div>
-        </>
-      )}
+        ))}
+      </section>
+      {/* <section className="fixtures">
+          {isLoadingFinishedFixtures || !finishedFixtures ? (
+            <Loader />
+          ) : Object.keys(finishedFixtures).reverse().map((round: any) => (
+            <div key={round} className="fixtures--round">
+              <h4>{round}</h4>
+              {finishedFixtures[round].map((fixture: any) => (
+                <div key={fixture.fixture.id} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <div className="team">
+                    <img
+                      src={fixture.teams.home.logo}
+                      alt="logo"
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        objectFit: "contain",
+                        marginRight: "5px"
+                      } as React.CSSProperties}
+                    />
+                    <span>{fixture.teams.home.name}</span>
+                  </div>
+                  <div className="team">
+                    <img
+                      src={fixture.teams.away.logo}
+                      alt="logo"
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        objectFit: "contain",
+                        marginRight: "5px"
+                      } as React.CSSProperties}
+                    />
+                    <span>{fixture.teams.away.name}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </section> */}
     </>
   )
 }

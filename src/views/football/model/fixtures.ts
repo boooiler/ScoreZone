@@ -1,5 +1,5 @@
 export interface FootballFixture {
-    fixture: FootballFixtureLeague
+    fixture: FootballFixtureDetails
     league: FootballFixtureLeague
     teams: {
         home: FootballFixtureTeam

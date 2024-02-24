@@ -32,9 +32,13 @@ export function useFootballLeagues (
       current
     }],
     retry: 3,
-    queryFn: async () => {
+    queryFn: async ({ queryKey }) => {
       if (!id || id.length === 0) {
-        return []
+        const data = await axios.get(`${apiUrl}/leagues`, {
+          headers,
+          params: queryKey[1] as AxiosRequestConfig<any>
+        })
+        return data.data.response
       }
       const promises = id.map((leagueId) => {
         return axios.get(`${apiUrl}/leagues`, {

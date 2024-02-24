@@ -6,15 +6,24 @@
 
     table {
         width: 100%;
-        background: $gray-medium-color;
         padding: 20px 0px;
-        border-radius: 10px;
         border-collapse: collapse;
 
         thead {
+            position: sticky;
+            top: 0;
 
             th {
                 padding: 20px 0;
+                background-color: $gray-light-color;
+
+                &:first-of-type {
+                    border-radius: 10px 0 0 0;
+                }
+
+                &:last-of-type {
+                    border-radius: 0 10px 0 0;
+                }
 
                 &.th-team {
                     text-align: left;
@@ -24,20 +33,43 @@
 
         tbody {
             tr {
-                border-top: 1px solid $gray-light-color;
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid $gray-light-color;
+                }
+
+                &:last-of-type {
+                    td {
+                        &:first-of-type {
+                            border-radius: 0 0 0 10px;
+                        }
+
+                        &:last-of-type {
+                            border-radius: 0 0 10px 0;
+                        }
+                    }
+                }
+
+                &:hover {
+                    td {
+                        background: lighten($gray-medium-color, 10);
+                    }
+                }
 
                 td {
                     padding: 10px 14px;
                     text-align: center;
+                    background: $gray-medium-color;
+                    font-family: $font-header;
 
                     &.td-team {
-                        padding: 10px 20px 10px 0;
+                        padding: 18px 20px 18px 0;
 
                         .team {
                             display: flex;
                             align-items: center;
                             gap: 15px;
-                            margin: 10px 0;
+                            // margin: 10px 0;
 
                             &:hover {
                                 text-decoration: underline;
@@ -45,9 +77,14 @@
                             }
 
                             img {
-                                width: 20px;
-                                height: 20px;
+                                width: 30px;
+                                height: 30px;
                                 object-fit: contain;
+                            }
+
+                            span {
+                                font-size: 17px;
+                                font-weight: 500;
                             }
                         }
                     }

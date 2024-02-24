@@ -4,8 +4,9 @@ import { RouteObject } from "react-router"
 
 const Football = React.lazy(() => import('./pages/index'))
 const Leagues = React.lazy(() => import('./pages/Leagues'))
-const LeagueDetails = React.lazy(() => import('./pages/LeagueDetails'))
-const TeamDetails = React.lazy(() => import('./pages/TeamDetails'))
+const LeagueDetails = React.lazy(() => import('./pages/leagueDetails/LeagueDetails'))
+const TeamDetails = React.lazy(() => import('./pages/teamDeatils/TeamDetails'))
+const FixtureDetails = React.lazy(() => import('./pages/fixtureDetails/FixtureDetails'))
 
 const routes: RouteObject[] = [
   {
@@ -37,6 +38,14 @@ const routes: RouteObject[] = [
     element: (
       <Suspense fallback={<Loader fullscreen />}>
         <TeamDetails />
+      </Suspense>
+    )
+  },
+  {
+    path: 'football/fixtures/:fixtureId',
+    element: (
+      <Suspense fallback={<Loader fullscreen />}>
+        <FixtureDetails />
       </Suspense>
     )
   }

@@ -1,0 +1,106 @@
+@import '@/root/theme/variables';
+
+.fixtures {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+
+        &--round {
+            h4 {
+                margin: 0;
+                background: $gray-light-color;
+                border-radius: 6px 6px 0 0;
+                padding: 10px 40px;
+            }
+
+            &__score {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 15px 40px;
+                background: $gray-medium-color;
+
+                &:hover {
+                    background: lighten($gray-medium-color, 10);
+                    cursor: pointer;
+                }
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid $gray-light-color;
+                }
+
+                &:last-of-type {
+                    border-radius: 0 0 6px 6px;
+                }
+
+                .match-date {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    gap: 2px;
+                    // margin-right: 100px;
+                    width: 150px;
+
+                    b {
+                        letter-spacing: .5px;
+                    }
+
+                    p {
+                        margin: 0;
+                        font-size: 10px;
+                        font-weight: 600;
+                        color: $gray-light-color;
+                    }
+                }
+
+                .team {
+                    display: flex;
+                    align-items: center;
+                    font-size: 17px;
+                    width: calc(50% - 41px);
+                    gap: 10px;
+
+                    &:first-of-type {
+                        padding-right: 40px;
+                    }
+
+                    &:last-of-type {
+                        padding-left: 40px;
+                        justify-content: flex-end;
+                    }
+
+                    img {
+                        width: 25px;
+                        height: 25px;
+                        object-fit: contain;
+                    }
+                }
+
+                .score {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    width: 82px;
+
+                    div {
+                        min-width: 26px;
+                        font-size: 18px;
+                        padding: 4px 6px;
+                        border-radius: 6px;
+                        background: $primary-color;
+                        text-align: center;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

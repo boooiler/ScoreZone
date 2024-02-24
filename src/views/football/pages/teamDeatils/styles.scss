@@ -1,0 +1,162 @@
+@import '@/root/theme/variables';
+
+.football-team-details {
+    padding: 0 !important;
+
+    .team-details-header {
+        position: relative;
+        display: flex;
+
+        &--bg-image {
+            position: absolute;
+            inset: 0;
+
+            &:after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                height: 100%;
+                width: 100%;
+                background: rgba($primary-color, .3);
+                // box-shadow: inset 0 0 115px 160px $primary-color;
+                background: linear-gradient(194deg, rgba($primary-color, .4) 10%, rgba($primary-color, .8) 35%, rgba($primary-color, 1) 65%);
+                pointer-events: none;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            // .team-name {
+            //     position: absolute;
+            //     bottom: 0;
+            //     transform: translateY(-50%);
+            //     right: 40px;
+            //     font-size: 8rem;
+            //     font-weight: 900;
+            //     opacity: .4;
+            //     text-transform: uppercase;
+            //     letter-spacing: -1px;
+            //     z-index: 3;
+            //     max-width: 70%;
+            //     margin: 0;
+            // }
+        }
+
+        .team-info-wrapper {
+            display: flex;
+            // align-items: flex-start;
+            flex-wrap: wrap;
+            column-gap: 10px;
+            row-gap: 28px;
+            padding: 20px 12px;
+            backdrop-filter: blur(6px);
+            background: rgba($gray-light-color, 0.08);
+            border-radius: 10px;
+            width: 100%;
+
+            .team-info {
+                width: calc(100% / 3 - 20px / 3);
+                // width: calc(50% - 5px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-weight: 900;
+                font-size: 20px;
+                text-align: center;
+
+                &.fluid {
+                    width: 100%;
+
+                    h4 {
+                        font-weight: 900;
+                        font-size: 1.2em;
+                    }
+                }
+
+                span {
+                    font-size: 10px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    margin-bottom: 4px;
+                    opacity: 0.6;
+                }
+
+                h4 {
+                    margin: 0;
+                }
+            }
+        }
+
+        &--left {
+            position: relative;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 40px;
+            min-height: 60vh;
+            width: 30%;
+            min-width: 470px;
+
+            img {
+                position: relative;
+                background-color: $white-color;
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .team-name {
+                position: relative;
+                font-size: 4rem;
+                font-weight: 900;
+                opacity: .4;
+                text-transform: uppercase;
+                letter-spacing: -1px;
+                text-align: center;
+                margin: 0;
+            }
+
+            .team-info-wrapper {
+                .team-info {
+                    width: calc(50% - 5px);
+                }
+            }
+        }
+
+        &--right {
+            padding: 60px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+    }
+
+    .team-details-sidebar {
+        width: 25%;
+        min-width: 300px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        border: 1px solid $gray-light-color;
+        border-left: none;
+
+        div {
+            padding: 20px 20px;
+            width: 100%;
+            text-align: center;
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid $gray-light-color;
+            }
+        }
+    }
+}
