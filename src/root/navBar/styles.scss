@@ -28,7 +28,10 @@
     }
 
     .app-logo {
-        width: 300px;
+        img {
+            height: 26px;
+            margin-top: 12px;
+        }
     }
 
     .menu-wrapper {

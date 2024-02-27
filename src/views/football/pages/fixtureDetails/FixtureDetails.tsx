@@ -5,6 +5,7 @@ import Loader from "@/shared/components/loader"
 import './styles.scss'
 import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
 import moment from "moment"
+import Icon from "@/shared/icons/Icon"
 
 export const FixtureDetails = () => {
   const { fixtureId } = useParams()
@@ -17,15 +18,15 @@ export const FixtureDetails = () => {
     console.log(fixtureDetails)
   }, [fixtureDetails])
 
-  const eventColor = (eventDetail: string): string => {
+  const eventIcon = (eventDetail: string) => {
     if(eventDetail.includes('Substitution')){
-      return 'blue'
+      return <Icon name='IconArrowSort' variant="filled" />
     } else if (eventDetail.includes('Yellow Card')){
-      return 'yellow'
+      return <div style={{ width: "10px", background: "yellow", borderRadius: "2px" }}></div>
     } else if (eventDetail.includes('Red Card')){
-      return 'red'
+      return <div style={{ width: "10px", background: "red", borderRadius: "2px" }}></div>
     } else if (eventDetail.includes('Normal Goal')){
-      return 'white'
+      return <Icon name='IconFootball' variant='filled' />
     } 
     return ''
   }
@@ -124,7 +125,9 @@ export const FixtureDetails = () => {
                       <div 
                         className={`match-report--item ${e.team.id === fixtureDetails.teams.home.id ? 'home' : 'away'}`}
                       >
-                        `{e.time.elapsed}{e.time.extra && `+${e.time.extra}`} <div className="match-report--item__icon" style={{ background: eventColor(e.detail) }}></div> {e.player.name} {e.assist.name && `(${e.assist.name})`} [{e.type}]
+                        <div>{e.time.elapsed}{e.time.extra && `+${e.time.extra}`}&#8242;</div> 
+                        <div className="match-report--item__icon">{eventIcon(e.detail)}</div> 
+                        <div>{e.player.name} <span>{e.assist.name && `(${e.assist.name})`}</span></div>
                       </div>
                     ))}
                   </section>
