@@ -26,21 +26,28 @@ export const FootballStandings = ({ league, season }: Props) => {
       <span 
         key={index} 
         style={{
-          width: "20px",
-          height: "20px",
-          display: "inline-flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "12px",
-          fontWeight: "600",
-          fontFamily: "Onest",
-          borderRadius: "6px",
           background: letter === "W" ? "green" : letter === "L" ? "red" : "orange"
         }}
       >
         {letter}
       </span>
     ))
+  }
+
+  const rankColor = (desc: string): string => {
+    if(!desc) return ""
+    const d = desc.toLowerCase()
+
+    if(d.includes("relegation")){
+      return "bg-red"
+    } else if (d.includes("champions league") || d === "promotion") {
+      return "bg-blue"
+    } else if (d.includes("europa league")) {
+      return "bg-green"
+    } else if (d.includes("conference league") || d.includes("promotion play-off")) {
+      return "bg-orange"
+    } 
+    return ""
   }
 
   return (
@@ -54,35 +61,35 @@ export const FootballStandings = ({ league, season }: Props) => {
               <tr>
                 <th>#</th>
                 <th className="th-team">Drużyna</th>
+                <th>PKT</th>
                 <th>M</th>
                 <th>W</th>
                 <th>R</th>
                 <th>P</th>
                 <th>B</th>
                 <th>+/-</th>
-                <th>PKT</th>
                 <th>Forma</th>
               </tr>
             </thead>
             <tbody>
               {_standings && _standings.length > 0 ? _standings.map(({ rank, team, points, goalsDiff, group, form, status, description, all, home, away }) => (
                 <tr key={rank}>
-                  <td>{rank}.</td>
+                  <td className={`td-rank ${rankColor(description)}`}>{rank}</td>
                   <td className="td-team" onClick={() => navigate(`/football/teams/${team.id}`)}>
                     <div className="team">
                       <img src={team.logo} alt="logo" />
                       <span>{team.name}</span>
                     </div>
                   </td>
+                  <td className="td-points">{points}</td>
                   <td>{all.played}</td>
                   <td>{all.win}</td>
                   <td>{all.draw}</td>
                   <td>{all.lose}</td>
                   <td>{all.goals.for}:{all.goals.against}</td>
                   <td>{goalsDiff}</td>
-                  <td>{points}</td>
-                  <td>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "4px" }}>
+                  <td className="td-form">
+                    <div>
                       {splitForm(form)}
                     </div>
                   </td>
