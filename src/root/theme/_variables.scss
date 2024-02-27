@@ -9,7 +9,8 @@ $white-color: #fff;
 $black-color: #000;
 
 $font-header: "Onest";
-$font-text: "Inter";
+$font-text: "Exo2";
+// $font-text: "Inter";
 
 
 /* VARIABLES FOR MEDIA QUERIES */
@@ -40,4 +41,19 @@ $hxlg: "only screen and (min-width : 1921px)";
 @font-face {
     font-family: "Inter";
     src: url("/fonts/Inter-variable.ttf");
+}
+
+@font-face {
+    font-family: "Exo2";
+    src: url("/fonts/Exo2-variable.ttf");
+}
+
+@font-face {
+    font-family: "KodeMono";
+    src: url("/fonts/KodeMono-variable.ttf");
+}
+
+@font-face {
+    font-family: "GemunuLibre";
+    src: url("/fonts/GemunuLibre-variable.ttf");
 }
