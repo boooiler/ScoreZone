@@ -7,6 +7,7 @@ import { FootballFixtures } from "../../components/footballFixtures/FootballFixt
 import Loader from "@/shared/components/loader"
 import { FootballLeague } from "../../model/league"
 import './styles.scss'
+import { TeamBox } from "@/shared/components/teamBox"
 
 export const LeagueDetails = () => {
   const { leagueId } = useParams()
@@ -62,7 +63,7 @@ export const LeagueDetails = () => {
               </div>
             </section>
 
-            <section className="live-fixtures-wrapper">
+            {/* <section className="live-fixtures-wrapper">
               <div className="live-fixture-item">
                 <div className="live-fixture-item--top">
                   <span className="live-fixture-item--top__time">`13</span>
@@ -113,7 +114,7 @@ export const LeagueDetails = () => {
                   </div>
                 </div>
               </div>
-            </section>
+            </section> */}
 
             <section className="tabs">
               <span 
@@ -154,23 +155,9 @@ export const LeagueDetails = () => {
               </section>
             ) : (
               <section className="teams">
-                <h2 style={{ marginTop: 0 }}>Drużyny</h2>
                 {teams.response && teams.response.map((t: any) => {
                   const { team } = t
-                  team.name
-                  return <div className="team" key={team.id}>
-                    <img
-                      src={team.logo}
-                      alt="logo"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        objectFit: "contain",
-                        marginRight: "15px"
-                      } as React.CSSProperties}
-                    />
-                    <span>{team.name}</span>
-                  </div>
+                  return <TeamBox id={team.id} name={team.name} photo={team.logo} />
                 })}
               </section>
             )}
