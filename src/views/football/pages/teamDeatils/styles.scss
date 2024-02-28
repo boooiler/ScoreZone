@@ -159,4 +159,16 @@
             }
         }
     }
+
+    .squad {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 20px;
+
+        .team-box {
+            width: calc(100% / 4 - 36px / 4);
+        }
+    }
 }

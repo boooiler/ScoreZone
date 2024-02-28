@@ -101,6 +101,24 @@ export function useFootballLineups (
   })
 }
 
+export function useFootballSquads (
+  team: number
+) {
+  return useQuery({
+    queryKey: ['football_squads', { 
+      team
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${apiUrl}/players/squads`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data.response
+    }
+  })
+}
+
 export function useFootballFixtures (
   id?: number,
   league?: number,

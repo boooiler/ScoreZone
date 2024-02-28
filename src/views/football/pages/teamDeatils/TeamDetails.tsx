@@ -1,31 +1,27 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
+import { useFootballLeagues, useFootballSquads, useFootballTeams } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
 import { FootballTeam } from "../../model/team"
 import FootballTopLeagues from "../../components/FootballTopLeagues"
-import './styles.scss'
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
+import { TeamBox } from "@/shared/components/teamBox"
+import './styles.scss'
 
 export const TeamDetails = () => {
   const { teamId } = useParams()
   const { data, isLoading } = useFootballTeams(Number(teamId))
   const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(true, undefined, undefined, undefined, undefined, undefined, Number(teamId), "league")
+  const { data: squad, isLoading: isLoadingSquad } = useFootballSquads(Number(teamId))
   const [teamDetails, setTeamDetails] = useState<FootballTeam>()
-  const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures'>('standings')
+  const [activeTab, setActiveTab] = useState<'squad' | 'standings' | 'plannedFixtures' | 'finishedFixtures'>('squad')
 
   useEffect(() => {
     if(data && data.response){
       setTeamDetails(data.response[0])
     }
   }, [data])
-
-  useEffect(() => {
-    console.log(leagueDetails)
-    // if(leagueDetails ){
-    // }
-  }, [leagueDetails])
 
   return (
     <>
@@ -85,14 +81,14 @@ export const TeamDetails = () => {
                 </div>
               </div>
             </section>
-
-            {/* <section className="team-details-sidebar">
-              <div>Wyniki</div>
-              <div>Mecze</div>
-              <div>Tabela ligowa</div>
-            </section> */}
             
             <section className="tabs">
+              <span 
+                className={`tab ${activeTab === 'squad' ? 'active' : ''}`}
+                onClick={() => setActiveTab('squad')}
+              >
+                  Skład
+              </span>
               <span 
                 className={`tab ${activeTab === 'standings' ? 'active' : ''}`}
                 onClick={() => setActiveTab('standings')}
@@ -113,7 +109,25 @@ export const TeamDetails = () => {
               </span>
             </section>
 
-            {activeTab === 'standings' ? (
+            {activeTab === 'squad' ? (
+              <section className="squad">
+                {isLoadingSquad || !squad ? (
+                  <Loader />
+                ) : (
+                  squad[0].players.map((p:any) => (
+                    <TeamBox 
+                      id={p.id} 
+                      name={p.name} 
+                      photo={p.photo} 
+                      number={p.number}
+                      position={p.position}
+                      age={p.age}
+                      isClickable={false} 
+                    />
+                  ))
+                )}
+              </section>
+            ) : activeTab === 'standings' ? (
               <FootballStandings league={leagueDetails[0].league.id} season={leagueDetails[0].seasons[leagueDetails[0].seasons.length - 1].year} />
             ) : activeTab === "plannedFixtures" ? (
               <section className="fixtures">

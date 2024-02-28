@@ -7,11 +7,14 @@
     padding: 40px 20px;
     font-size: 20px;
     font-weight: 600;
-    cursor: pointer;
-    transition: all .5s;
 
-    &:hover {
-        background: $gray-medium-color;
+    &.clickable {
+        cursor: pointer;
+        transition: all .5s;
+
+        &:hover {
+            background: $gray-medium-color;
+        }
     }
 
     img {
@@ -23,7 +26,30 @@
         margin-bottom: 20px;
     }
 
-    p {
+    .name {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+
+        .number {
+            border-radius: 6px;
+            background: $gray-medium-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            $w: 30px;
+            width: $w;
+            height: $w;
+        }
+    }
+
+    .age {
+        font-size: 14px;
         margin: 0;
     }
 }
