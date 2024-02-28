@@ -6,17 +6,15 @@ import './styles.scss'
 import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
 import moment from "moment"
 import Icon from "@/shared/icons/Icon"
+import { FootballLineups } from "../../components/footballLineups/FootballLineups"
+import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 
 export const FixtureDetails = () => {
   const { fixtureId } = useParams()
   const navigate = useNavigate()
   const { data: fixture, isLoading } = useFootballFixtures(Number(fixtureId))
   const fixtureDetails: FootballMatch = fixture && fixture[0]
-  const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'h2h' | 'standings'>('events')
-
-  useEffect(() => {
-    console.log(fixtureDetails)
-  }, [fixtureDetails])
+  const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'standings'>('events')
 
   const eventIcon = (eventDetail: string) => {
     if(eventDetail.includes('Substitution')){
@@ -105,12 +103,6 @@ export const FixtureDetails = () => {
                 Składy
                 </span>
                 <span 
-                  className={`tab ${activeTab === 'h2h' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('h2h')}
-                >
-                Mecze
-                </span>
-                <span 
                   className={`tab ${activeTab === 'standings' ? 'active' : ''}`} 
                   onClick={() => setActiveTab('standings')}
                 >
@@ -118,11 +110,12 @@ export const FixtureDetails = () => {
                 </span>
               </section>
 
-              <section className="tab-content">
-                {activeTab === 'events' ? (
+              {activeTab === 'events' ? (
+                <section className="tab-content">
                   <section className="match-report">
-                    {fixtureDetails.events.map((e: FootballFixtureEvent) => (
+                    {fixtureDetails.events.map((e: FootballFixtureEvent, index: number) => (
                       <div 
+                        key={index}
                         className={`match-report--item ${e.team.id === fixtureDetails.teams.home.id ? 'home' : 'away'}`}
                       >
                         <div>{e.time.elapsed}{e.time.extra && `+${e.time.extra}`}&#8242;</div> 
@@ -131,10 +124,16 @@ export const FixtureDetails = () => {
                       </div>
                     ))}
                   </section>
-                ) : (
-                  <></>
-                )}
-              </section>
+                </section>
+              ) : activeTab === "squads" ? (
+                fixtureId && (
+                  <section className="tab-content">
+                    <FootballLineups fixtureId={fixtureId} />
+                  </section>
+                )
+              ) : (
+                <FootballStandings league={fixtureDetails.league.id} season={fixtureDetails.league.season} />
+              )}
             </section>
           </>
         )}

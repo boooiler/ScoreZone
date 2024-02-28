@@ -1,0 +1,177 @@
+@import '@/root/theme/variables';
+
+.lineups-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 20px;
+    row-gap: 30px;
+
+    .team-home {
+        --shirt-color: var(--home-shirt-color);
+        --border-color: var(--home-border-color);
+        --number-color: var(--home-number-color);
+
+        .player-item--number.gk {
+            --shirt-color: var(--home-gk-shirt-color);
+            --border-color: var(--home-gk-border-color);
+            --number-color: var(--home-gk-number-color);
+        }
+    }
+
+    .team-away {
+        --shirt-color: var(--away-shirt-color);
+        --border-color: var(--away-border-color);
+        --number-color: var(--away-number-color);
+
+        .player-item--number.gk {
+            --shirt-color: var(--away-gk-shirt-color);
+            --border-color: var(--away-gk-border-color);
+            --number-color: var(--away-gk-number-color);
+        }
+    }
+
+    .lineups-field {
+        display: flex;
+        gap: 40px;
+        width: 100%;
+        border: 2px solid $white-color;
+        padding: 40px 0;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(50% - 1px);
+            height: 100%;
+            width: 2px;
+            background: $white-color;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            border: 2px solid $white-color;
+        }
+
+        .lineups-formation {
+            display: flex;
+            height: 100%;
+            width: calc(50% - 20px);
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -2px;
+                transform: translateY(-50%);
+                height: 60%;
+                width: 20%;
+                border: 2px solid $white-color;
+            }
+
+            &.team-away {
+                flex-direction: row-reverse;
+
+                &::before {
+                    left: unset;
+                    right: -2px;
+                }
+            }
+
+            .formation-line {
+                align-items: center;
+                column-gap: 4px;
+                row-gap: 40px;
+                display: flex;
+                flex-direction: column-reverse;
+                height: 100%;
+                justify-content: space-evenly;
+                width: 100%;
+                font-size: 10px;
+                text-align: center;
+            }
+        }
+    }
+
+    p {
+        width: 100%;
+        text-align: center;
+        padding: 8px 10px;
+        background: $primary-color;
+        border-radius: 6px;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .player-item--number {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        position: relative;
+
+        svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &--team {
+        width: calc(50% - 10px);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 0 10px;
+
+        &.team-away {
+            text-align: right;
+
+            &.coach {
+                flex-direction: row-reverse;
+                justify-content: flex-start;
+            }
+
+            .player-item {
+                flex-direction: row-reverse;
+            }
+        }
+
+        &.coach {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: 12px;
+
+            img {
+                border-radius: 6px;
+            }
+        }
+
+        .player-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 0;
+
+            &--position {
+                color: $gray-light-color;
+                font-size: 14px;
+            }
+        }
+    }
+}

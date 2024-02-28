@@ -81,6 +81,26 @@ export function useFootballStandings (
   })
 }
 
+export function useFootballLineups (
+  fixture: number,
+  team?: number
+) {
+  return useQuery({
+    queryKey: ['football_lineups', { 
+      fixture, 
+      team
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${apiUrl}/fixtures/lineups`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data.response
+    }
+  })
+}
+
 export function useFootballFixtures (
   id?: number,
   league?: number,
