@@ -1,5 +1,6 @@
 const root = {
   menu: {
+    news: "Aktualności",
     football: "Piłka nożna",
     basketball: "Koszykówka",
     volleyball: "Siatkówka",

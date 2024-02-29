@@ -69,14 +69,23 @@ const NavigationBar = () => {
   return (
     <header className='app-navbar'>
       <section className='app-logo'>
-        <NavLink to='/dashboard'>
-          <img src='/images/ScoreZone.svg' alt='ScoreZone logo' />
-        </NavLink>
+        <img src='/images/ScoreZone.svg' alt='ScoreZone logo' />
       </section>
 
       <section className='menu-wrapper' ref={parentRef}>
         <nav className='app-navlist'>
           <ul>
+            <li>
+              <NavLink
+                to='/news'
+                id='news'
+                onMouseEnter={() => handleMouseEnter('news')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Icon name='IconNews' variant='outlined' />
+                <span>{t('root.menu.news')}</span>
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to='/football'

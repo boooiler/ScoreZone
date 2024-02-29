@@ -10,6 +10,10 @@
   --main-color: $black-color;
   color: $white-color;
 
+  &.page-news {
+    --main-color: #{$purple-light-color};
+  }
+
   &.page-football {
     // background-color: #191204;
     --main-color: #{$green-light-color};

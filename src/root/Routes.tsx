@@ -4,6 +4,7 @@ import ErrorPage from "./ErrorPage"
 import FootballRoutes from '@/views/football/Routes'
 import VolleyballRoutes from '@/views/volleyball/Routes'
 import HandballRoutes from '@/views/handball/Routes'
+import NewsRoutes from '@/views/news/Routes'
 import Loader from "@/shared/components/loader"
 
 const AppWrapper = React.lazy(() => import('./App'))
@@ -11,7 +12,7 @@ const AppWrapper = React.lazy(() => import('./App'))
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Navigate to='football' />,
+    element: <Navigate to='news' />,
     errorElement: <ErrorPage />
   },
   {
@@ -25,7 +26,8 @@ const routes: RouteObject[] = [
     children: [
       ...FootballRoutes,
       ...VolleyballRoutes,
-      ...HandballRoutes
+      ...HandballRoutes,
+      ...NewsRoutes
     ]
   }
 ]
