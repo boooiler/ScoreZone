@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react"
-import { useFootballCountries, useFootballLeagues, useFootballTeams } from "../api/footballQuery"
-import './styles.scss'
 import { useParams } from "react-router-dom"
-import FootballTopLeagues from "../components/FootballTopLeagues"
-import { FootballStandings } from "../components/FootballStandings"
-import { FootballFixtures } from "../components/FootballFixtures"
-import { FootballLeague } from "../model/football"
+// import { useFootballCountries, useFootballLeagues, useFootballTeams } from "../api/footballQuery"
+// import FootballTopLeagues from "../components/FootballTopLeagues"
+// import { FootballStandings } from "../components/FootballStandings"
+// import { FootballFixtures } from "../components/FootballFixtures"
+// import { FootballLeague } from "../model/football"
+import './styles.scss'
 
 export const LeagueDetails = () => {
   const { leagueId } = useParams()
-  const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(undefined, [Number(leagueId)])
-  const [leagueInfo, setLeagueInfo] = useState<FootballLeague | undefined>()
+  // const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(undefined, [Number(leagueId)])
+  // const [leagueInfo, setLeagueInfo] = useState<FootballLeague | undefined>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
-  useEffect(() => {
-    if(leagueDetails){
-      setLeagueInfo(leagueDetails[0])
-    }
-  }, [leagueDetails])
+  // useEffect(() => {
+  //   if(leagueDetails){
+  //     setLeagueInfo(leagueDetails[0])
+  //   }
+  // }, [leagueDetails])
   
-  const { data: teams, isLoading: isLoadingTeams } = useFootballTeams(undefined, Number(leagueId), leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].year)
+  // const { data: teams, isLoading: isLoadingTeams } = useFootballTeams(undefined, Number(leagueId), leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].year)
 
   return (
     <>
-      <section className="left-sidebar">
+      {/* <section className="left-sidebar">
         <FootballTopLeagues />
       </section>
       <section className="page-wrapper" style={{ padding: 0, position: "relative" }}>
@@ -191,7 +191,7 @@ export const LeagueDetails = () => {
             )}
           </>
         )}
-      </section>
+      </section> */}
     </>
   )
 }
