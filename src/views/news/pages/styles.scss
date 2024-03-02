@@ -176,7 +176,8 @@
                 text-decoration: underline;
 
                 img {
-                    transform: scale(1.1);
+                    transform: scale(1.05);
+                    opacity: .6;
                 }
             }
 
@@ -185,14 +186,14 @@
                 border-radius: 6px;
                 overflow: hidden;
                 position: relative;
+                background-color: $purple-light-color;
 
                 img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
                     object-position: center;
-                    transition: all .5s;
-                    background-color: $gray-medium-color;
+                    transition: all .6s;
                     display: flex;
                     justify-content: center;
                     align-items: center;
