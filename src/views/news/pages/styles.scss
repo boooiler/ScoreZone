@@ -65,7 +65,8 @@
                     font-size: 54px;
                     line-height: 1.5;
                     font-weight: 600;
-                    background: $purple-light-color;
+                    background: rgba($purple-light-color, .65);
+                    backdrop-filter: blur(12px);
                     padding: 40px 60px;
                     border-radius: 10px;
 
