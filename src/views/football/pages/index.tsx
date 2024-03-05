@@ -1,4 +1,4 @@
-import FootballTopLeagues from "../components/FootballTopLeagues"
+import FootballTopLeagues from "../components/footballTopLeagues/FootballTopLeagues"
 import './styles.scss'
 
 export const Football = () => {

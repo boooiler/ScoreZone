@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { topFootballLeagues } from "../model/mockupLeagues"
-import { FootballLeague } from "../model/league"
+import { topFootballLeagues } from "../../model/mockupLeagues"
+import { FootballLeague } from "../../model/league"
+import "./styles.scss"
 
 export const FootballTopLeagues = () => {
   const navigate = useNavigate()
@@ -33,45 +34,24 @@ export const FootballTopLeagues = () => {
   }
 
   return (
-    <section>
+    <section className="football-top-leagues">
       <h3>Popularne ligi:</h3>
-      <section className="top-leagues" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <section className="football-top-leagues--content">
         {leagues.map((l: FootballLeague) => {
-          // console.log(l)
           const { league, country } = l
           return (
             <div 
               className={`league ${isActive(`${league.id}`) ? 'active' : ''}`} 
               key={league.id} 
               onClick={() => navigate(`/football/leagues/${league.id}`)}
-              style={{ 
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "6px",
-                padding: "6px 10px 6px 8px",
-                background:"#30343c",
-                border: isActive(`${league.id}`) ? "1px solid #0bbe35" : "unset",
-                borderLeft: isActive(`${league.id}`) ? "4px solid #0bbe35" : "unset",
-                boxShadow: isActive(`${league.id}`) ? "0 0px 14px -6px var(--main-color)" : "unset"
-              }}
             >
               <img
                 src={league.logo}
                 alt="logo"
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  objectFit: "contain",
-                  marginRight: "15px",
-                  background: "#fff",
-                  padding: "4px",
-                  borderRadius: "6px"
-                } as React.CSSProperties}
               />
               <div>
-                <p style={{ margin: 0, fontWeight: "bold", color: isActive(`${league.id}`) ? "var(--main-color)" : "inherit" }}>{league.name}</p>
-                <i style={{ fontSize: "11px", color: "#d8d8d8" }}>{country.name}</i>
+                <p>{league.name}</p>
+                <i>{country.name}</i>
               </div>
             </div>
           )

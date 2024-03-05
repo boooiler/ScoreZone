@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
-import FootballTopLeagues from "../../components/FootballTopLeagues"
+import FootballTopLeagues from "../../components/footballTopLeagues/FootballTopLeagues"
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
 import Loader from "@/shared/components/loader"
