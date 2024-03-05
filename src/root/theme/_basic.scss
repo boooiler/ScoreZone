@@ -6,6 +6,13 @@ body {
     line-height: 1.15;
     background: $primary-color;
 
+    //hidden scrollbar
+    // scrollbar-width: none;
+
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+
     * {
         box-sizing: border-box;
 
