@@ -28,18 +28,17 @@
                 .img-wrapper {
                     position: relative;
                     pointer-events: none;
-                    aspect-ratio: 16/9;
+                    height: 90vh;
 
-                    @media #{$mlg} {
-                        aspect-ratio: 4/3;
+                    @media #{$msm} {
+                        height: 100vh;
                     }
 
                     &::after {
                         content: '';
                         position: absolute;
                         inset: 0;
-                        // background: rgba(0, 0, 0, .4);
-                        background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(25, 29, 38, .85) 100%);
+                        background: linear-gradient(0deg, rgba($black-color, 0.5) 0%, rgba(25, 29, 38, .85) 100%);
                         pointer-events: none;
                     }
 
@@ -49,7 +48,6 @@
                         object-fit: cover;
                         object-position: center;
                         pointer-events: none;
-                        // box-shadow: 0 5px 14px -7px rgba(0, 0, 0, .8);
 
                         &::selection {
                             background: none;
@@ -69,6 +67,12 @@
                     backdrop-filter: blur(12px);
                     padding: 40px 60px;
                     border-radius: 10px;
+                    color: $white-color;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
 
                     @media #{$mhlg} {
                         line-height: inherit;
@@ -92,23 +96,19 @@
                         max-width: 80%;
                         bottom: 10px;
                         right: 10px;
-                        font-size: 24px;
                         padding: 20px 40px;
                     }
 
                     @media #{$msm} {
                         max-width: calc(100% - 20px);
-                        font-size: 17px;
                         padding: 12px 20px;
-                        font-weight: 500;
                     }
 
                     @media #{$mxs} {
                         max-width: calc(100% - 10px);
                         bottom: 5px;
                         right: 5px;
-                        font-size: 16px;
-                        padding: 6px 10px;
+                        padding: 10px;
                     }
                 }
             }
@@ -127,13 +127,15 @@
 
             .dot {
                 width: 5vw;
+                height: 8px;
                 box-shadow: unset;
                 transition: all .2s;
-                border-radius: 6px;
+                border-radius: 2px;
                 opacity: .6;
 
                 @media #{$mxl} {
-                    width: 15vw;
+                    width: 12vw;
+                    height: 6px;
                 }
 
                 &.selected {
@@ -148,10 +150,17 @@
     .articles {
         display: flex;
         flex-wrap: wrap;
-        // flex-direction: column;
         column-gap: 30px;
         row-gap: 50px;
         padding: 0 40px;
+
+        @media #{$mxl} {
+            padding: 0 20px;
+        }
+
+        @media #{$mlg} {
+            padding: 0 12px;
+        }
 
         .article-box {
             width: calc(100% / 4 - 90px / 4);
@@ -172,7 +181,6 @@
             }
 
             &:hover {
-                // color: $gray-light-color;
                 text-decoration: underline;
 
                 img {
@@ -187,6 +195,10 @@
                 overflow: hidden;
                 position: relative;
                 background-color: $purple-light-color;
+
+                @media #{$mlg} {
+                    aspect-ratio: 16/9;
+                }
 
                 img {
                     width: 100%;

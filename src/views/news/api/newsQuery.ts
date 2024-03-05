@@ -36,12 +36,12 @@ export function useTopNews (
 export function useNews (
   q?: string,
   domains?: string,
+  pageSize?: number,
   searchIn?: 'title' | 'description' | 'content',
   from?: string,
   to?: string,
   language?: string,
   sortBy?: 'relevancy' | 'popularity' | 'publishedAt',
-  pageSize?: number,
   page?: number
 ) {
   return useQuery({

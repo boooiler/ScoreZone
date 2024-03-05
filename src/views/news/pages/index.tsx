@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles.scss'
 
 export const News = () => {
-  const { data: topNews, isLoading } = useNews('sport', 'interia.pl, sport.interia.pl')
+  const { data: topNews, isLoading } = useNews('sport', 'interia.pl, sport.interia.pl', 64)
   const [sliderNews, setSliderNews] = useState<any>()
   const [otherNews, setOtherNews] = useState<any>()
 
@@ -15,8 +15,6 @@ export const News = () => {
       const { articles } = topNews
       setSliderNews(articles.slice(0,4))
       setOtherNews(articles.slice(4))
-      // setSliderNews(articles.slice(8,12))
-      // setOtherNews(articles.slice(12))
     }
   }, [topNews])
 
@@ -47,7 +45,9 @@ export const News = () => {
                   <div className="img-wrapper">
                     <img src={news.urlToImage} alt='image' />
                   </div>
-                  <span className='slide-text'>{news.title}</span>
+                  <a className='slide-text' href={news.url} target='_blank' rel="noreferrer">
+                    {news.title}
+                  </a>
                 </div>
               ))}
             </Carousel>

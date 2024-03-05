@@ -4,7 +4,7 @@
 .app-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   background: $primary-color;
   --main-color: $black-color;
@@ -12,6 +12,10 @@
 
   &.page-news {
     --main-color: #{$purple-light-color};
+
+    .app-outlet {
+      padding-top: 0 !important;
+    }
   }
 
   &.page-football {
@@ -31,62 +35,75 @@
 
   .app-outlet {
     flex-grow: 1;
-    // overflow-x: hidden;
-    // overflow-y: auto;
     position: relative;
     display: flex;
-    overflow: hidden;
+    // overflow: hidden;
 
-    .left-sidebar {
-      // max-width: 600px;
-      // width: calc(100% / 5);
-      width: 240px;
-      min-width: 240px;
-      height: 100%;
-      border-right: 1px solid $gray-light-color;
-      padding: 20px 12px;
+    @media #{$mlg} {
+      flex-direction: column-reverse;
     }
+  }
+}
 
-    .page-wrapper {
-      overflow-x: hidden;
-      overflow-y: auto;
-      flex-grow: 1;
-      padding: 20px 12px;
+.left-sidebar {
+  width: 240px;
+  min-width: 240px;
+  // height: 100%;
+  border-right: 1px solid $gray-light-color;
+  padding: 20px 12px;
 
-      .tabs {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        padding: 20px;
+  @media #{$mlg} {
+    width: 100%;
+    border: unset;
+  }
+}
 
-        .tab {
-          cursor: pointer;
-          padding: 10px 16px 8px;
-          background: $gray-medium-color;
-          border-radius: 6px;
-          transition: all .3s;
-          font-family: $font-header;
-          font-size: 14px;
+.page-wrapper {
+  flex-grow: 1;
+  padding: 20px 12px;
 
-          &:hover {
-            background: $gray-light-color;
-          }
+  @media #{$mlg} {
+    width: 100%;
+  }
 
-          &.active {
-            box-shadow: 0 0px 12px -2px var(--main-color);
-            border: 1px solid var(--main-color);
-            background: var(--main-color);
-          }
-        }
+  .tabs {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+
+    .tab {
+      cursor: pointer;
+      padding: 10px 16px 8px;
+      background: $gray-medium-color;
+      border-radius: 6px;
+      transition: all .3s;
+      font-family: $font-header;
+      font-size: 14px;
+
+      &:hover {
+        background: $gray-light-color;
+      }
+
+      &.active {
+        box-shadow: 0 0px 12px -2px var(--main-color);
+        border: 1px solid var(--main-color);
+        background: var(--main-color);
       }
     }
+  }
+}
 
-    .favorite-teams {
-      width: 60px;
-      border-left: 1px solid $gray-light-color;
-      padding: 20px 6px;
-    }
+.favorite-teams {
+  width: 60px;
+  min-width: 60px;
+  border-left: 1px solid $gray-light-color;
+  padding: 20px 6px;
+
+  @media #{$mlg} {
+    width: 100%;
+    border: unset;
   }
 }
