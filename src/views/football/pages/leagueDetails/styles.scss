@@ -54,6 +54,18 @@
                 font-weight: 900;
                 font-size: 100px;
                 color: $gray-light-color;
+
+                @media #{$mlg} {
+                    font-size: 80px;
+                }
+
+                @media #{$msm} {
+                    font-size: 60px;
+                }
+
+                @media #{$mxs} {
+                    font-size: 40px;
+                }
             }
         }
 

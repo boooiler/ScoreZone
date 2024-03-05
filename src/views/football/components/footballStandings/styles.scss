@@ -3,6 +3,7 @@
 .standings {
     position: relative;
     padding: 20px;
+    overflow-x: auto;
 
     table {
         width: 100%;
