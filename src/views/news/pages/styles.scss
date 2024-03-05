@@ -31,7 +31,13 @@
                     height: 90vh;
 
                     @media #{$msm} {
-                        height: 100vh;
+                        height: auto;
+                        aspect-ratio: 4/3;
+                        min-height: 45vh;
+                    }
+
+                    @media #{$mxs} {
+                        min-height: 40vh;
                     }
 
                     &::after {
@@ -102,6 +108,7 @@
                     @media #{$msm} {
                         max-width: calc(100% - 20px);
                         padding: 12px 20px;
+                        font-size: 23px;
                     }
 
                     @media #{$mxs} {
@@ -109,6 +116,7 @@
                         bottom: 5px;
                         right: 5px;
                         padding: 10px;
+                        font-size: 20px;
                     }
                 }
             }
@@ -160,6 +168,10 @@
 
         @media #{$mlg} {
             padding: 0 12px;
+        }
+
+        @media #{$msm} {
+            row-gap: 20px;
         }
 
         .article-box {

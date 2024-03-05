@@ -112,6 +112,8 @@
         @media #{$mxl} {
             display: flex;
             flex-direction: column-reverse;
+            align-items: center;
+            justify-content: flex-start;
             gap: 60px;
         }
 
@@ -126,6 +128,18 @@
             padding: 80px 120px;
             transition: all .4s;
 
+            @media #{$mmd} {
+                padding: 80px;
+            }
+
+            @media #{$msm} {
+                padding: 40px;
+            }
+
+            @media #{$mxs} {
+                padding: 20px;
+            }
+
             &.isOpen {
                 left: 0;
             }
@@ -134,6 +148,18 @@
                 width: calc(100% - 240px) !important;
                 height: 70px;
                 border-radius: 6px;
+
+                @media #{$mmd} {
+                    width: calc(100% - 160px) !important;
+                }
+
+                @media #{$msm} {
+                    width: calc(100% - 80px) !important;
+                }
+
+                @media #{$mxs} {
+                    width: calc(100% - 40px) !important;
+                }
 
                 &:before,
                 &:after {

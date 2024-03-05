@@ -5,6 +5,10 @@
     padding: 20px;
     overflow-x: auto;
 
+    @media #{$msm} {
+        padding: 20px 0;
+    }
+
     table {
         width: 100%;
         padding: 20px 0px;

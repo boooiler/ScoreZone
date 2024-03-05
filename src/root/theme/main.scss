@@ -40,7 +40,7 @@
     // overflow: hidden;
 
     @media #{$mlg} {
-      flex-direction: column-reverse;
+      flex-direction: column;
     }
   }
 }
@@ -73,6 +73,20 @@
     justify-content: center;
     gap: 10px;
     padding: 20px;
+    overflow-x: auto;
+
+    @media #{$mlg} {
+      justify-content: flex-start;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    @media #{$msm} {
+      padding: 20px 0;
+    }
 
     .tab {
       cursor: pointer;

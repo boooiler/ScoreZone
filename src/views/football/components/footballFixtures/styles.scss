@@ -5,6 +5,10 @@
     padding: 20px;
     width: 100%;
 
+    @media #{$msm} {
+        padding: 20px 0;
+    }
+
     &-wrapper {
         display: flex;
         flex-direction: column;
@@ -16,6 +20,10 @@
                 background: $gray-light-color;
                 border-radius: 6px 6px 0 0;
                 padding: 10px 40px;
+
+                @media #{$mlg} {
+                    padding: 10px 20px;
+                }
             }
 
             &__score {
@@ -25,6 +33,15 @@
                 gap: 10px;
                 padding: 15px 40px;
                 background: $gray-medium-color;
+
+                @media #{$mlg} {
+                    padding: 15px 20px;
+                    flex-wrap: wrap;
+                }
+
+                @media #{$msm} {
+                    padding: 12px 10px;
+                }
 
                 &:hover {
                     background: lighten($gray-medium-color, 10);
@@ -48,6 +65,11 @@
                     // margin-right: 100px;
                     width: 150px;
 
+                    @media #{$mlg} {
+                        width: 100%;
+                        align-items: center;
+                    }
+
                     b {
                         letter-spacing: .5px;
                     }
@@ -64,8 +86,12 @@
                     display: flex;
                     align-items: center;
                     font-size: 17px;
-                    width: calc(50% - 41px);
+                    width: calc(50% - 51px);
                     gap: 10px;
+
+                    @media #{$mlg} {
+                        font-size: 16px;
+                    }
 
                     &:first-of-type {
                         padding-right: 40px;
@@ -74,6 +100,7 @@
                     &:last-of-type {
                         padding-left: 40px;
                         justify-content: flex-end;
+                        text-align: right;
                     }
 
                     img {

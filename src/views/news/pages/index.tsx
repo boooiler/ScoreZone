@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles.scss'
 
 export const News = () => {
-  const { data: topNews, isLoading } = useNews('sport', 'interia.pl, sport.interia.pl', 64)
+  const { data: topNews, isLoading } = useNews('sport', 'sport.interia.pl, sport.pl, sport.onet.pl, polsatsport.pl, sportowefakty.wp.pl, meczyki.pl, sport.tvp.pl, sport.se.pl, przegladsportowy.onet.pl', 64)
   const [sliderNews, setSliderNews] = useState<any>()
   const [otherNews, setOtherNews] = useState<any>()
 

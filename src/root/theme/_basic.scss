@@ -5,6 +5,7 @@ body {
     font-family: $font-text;
     line-height: 1.15;
     background: $primary-color;
+    scroll-behavior: smooth;
 
     //hidden scrollbar
     // scrollbar-width: none;
