@@ -17,7 +17,6 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
   const { data: fixturesData, isLoading } = useFootballFixtures(undefined, league, season, "TBD-NS-PST-CANC-ABD-AWD", undefined, team)
   const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useFootballFixtures(undefined, league, season, "FT-AET-PEN-LIVE-WO", undefined, team)
   const [fixtures, setFixtures] = useState<FootballFixtureMatchDay>()
-  // const [finishedFixtures, setFinishedFixtures] = useState<FootballFixtureMatchDay>()
 
   useEffect(() => {
     if(fixturesData && finishedFixturesData && fixturesType) {
@@ -42,7 +41,7 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
   return (
     <>
       <section className="fixtures-wrapper">
-        {isLoading || !fixtures ? (
+        {isLoading || isLoadingFinishedFixtures || !fixtures ? (
           <Loader />
         ) : Object.keys(fixtures).map((round: string, index: number) => (
           <div key={index} className="fixtures-wrapper--round">
@@ -85,45 +84,6 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
           </div>
         ))}
       </section>
-      {/* <section className="fixtures">
-          {isLoadingFinishedFixtures || !finishedFixtures ? (
-            <Loader />
-          ) : Object.keys(finishedFixtures).reverse().map((round: any) => (
-            <div key={round} className="fixtures--round">
-              <h4>{round}</h4>
-              {finishedFixtures[round].map((fixture: any) => (
-                <div key={fixture.fixture.id} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <div className="team">
-                    <img
-                      src={fixture.teams.home.logo}
-                      alt="logo"
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        objectFit: "contain",
-                        marginRight: "5px"
-                      } as React.CSSProperties}
-                    />
-                    <span>{fixture.teams.home.name}</span>
-                  </div>
-                  <div className="team">
-                    <img
-                      src={fixture.teams.away.logo}
-                      alt="logo"
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        objectFit: "contain",
-                        marginRight: "5px"
-                      } as React.CSSProperties}
-                    />
-                    <span>{fixture.teams.away.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </section> */}
     </>
   )
 }

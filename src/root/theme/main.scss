@@ -48,7 +48,6 @@
 .left-sidebar {
   width: 240px;
   min-width: 240px;
-  // height: 100%;
   border-right: 1px solid $gray-light-color;
   padding: 20px 12px;
 
@@ -96,6 +95,10 @@
       transition: all .3s;
       font-family: $font-header;
       font-size: 14px;
+
+      @media #{$msm} {
+        font-size: 12px;
+      }
 
       &:hover {
         background: $gray-light-color;

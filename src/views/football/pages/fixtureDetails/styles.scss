@@ -78,12 +78,22 @@
                     border-radius: 6px;
                     background: $white-color;
                 }
+
+                p {
+                    @media #{$msm} {
+                        margin: 6px;
+                    }
+                }
             }
 
             .fixture-round {
                 margin: 0;
                 font-weight: 500;
                 font-size: 14px;
+
+                @media #{$msm} {
+                    font-size: 12px;
+                }
             }
         }
 
@@ -93,6 +103,10 @@
             align-items: center;
             justify-content: center;
             gap: 40px;
+
+            @media #{$mlg} {
+                gap: 20px;
+            }
 
             .fixture-match-info {
                 text-align: center;
@@ -113,6 +127,10 @@
                 &--date {
                     font-weight: 600;
                     font-size: 16px;
+
+                    @media #{$msm} {
+                        font-size: 12px;
+                    }
                 }
 
                 &--stadium {
@@ -245,10 +263,15 @@
 
                 @media #{$msm} {
                     margin-top: 0;
+                    font-size: 12px;
                 }
 
                 b {
                     font-size: 16px;
+
+                    @media #{$msm} {
+                        font-size: 14px;
+                    }
                 }
             }
         }
@@ -278,6 +301,14 @@
                 flex-direction: column;
                 gap: 10px;
 
+                @media #{$mxl} {
+                    font-size: 14px;
+                }
+
+                @media #{$msm} {
+                    font-size: 12px;
+                }
+
                 &--item {
                     width: 100%;
                     display: flex;
@@ -285,17 +316,28 @@
                     align-items: center;
                     gap: 10px;
 
+                    @media #{$mxl} {
+                        gap: 8px;
+                    }
+
                     &.away {
                         justify-content: flex-start;
                         flex-direction: row-reverse;
 
                         div {
                             &:last-of-type {
-                                display: flex;
-                                align-items: center;
                                 flex-direction: row-reverse;
-                                gap: 10px;
                             }
+                        }
+                    }
+
+                    div:last-of-type {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        @media #{$mxl} {
+                            gap: 6px;
                         }
                     }
 
@@ -308,11 +350,21 @@
                         justify-content: center;
                         align-items: center;
 
+                        @media #{$msm} {
+                            width: 20px;
+                            height: 20px;
+                        }
+
 
                         svg,
                         div {
                             width: 16px;
                             height: 16px;
+
+                            @media #{$msm} {
+                                width: 12px;
+                                height: 12px;
+                            }
                         }
                     }
 
@@ -320,6 +372,14 @@
                         font-size: 16px;
                         font-weight: 500;
                         color: $gray-light-color;
+
+                        @media #{$mxl} {
+                            font-size: 14px;
+                        }
+
+                        @media #{$msm} {
+                            font-size: 12px;
+                        }
                     }
                 }
             }

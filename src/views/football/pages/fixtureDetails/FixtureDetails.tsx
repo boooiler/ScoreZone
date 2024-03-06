@@ -27,6 +27,8 @@ export const FixtureDetails = () => {
       return <div style={{ width: "10px", background: "red", borderRadius: "2px" }}></div>
     } else if (eventDetail.includes('Normal Goal')){
       return <Icon name='IconFootball' variant='filled' />
+    } else if (eventDetail.includes('Goal Disallowed')){
+      return <div style={{ width: "15px", fontSize: "8px" }}>VAR</div>
     } 
     return ''
   }
@@ -55,6 +57,8 @@ export const FixtureDetails = () => {
                     <div className="live-match">
                       <b>{breakStatus.includes(fixtureDetails.fixture.status.short) ? 'PRZERWA' : `${fixtureDetails.fixture.status.elapsed}'`}</b>
                     </div>
+                  ) : fixtureDetails.fixture.status.short === 'FT' ? (
+                    <b style={{ fontSize: '16px' }}>KONIEC</b>
                   ) : (
                     <>
                       <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
