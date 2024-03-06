@@ -70,6 +70,10 @@
                     background: $gray-medium-color;
                     font-family: $font-header;
 
+                    @media #{$msm} {
+                        font-size: 14px;
+                    }
+
                     &.td-rank {
                         position: relative;
 
@@ -131,6 +135,10 @@
                             span {
                                 font-size: 17px;
                                 font-weight: 500;
+
+                                @media #{$msm} {
+                                    font-size: 14px;
+                                }
                             }
                         }
                     }

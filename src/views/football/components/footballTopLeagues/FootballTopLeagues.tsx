@@ -30,7 +30,8 @@ export const FootballTopLeagues = () => {
 
   const isActive = (path: string) => {
     if (!pathname) return false
-    return pathname.includes(path)
+    const [, , , id] = pathname.split('/')
+    return id === path
   }
 
   return (

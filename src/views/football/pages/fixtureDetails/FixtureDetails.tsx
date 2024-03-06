@@ -15,6 +15,8 @@ export const FixtureDetails = () => {
   const { data: fixture, isLoading } = useFootballFixtures(Number(fixtureId))
   const fixtureDetails: FootballMatch = fixture && fixture[0]
   const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'standings'>('events')
+  const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
+  const breakStatus = ['HT', 'BT', 'INT']
 
   const eventIcon = (eventDetail: string) => {
     if(eventDetail.includes('Substitution')){
@@ -49,12 +51,19 @@ export const FixtureDetails = () => {
               </section>
               <section className="fixture-details-header--bottom">
                 <div className="fixture-match-info">
-                  <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
-                  <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("HH:mm")}</p>
-                  <p className="fixture-match-info--stadium">
-                    {fixtureDetails.fixture.venue.name}, {fixtureDetails.fixture.venue.city}
-                  </p>
-                  {/* <p>{fixtureDetails.fixture.status.long}</p> */}
+                  {liveStatus.includes(fixtureDetails.fixture.status.short) ? (
+                    <div className="live-match">
+                      <b>{breakStatus.includes(fixtureDetails.fixture.status.short) ? 'PRZERWA' : `${fixtureDetails.fixture.status.elapsed}'`}</b>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
+                      <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("HH:mm")}</p>
+                      <p className="fixture-match-info--stadium">
+                        {fixtureDetails.fixture.venue.name}, {fixtureDetails.fixture.venue.city}
+                      </p>
+                    </>
+                  )}
                 </div>
                 <div className="fixture-summary">
                   <div 
@@ -65,7 +74,6 @@ export const FixtureDetails = () => {
                     <img src={fixtureDetails.teams.home.logo} alt="logo" />
                   </div>
                   <div className="fixture-summary--result">
-                    {/* <p>`{fixtureDetails.fixture.status.elapsed}</p> */}
                     <div className="score">
                       <div className="score--item">
                         {fixtureDetails.goals.home}

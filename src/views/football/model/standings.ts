@@ -6,7 +6,7 @@ export interface FootballStandings {
         logo: string
         url: string
         season: number
-        standings: [FootballStandingInfo[]]
+        standings: FootballStandingInfo[][]
     }
 }
 

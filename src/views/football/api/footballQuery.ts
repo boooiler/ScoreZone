@@ -159,7 +159,8 @@ export function useFootballFixtures (
         params: queryKey[1] as AxiosRequestConfig<any>
       })
       return data.response
-    }
+    },
+    refetchInterval: 30000
   })
 }
 

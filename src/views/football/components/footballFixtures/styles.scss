@@ -70,6 +70,10 @@
                         align-items: center;
                     }
 
+                    .live-match {
+                        color: var(--main-color);
+                    }
+
                     b {
                         letter-spacing: .5px;
                     }
@@ -91,6 +95,17 @@
 
                     @media #{$mlg} {
                         font-size: 16px;
+                        flex-direction: column;
+                        text-align: center;
+                        padding: 0 !important;
+                    }
+
+                    @media #{$msm} {
+                        font-size: 14px;
+                    }
+
+                    @media #{$mxs} {
+                        font-size: 12px;
                     }
 
                     &:first-of-type {
@@ -101,6 +116,11 @@
                         padding-left: 40px;
                         justify-content: flex-end;
                         text-align: right;
+
+                        @media #{$mlg} {
+                            flex-direction: column-reverse;
+                            text-align: center;
+                        }
                     }
 
                     img {

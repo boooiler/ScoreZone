@@ -104,6 +104,551 @@ export const topFootballLeagues: FootballLeague[] = [
       }
     ]
   },
+  { // UEFA Champions League 2
+    league: {
+      id: 2,
+      name: "UEFA Champions League",
+      type: "Cup",
+      logo: "https://media.api-sports.io/football/leagues/2.png"
+    
+    },
+    country: {
+      name: "World",
+      code: null,
+      flag: null
+    
+    },
+    seasons: [
+      {
+        year: 2011,
+        start: "2011-06-28",
+        end: "2012-05-19",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: false,
+            statistics_players: false
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2012,
+        start: "2012-07-03",
+        end: "2013-05-25",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: false,
+            statistics_players: false
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+    
+      },
+      {
+        year: 2013,
+        start: "2013-07-02",
+        end: "2014-05-24",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: false,
+            statistics_players: false
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+    
+      },
+      {
+        year: 2014,
+        start: "2014-07-01",
+        end: "2015-06-06",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: false,
+            statistics_players: false
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+    
+      },
+      {
+        year: 2015,
+        start: "2015-06-30",
+        end: "2016-05-28",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+    
+      },
+      {
+        year: 2016,
+        start: "2016-06-28",
+        end: "2017-06-03",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2017,
+        start: "2017-06-27",
+        end: "2018-05-26",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2018,
+        start: "2018-06-26",
+        end: "2019-06-01",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2019,
+        start: "2019-06-25",
+        end: "2020-08-23",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2020,
+        start: "2020-08-08",
+        end: "2021-05-29",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2021,
+        start: "2021-06-22",
+        end: "2022-05-28",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2022,
+        start: "2022-06-21",
+        end: "2023-06-10",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2023,
+        start: "2023-06-27",
+        end: "2024-03-13",
+        current: true,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: true
+        }
+      }
+    ]
+  },
+  { // UEFA Europa League 3
+    league: {
+    
+      id: 3,
+      name: "UEFA Europa League",
+      type: "Cup",
+      logo: "https://media.api-sports.io/football/leagues/3.png"
+    
+    },
+    country: {
+      name: "World",
+      code: null,
+      flag: null
+    
+    },
+    seasons: [
+      {
+        year: 2014,
+        start: "2014-07-01",
+        end: "2015-05-27",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: false,
+            statistics_players: false
+          },
+          standings: false,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2015,
+        start: "2015-06-30",
+        end: "2016-05-18",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: false,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2016,
+        start: "2016-06-28",
+        end: "2017-05-24",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2017,
+        start: "2017-06-29",
+        end: "2018-05-16",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2018,
+        start: "2018-06-26",
+        end: "2019-05-29",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2019,
+        start: "2019-06-27",
+        end: "2020-08-21",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: false,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2020,
+        start: "2020-08-18",
+        end: "2021-05-26",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2021,
+        start: "2021-08-03",
+        end: "2022-05-18",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2022,
+        start: "2022-08-04",
+        end: "2023-05-31",
+        current: false,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: false
+        }
+      },
+      {
+        year: 2023,
+        start: "2023-08-08",
+        end: "2024-03-14",
+        current: true,
+        coverage: {
+          fixtures: {
+            events: true,
+            lineups: true,
+            statistics_fixtures: true,
+            statistics_players: true
+          },
+          standings: true,
+          players: true,
+          top_scorers: true,
+          top_assists: true,
+          top_cards: true,
+          injuries: true,
+          predictions: true,
+          odds: true
+        }
+      }
+    ]
+  },
   { // UEFA Europa Conference League 848
     "league": {
       "id": 848,

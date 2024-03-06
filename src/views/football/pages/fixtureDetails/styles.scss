@@ -102,6 +102,10 @@
                 gap: 6px;
                 max-width: 400px;
 
+                .live-match {
+                    color: var(--main-color);
+                }
+
                 p {
                     margin: 0;
                 }

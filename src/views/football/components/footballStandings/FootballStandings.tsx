@@ -12,12 +12,12 @@ interface Props {
 export const FootballStandings = ({ league, season }: Props) => {
   const navigate = useNavigate()
   const { data: standingsData, isLoading } = useFootballStandings(season, league)
-  const [_standings, setStandings] = useState<FootballStandingInfo[]>()
+  const [_standings, setStandings] = useState<FootballStandingInfo[][]>()
 
   useEffect(() => {
     if(standingsData) {
       const { league: { standings } } = standingsData
-      setStandings(standings[0])
+      setStandings(standings)
     }
   }, [standingsData])
 
@@ -55,51 +55,53 @@ export const FootballStandings = ({ league, season }: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <section className="standings">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th className="th-team">Drużyna</th>
-                <th>PKT</th>
-                <th>M</th>
-                <th>W</th>
-                <th>R</th>
-                <th>P</th>
-                <th>B</th>
-                <th>+/-</th>
-                <th>Forma</th>
-              </tr>
-            </thead>
-            <tbody>
-              {_standings && _standings.length > 0 ? _standings.map(({ rank, team, points, goalsDiff, group, form, status, description, all, home, away }) => (
-                <tr key={rank}>
-                  <td className={`td-rank ${rankColor(description)}`}>{rank}</td>
-                  <td className="td-team" onClick={() => navigate(`/football/teams/${team.id}`)}>
-                    <div className="team">
-                      <img src={team.logo} alt="logo" />
-                      <span>{team.name}</span>
-                    </div>
-                  </td>
-                  <td className="td-points">{points}</td>
-                  <td>{all.played}</td>
-                  <td>{all.win}</td>
-                  <td>{all.draw}</td>
-                  <td>{all.lose}</td>
-                  <td>{all.goals.for}:{all.goals.against}</td>
-                  <td>{goalsDiff}</td>
-                  <td className="td-form">
-                    <div>
-                      {splitForm(form)}
-                    </div>
-                  </td>
+        _standings && _standings.length > 0 && _standings.map((standing: FootballStandingInfo[]) => (
+          <section className="standings">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th className="th-team">Drużyna</th>
+                  <th>PKT</th>
+                  <th>M</th>
+                  <th>W</th>
+                  <th>R</th>
+                  <th>P</th>
+                  <th>B</th>
+                  <th>+/-</th>
+                  <th>Forma</th>
                 </tr>
-              )) : (
-                <div>Brak danych</div>
-              )}
-            </tbody>
-          </table>
-        </section>
+              </thead>
+              <tbody>
+                {standing && standing.length > 0 ? standing.map(({ rank, team, points, goalsDiff, group, form, status, description, all, home, away }) => (
+                  <tr key={rank}>
+                    <td className={`td-rank ${rankColor(description)}`}>{rank}</td>
+                    <td className="td-team" onClick={() => navigate(`/football/teams/${team.id}`)}>
+                      <div className="team">
+                        <img src={team.logo} alt="logo" />
+                        <span>{team.name}</span>
+                      </div>
+                    </td>
+                    <td className="td-points">{points}</td>
+                    <td>{all.played}</td>
+                    <td>{all.win}</td>
+                    <td>{all.draw}</td>
+                    <td>{all.lose}</td>
+                    <td>{all.goals.for}:{all.goals.against}</td>
+                    <td>{goalsDiff}</td>
+                    <td className="td-form">
+                      <div>
+                        {splitForm(form)}
+                      </div>
+                    </td>
+                  </tr>
+                )) : (
+                  <div>Brak danych</div>
+                )}
+              </tbody>
+            </table>
+          </section>
+        ))
       )}
     </>
   )

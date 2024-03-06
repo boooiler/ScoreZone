@@ -1,1 +1,11 @@
 @import '@/root/theme/variables';
+
+.football-main-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h2 {
+        margin: 0;
+    }
+}
