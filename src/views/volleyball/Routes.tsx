@@ -3,6 +3,7 @@ import React, { Suspense } from "react"
 import { RouteObject } from "react-router-dom"
 
 const Volleyball = React.lazy(() => import('./pages'))
+const LeagueDetails = React.lazy(() => import('./pages/leagueDetails/LeagueDetails'))
 
 const routes: RouteObject[] = [
   {
@@ -17,7 +18,7 @@ const routes: RouteObject[] = [
     path: 'volleyball/leagues/:leagueId',
     element: (
       <Suspense fallback={<Loader fullscreen />}>
-        {/* <LeagueDetails /> */}
+        <LeagueDetails />
       </Suspense>
     )
   }
