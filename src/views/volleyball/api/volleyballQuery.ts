@@ -106,3 +106,30 @@ export function useVolleyballTeams (
     }
   })
 }
+
+export function useVolleyballGames (
+  id?: number,
+  league?: number,
+  season?: number,
+  team?: number,
+  date?: string
+) {
+  return useQuery({
+    queryKey: ['volleyball_games', { 
+      id,
+      season, 
+      league,
+      team,
+      date
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${apiUrl}/games`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data.response
+    },
+    refetchInterval: 30000
+  })
+}

@@ -1,0 +1,236 @@
+@import '@/root/theme/variables';
+
+.football-team-details {
+    padding: 0 !important;
+
+    .team-details-header {
+        position: relative;
+        display: flex;
+
+        @media #{$mxl} {
+            flex-direction: column;
+        }
+
+        &--bg-image {
+            position: absolute;
+            inset: 0;
+
+            &:after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                height: 100%;
+                width: 100%;
+                background: rgba($primary-color, .3);
+                background: linear-gradient(194deg, rgba($primary-color, .4) 10%, rgba($primary-color, .8) 35%, rgba($primary-color, 1) 65%);
+                pointer-events: none;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        .team-info-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 10px;
+            row-gap: 28px;
+            padding: 20px 12px;
+            backdrop-filter: blur(6px);
+            background: rgba($gray-light-color, 0.08);
+            border-radius: 10px;
+            width: 100%;
+
+            @media #{$msl} {
+                row-gap: 15px;
+            }
+
+            .team-info {
+                width: calc(100% / 3 - 20px / 3);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-weight: 900;
+                font-size: 20px;
+                text-align: center;
+
+                @media #{$msl} {
+                    width: 100%;
+                }
+
+                &.fluid {
+                    width: 100%;
+
+                    h4 {
+                        font-weight: 900;
+                        font-size: 1.2em;
+                    }
+                }
+
+                span {
+                    font-size: 10px;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    margin-bottom: 4px;
+                    opacity: 0.6;
+                }
+
+                h4 {
+                    margin: 0;
+                }
+            }
+        }
+
+        &--left {
+            position: relative;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 40px;
+            min-height: 60vh;
+            width: 30%;
+            min-width: 470px;
+
+            @media #{$mxl} {
+                min-width: unset;
+                width: 100%;
+                padding-bottom: 0;
+            }
+
+            @media #{$mmd} {
+                padding: 40px 12px 0;
+            }
+
+            @media #{$msm} {
+                gap: 20px;
+            }
+
+            img {
+                position: relative;
+                background-color: $white-color;
+                padding: 20px;
+                border-radius: 20px;
+
+                @media #{$mxl} {
+                    width: 100px;
+                    height: 100px;
+                    padding: 10px;
+                    border-radius: 10px;
+                }
+
+                @media #{$msm} {
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+
+            .team-name {
+                position: relative;
+                font-size: 4rem;
+                font-weight: 900;
+                opacity: .4;
+                text-transform: uppercase;
+                letter-spacing: -1px;
+                text-align: center;
+                margin: 0;
+                overflow-wrap: anywhere;
+
+                @media #{$mxxxl} {
+                    font-size: 3.5rem;
+                }
+
+                @media #{$mxl} {
+                    font-size: 3rem;
+                }
+
+                @media #{$mlg} {
+                    font-size: 2.5rem;
+                }
+
+                @media #{$msm} {
+                    font-size: 2rem;
+                }
+            }
+
+            .team-info-wrapper {
+                .team-info {
+                    width: calc(50% - 5px);
+
+                    @media #{$msm} {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        &--right {
+            padding: 60px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            @media #{$mmd} {
+                padding: 20px 12px;
+            }
+        }
+    }
+
+    .team-details-sidebar {
+        width: 25%;
+        min-width: 300px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        border: 1px solid $gray-light-color;
+        border-left: none;
+
+        div {
+            padding: 20px 20px;
+            width: 100%;
+            text-align: center;
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid $gray-light-color;
+            }
+        }
+    }
+
+    .squad {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 20px;
+
+        @media #{$mlg} {
+            padding: 12px;
+        }
+
+        .team-box {
+            width: calc(100% / 4 - 36px / 4);
+
+            @media #{$mlg} {
+                width: calc(100% / 3 - 24px / 3);
+            }
+
+            @media #{$mmd} {
+                width: calc(50% - 6px);
+                padding: 20px 15px;
+            }
+
+            @media #{$msm} {
+                width: 100%;
+            }
+        }
+    }
+}
