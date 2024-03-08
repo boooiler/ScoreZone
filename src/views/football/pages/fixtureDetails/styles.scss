@@ -118,6 +118,15 @@
 
                 .live-match {
                     color: var(--main-color);
+
+                    b {
+                        display: flex;
+                        align-items: center;
+
+                        div {
+                            @include blinking-animation(1s)
+                        }
+                    }
                 }
 
                 p {

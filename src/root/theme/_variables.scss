@@ -58,3 +58,21 @@ $hxlg: "only screen and (min-width : 1921px)";
     font-family: "GemunuLibre";
     src: url("/fonts/GemunuLibre-variable.ttf");
 }
+
+@mixin blinking-animation($duration: 1s) {
+    @keyframes blinking {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    animation: blinking $duration infinite;
+}

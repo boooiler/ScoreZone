@@ -1,23 +1,5 @@
 @import '@/root/theme/variables';
 
-@mixin blinking-animation($duration: 1s) {
-    @keyframes blinking {
-        0% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-
-    animation: blinking $duration infinite;
-}
-
 .fixtures {
     position: relative;
     padding: 20px;

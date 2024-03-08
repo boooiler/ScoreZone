@@ -55,10 +55,10 @@ export const FixtureDetails = () => {
                 <div className="fixture-match-info">
                   {liveStatus.includes(fixtureDetails.fixture.status.short) ? (
                     <div className="live-match">
-                      <b>{breakStatus.includes(fixtureDetails.fixture.status.short) ? 'PRZERWA' : `${fixtureDetails.fixture.status.elapsed}'`}</b>
+                      {breakStatus.includes(fixtureDetails.fixture.status.short) 
+                        ? <b style={{ fontSize: '12px' }}>PRZERWA</b> 
+                        : <b>{fixtureDetails.fixture.status.elapsed}<div>&#8242;</div></b>}
                     </div>
-                  ) : fixtureDetails.fixture.status.short === 'FT' ? (
-                    <b style={{ fontSize: '16px' }}>KONIEC</b>
                   ) : (
                     <>
                       <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
@@ -78,7 +78,7 @@ export const FixtureDetails = () => {
                     <img src={fixtureDetails.teams.home.logo} alt="logo" />
                   </div>
                   <div className="fixture-summary--result">
-                    <div className="score">
+                    <div className="score" style={{ color: liveStatus.concat(breakStatus).includes(fixtureDetails.fixture.status.short) ? 'var(--main-color)' : 'inherit' }}>
                       <div className="score--item">
                         {fixtureDetails.goals.home}
                       </div>
