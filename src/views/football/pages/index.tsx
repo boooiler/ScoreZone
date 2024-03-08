@@ -60,7 +60,7 @@ export const Football = () => {
                     <div className="match-date">
                       {liveStatus.includes(fixture.fixture.status.short) ? (
                         <div className="live-match">
-                          <b>{breakStatus.includes(fixture.fixture.status.short) ? 'PRZERWA' : `${fixture.fixture.status.elapsed}'`}</b>
+                          <b>{breakStatus.includes(fixture.fixture.status.short) ? 'PRZERWA' : <>{fixture.fixture.status.elapsed}<div>&#8242;</div></>}</b>
                         </div>
                       ) : fixture.fixture.status.short === 'FT' ? (
                         <b style={{ fontSize: '12px' }}>KONIEC</b>
