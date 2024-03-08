@@ -15,8 +15,10 @@ interface Props {
 export const FootballFixtures = ({ league, season, fixturesType, team }: Props) => {
   const navigate = useNavigate()
   const { data: fixturesData, isLoading } = useFootballFixtures(undefined, league, season, "TBD-NS-PST-CANC-ABD-AWD", undefined, team)
-  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useFootballFixtures(undefined, league, season, "FT-AET-PEN-LIVE-WO", undefined, team)
+  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useFootballFixtures(undefined, league, season, "FT-AET-PEN-LIVE-WO-1H-HT-2H-ET-BT-P-INT-HT-BT-INT", undefined, team)
   const [fixtures, setFixtures] = useState<FootballFixtureMatchDay>()
+  const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
+  const breakStatus = ['HT', 'BT', 'INT']
 
   useEffect(() => {
     if(fixturesData && finishedFixturesData && fixturesType) {
@@ -55,8 +57,16 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
                   onClick={() => navigate(`/football/fixtures/${fixture.fixture.id}`)}
                 >
                   <div className="match-date">
-                    <b>{moment(fixture.fixture.date).format("HH:mm")}</b>
-                    <p>{moment(fixture.fixture.date).format("DD/MM/YY")}</p>
+                    {liveStatus.includes(fixture.fixture.status.short) ? (
+                      <div className="live-match">
+                        <b>{breakStatus.includes(fixture.fixture.status.short) ? 'PRZERWA' : <>{fixture.fixture.status.elapsed}<div>&#8242;</div></>}</b>
+                      </div>
+                    ) : (
+                      <>
+                        <b>{moment(fixture.fixture.date).format("HH:mm")}</b>
+                        <p>{moment(fixture.fixture.date).format("DD/MM/YY")}</p>
+                      </>
+                    )}
                   </div>
                   <div className="team">
                     <img
@@ -66,10 +76,10 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
                     <span>{fixture.teams.home.name}</span>
                   </div>
                   <div className="score">
-                    {fixturesType === 'finished' ? (
-                      <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>
-                    ) : (
+                    {['NS','TBD'].includes(fixture.fixture.status.short) ? (
                       <><div>-</div> : <div>-</div></>
+                    ) : (
+                      <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>
                     )}
                   </div>
                   <div className="team">
