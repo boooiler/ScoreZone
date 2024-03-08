@@ -6,7 +6,7 @@ import "./styles.scss"
 import moment from "moment"
 import { useNavigate } from "react-router-dom"
 import { useVolleyballGames } from "../../api/volleyballQuery"
-import { VolleyballFixtureMatch } from "../../model/fixtures"
+import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "../../model/fixtures"
 
 interface Props {
   sport: "volleyball" | "handball"
@@ -18,17 +18,18 @@ interface Props {
 export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }: Props) => {
   const navigate = useNavigate()
   const { data: fixturesData, isLoading } = useVolleyballGames(sport, undefined, league, season, team, undefined)
-  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useVolleyballGames(sport, undefined, league, season, team, undefined)
-  const [fixtures, setFixtures] = useState<VolleyballFixtureMatch>()
+  // const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useVolleyballGames(sport, undefined, league, season, team, undefined)
+  const [fixtures, setFixtures] = useState<VolleyballFixtureMatchDay>()
 
   useEffect(() => {
-    if(fixturesData && finishedFixturesData && fixturesType) {
-      const sortedFinishedFixtures = finishedFixturesData.sort().reverse()
-      const fixtures = fixturesType === "planned" ? fixturesData : sortedFinishedFixtures
+    if(fixturesData && fixturesType) {
+      console.log(fixturesData.filter((f: any) => f.status.short === 'FT').sort().reverse())
+      const sortedFinishedFixtures = fixturesData.filter((f: any) => f.status.short === 'FT')
+      const plannedFixtures = fixturesData.filter((f: any) => f.status.short === 'NS')
+      const fixtures = fixturesType === "planned" ? plannedFixtures : sortedFinishedFixtures
       setFixtures(groupFixtures(fixtures))
-      console.log(groupFixtures(fixtures))
     }
-  }, [fixturesData, finishedFixturesData, fixturesType])
+  }, [fixturesData, fixturesType])
 
   const groupFixtures = (fixtures: VolleyballFixtureMatch[]) => {
     const groupedFixtures = fixtures.reduce((acc: any, fixture: VolleyballFixtureMatch) => {
@@ -45,12 +46,12 @@ export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }
   return (
     <>
       <section className="fixtures-wrapper">
-        {isLoading || isLoadingFinishedFixtures || !fixtures ? (
+        {isLoading || !fixtures ? (
           <Loader />
-        ) : Object.keys(fixtures).map((round: string, index: number) => (
+        ) : Object.keys(fixtures).sort().reverse().map((round: string, index: number) => (
           <div key={index} className="fixtures-wrapper--round">
-            <h4>{round}</h4>
-            {/* {fixtures[round]
+            <h4>Week {round}</h4>
+            {fixtures[round]
               .sort((a: VolleyballFixtureMatch, b: VolleyballFixtureMatch) => new Date(a.date).getTime() - new Date(b.date).getTime())
               .map((fixture: VolleyballFixtureMatch) => (
                 <div 
@@ -70,8 +71,8 @@ export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }
                     <span>{fixture.teams.home.name}</span>
                   </div>
                   <div className="score">
-                    {fixturesType === 'finished' ? (
-                      <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>
+                    {fixture.status.short === 'FT' ? (
+                      <><div>{fixture.scores.home}</div> : <div>{fixture.scores.away}</div></>
                     ) : (
                       <><div>-</div> : <div>-</div></>
                     )}
@@ -84,7 +85,7 @@ export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }
                     />
                   </div>
                 </div>
-              ))} */}
+              ))}
           </div>
         ))}
       </section>

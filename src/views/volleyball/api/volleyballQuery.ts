@@ -12,7 +12,7 @@ const headers = {
 
 export function useVolleyballLeagues (
   sport: "volleyball" | "handball",
-  id?: number[], 
+  id?: number, 
   season?: number,
   name?: string,
   country?: string, 
@@ -28,30 +28,30 @@ export function useVolleyballLeagues (
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {
-      if (!id || id.length === 0) {
-        const data = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
-          headers,
-          params: queryKey[1] as AxiosRequestConfig<any>
-        })
-        return data.data.response
-      }
-      const promises = id.map((leagueId) => {
-        return axios.get(`${apiUrl}/leagues`, {
-          headers,
-          params: { id: leagueId }
-        })
+      // if (!id || id.length === 0) {
+      const data = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
       })
+      return data.data.response
+      // }
+      // const promises = id.map((leagueId) => {
+      //   return axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
+      //     headers,
+      //     params: { id: leagueId }
+      //   })
+      // })
 
-      const responses: AxiosResponse<any>[] = await Promise.all(promises)
-      const leagueDatas: any[] = []
+      // const responses: AxiosResponse<any>[] = await Promise.all(promises)
+      // const leagueDatas: any[] = []
 
-      responses.forEach((response) => {
-        if (response.data.response && response.data.response.length > 0) {
-          leagueDatas.push(response.data.response[0]) 
-        }
-      })
+      // responses.forEach((response) => {
+      //   if (response.data.response && response.data.response.length > 0) {
+      //     leagueDatas.push(response.data.response[0]) 
+      //   }
+      // })
 
-      return leagueDatas
+      // return leagueDatas
     }
   })
 }

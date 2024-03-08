@@ -18,7 +18,7 @@ const routes: RouteObject[] = [
     path: 'volleyball/leagues/:leagueId',
     element: (
       <Suspense fallback={<Loader fullscreen />}>
-        <LeagueDetails />
+        <LeagueDetails sport="volleyball" />
       </Suspense>
     )
   }

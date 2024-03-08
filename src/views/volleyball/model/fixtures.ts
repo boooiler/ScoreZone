@@ -55,3 +55,7 @@ export interface VolleyballFixtureMatch {
         fifth: VolleyballFixturePeriodScores;
     };
 }
+
+export interface VolleyballFixtureMatchDay {
+    [round: string]: VolleyballFixtureMatch[]
+}

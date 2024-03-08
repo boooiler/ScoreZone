@@ -19,7 +19,7 @@ import { VolleyballStandings } from "@/views/volleyball/components/volleyballSta
 
 export const LeagueDetails = () => {
   const { leagueId } = useParams()
-  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues('handball', [Number(leagueId)], 2023)
+  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues('handball', Number(leagueId), 2023)
   const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
@@ -164,8 +164,7 @@ export const LeagueDetails = () => {
             ) : (
               <section className="teams">
                 {teams.response && teams.response.map((t: any) => {
-                  const { team } = t
-                  return <TeamBox id={team.id} name={team.name} photo={team.logo} />
+                  return <TeamBox id={t.id} name={t.name} photo={t.logo} />
                 })}
               </section>
             )}

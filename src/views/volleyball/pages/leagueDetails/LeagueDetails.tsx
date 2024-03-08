@@ -13,13 +13,14 @@ import TopLeagues from "@/shared/components/topLeagues"
 import { FootballLeague } from "@/views/football/model/league"
 import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
 import { VolleyballLeagueInfo } from "../../model/league"
+import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
 
 interface Props {
   sport: "volleyball" | "handball"
 }
 export const LeagueDetails = ({ sport }: Props) => {
   const { leagueId } = useParams()
-  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, [Number(leagueId)])
+  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, Number(leagueId))
   const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
@@ -34,7 +35,7 @@ export const LeagueDetails = ({ sport }: Props) => {
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues leagueIds={[97, 113, 120]} sport="volleyball" />
+        <TopLeagues leagueIds={sport === 'volleyball' ? [97, 113, 120] : [127, 81, 82, 39, 103]} sport={sport} />
       </section>
       <section className="page-wrapper football-league-details">
         {isLoadingTeams || isLoadingLeague || !leagueInfo || !teams ? (
@@ -152,20 +153,19 @@ export const LeagueDetails = ({ sport }: Props) => {
             </section>
 
             {activeTab === 'standings' ? (
-              <VolleyballStandings sport="volleyball" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
-            // ) : activeTab === "plannedFixtures" ? (
-            //   <section className="fixtures">
-            //     <FootballFixtures fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
-            //   </section>
-            // ) : activeTab === "finishedFixtures" ? (
-            //   <section className="fixtures">
-            //     <FootballFixtures fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
-            //   </section>
+              <VolleyballStandings sport={sport} league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+            ) : activeTab === "plannedFixtures" ? (
+              <section className="fixtures">
+                <VolleyballFixtures sport={sport} fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+              </section>
+            ) : activeTab === "finishedFixtures" ? (
+              <section className="fixtures">
+                <VolleyballFixtures sport={sport} fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+              </section>
             ) : (
               <section className="teams">
                 {teams.response && teams.response.map((t: any) => {
-                  const { team } = t
-                  return <TeamBox id={team.id} name={team.name} photo={team.logo} />
+                  return <TeamBox id={t.id} name={t.name} photo={t.logo} />
                 })}
               </section>
             )}
