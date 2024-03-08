@@ -6,12 +6,13 @@ import { VolleyballStandingInfo } from "../../model/standings"
 import './styles.scss'
 
 interface Props {
-    league: number
-    season: number
+  sport: "volleyball" | "handball"
+  league: number
+  season: number
 }
-export const VolleyballStandings = ({ league, season }: Props) => {
+export const VolleyballStandings = ({ sport, league, season }: Props) => {
   const navigate = useNavigate()
-  const { data: standingsData, isLoading } = useVolleyballStandings(season, league)
+  const { data: standingsData, isLoading } = useVolleyballStandings(sport, season, league)
   const [_standings, setStandings] = useState<VolleyballStandingInfo[][]>()
 
   useEffect(() => {

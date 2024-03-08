@@ -6,23 +6,23 @@ import { useVolleyballLeagues } from "../api/volleyballQuery"
 export const VolleyballTopLeagues = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { data: leagues, isLoading: isLoadingLeagues } = useVolleyballLeagues([
-    97 // SuperLega IT
-    // 113 // PlusLiga
-    // 114 // Super Cup
-    // 116, // Polish Cup
-    // 183, // Nations League
-    // 185, // World Championship
-    // 188, // World Cup
-    // 189, // Olympic Games
-    // 244, // European Championships
-    // 248 // Champions League
-    // 184, // Nations League Women
-    // 186, // World Championship Women
-    // 187, // World Cup Women
-    // 190, // Olympic Games Women
-    // 245 // European Championships Women
-  ], 2023)
+  // const { data: leagues, isLoading: isLoadingLeagues } = useVolleyballLeagues([
+  //   97 // SuperLega IT
+  //   // 113 // PlusLiga
+  //   // 114 // Super Cup
+  //   // 116, // Polish Cup
+  //   // 183, // Nations League
+  //   // 185, // World Championship
+  //   // 188, // World Cup
+  //   // 189, // Olympic Games
+  //   // 244, // European Championships
+  //   // 248 // Champions League
+  //   // 184, // Nations League Women
+  //   // 186, // World Championship Women
+  //   // 187, // World Cup Women
+  //   // 190, // Olympic Games Women
+  //   // 245 // European Championships Women
+  // ], 2023)
 
   const isActive = (path: string) => {
     if (!pathname) return false
@@ -32,7 +32,7 @@ export const VolleyballTopLeagues = () => {
   return (
     <section>
       <h2>Popularne ligi:</h2>
-      {isLoadingLeagues ? (
+      {/* {isLoadingLeagues ? (
         <Loader />
       ) : leagues && leagues.length > 0 ? (
         <section className="" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -77,7 +77,7 @@ export const VolleyballTopLeagues = () => {
         </section>
       ) : (
         <p>Brak lig lub skończyła się darmowa ilość requestów. Spróbuj ponownie jutro. Przepraszamy za utrudnienia.</p>
-      )}
+      )} */}
     </section>
   )
 }

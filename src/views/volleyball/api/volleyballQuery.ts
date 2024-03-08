@@ -3,37 +3,33 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
 const apiHost = import.meta.env.VITE_API_HOST_VOLLEYBALL
-const apiUrl = 'https://v1.volleyball.api-sports.io/'
+const apiUrl = 'https://v1.volleyball.api-sports.io'
+const apiUrl2 = 'https://v1.handball.api-sports.io'
 const headers = {
   "x-rapidapi-key": apiKey,
   "x-rapidapi-host": apiHost
 }
 
 export function useVolleyballLeagues (
-  current?: boolean,
+  sport: "volleyball" | "handball",
   id?: number[], 
+  season?: number,
   name?: string,
   country?: string, 
-  code?: string, 
-  season?: number,
-  team?: number,
   type?: string
 ) {
   return useQuery({
-    queryKey: ['volleyball_leagues', { 
+    queryKey: [`${sport}_leagues`, { 
       id, 
       name,
       country, 
-      code, 
       season,
-      team,
-      type,
-      current
+      type
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {
       if (!id || id.length === 0) {
-        const data = await axios.get(`${apiUrl}/leagues`, {
+        const data = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
           headers,
           params: queryKey[1] as AxiosRequestConfig<any>
         })
@@ -61,17 +57,18 @@ export function useVolleyballLeagues (
 }
 
 export function useVolleyballStandings (
+  sport: "volleyball" | "handball",
   season: number,
   league: number
 ) {
   return useQuery({
-    queryKey: ['volleyball_standings', { 
+    queryKey: [`${sport}_standings`, { 
       season, 
       league
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {
-      const { data } = await axios.get(`${apiUrl}/standings`, {
+      const { data } = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/standings`, {
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })
@@ -81,6 +78,7 @@ export function useVolleyballStandings (
 }
 
 export function useVolleyballTeams (
+  sport: "volleyball" | "handball",
   id?: number,
   season?: number,
   league?: number,
@@ -89,7 +87,7 @@ export function useVolleyballTeams (
   country?: string
 ) {
   return useQuery({
-    queryKey: ['volleyball_teams', {
+    queryKey: [`${sport}_teams`, { 
       id,
       season,
       league,
@@ -98,7 +96,7 @@ export function useVolleyballTeams (
       country
     }],
     queryFn: async ({ queryKey }) => {
-      const { data } = await axios.get(`${apiUrl}/teams`, {
+      const { data } = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/teams`, {
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })
@@ -108,6 +106,7 @@ export function useVolleyballTeams (
 }
 
 export function useVolleyballGames (
+  sport: "volleyball" | "handball",
   id?: number,
   league?: number,
   season?: number,
@@ -115,7 +114,7 @@ export function useVolleyballGames (
   date?: string
 ) {
   return useQuery({
-    queryKey: ['volleyball_games', { 
+    queryKey: [`${sport}_games`, { 
       id,
       season, 
       league,
@@ -124,7 +123,7 @@ export function useVolleyballGames (
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {
-      const { data } = await axios.get(`${apiUrl}/games`, {
+      const { data } = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/games`, {
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })

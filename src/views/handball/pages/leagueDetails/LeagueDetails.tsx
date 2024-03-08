@@ -8,18 +8,18 @@ import Loader from "@/shared/components/loader"
 // import { FootballLeague } from "../../model/league"
 import './styles.scss'
 import { TeamBox } from "@/shared/components/teamBox"
-import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
+// import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
 import TopLeagues from "@/shared/components/topLeagues"
 import { FootballLeague } from "@/views/football/model/league"
-import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
-import { VolleyballLeagueInfo } from "../../model/league"
+import { VolleyballLeagueInfo } from "@/views/volleyball/model/league"
+import { useVolleyballLeagues, useVolleyballTeams } from "@/views/volleyball/api/volleyballQuery"
+import { VolleyballStandings } from "@/views/volleyball/components/volleyballStandings/VolleyballStandings"
+// import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
+// import { VolleyballLeagueInfo } from "../../model/league"
 
-interface Props {
-  sport: "volleyball" | "handball"
-}
-export const LeagueDetails = ({ sport }: Props) => {
+export const LeagueDetails = () => {
   const { leagueId } = useParams()
-  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, [Number(leagueId)])
+  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues('handball', [Number(leagueId)], 2023)
   const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
@@ -29,20 +29,20 @@ export const LeagueDetails = ({ sport }: Props) => {
     }
   }, [leagueDetails])
   
-  const { data: teams, isLoading: isLoadingTeams } = useVolleyballTeams(sport, undefined, leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].season, Number(leagueId))
+  const { data: teams, isLoading: isLoadingTeams } = useVolleyballTeams('handball', undefined, 2023, Number(leagueId))
 
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues leagueIds={[97, 113, 120]} sport="volleyball" />
+        <TopLeagues leagueIds={[127, 81, 82, 39, 103]} sport="handball" />
       </section>
       <section className="page-wrapper football-league-details">
-        {isLoadingTeams || isLoadingLeague || !leagueInfo || !teams ? (
+        {isLoadingTeams || isLoadingLeague || !teams ? (
           <Loader fullscreen />
         ) : (
           <>
             <section className="league-details-header">
-              <div className="league-details-header--top">
+              {/* <div className="league-details-header--top">
                 <img
                   src={leagueInfo.logo}
                   alt="logo"
@@ -68,7 +68,7 @@ export const LeagueDetails = ({ sport }: Props) => {
                   <span>Teams</span>
                   <h4>{teams.response.length}</h4>
                 </div>
-              </div>
+              </div> */}
             </section>
 
             {/* <section className="live-fixtures-wrapper">
@@ -152,7 +152,7 @@ export const LeagueDetails = ({ sport }: Props) => {
             </section>
 
             {activeTab === 'standings' ? (
-              <VolleyballStandings sport="volleyball" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+              <VolleyballStandings sport="handball" league={Number(leagueId)} season={2023} />
             // ) : activeTab === "plannedFixtures" ? (
             //   <section className="fixtures">
             //     <FootballFixtures fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />

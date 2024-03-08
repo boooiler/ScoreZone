@@ -9,15 +9,16 @@ import { useVolleyballGames } from "../../api/volleyballQuery"
 import { VolleyballFixtureMatch } from "../../model/fixtures"
 
 interface Props {
-    league: number
-    season: number
-    fixturesType: "planned" | "finished"
-    team?: number
+  sport: "volleyball" | "handball"
+  league: number
+  season: number
+  fixturesType: "planned" | "finished"
+  team?: number
 }
-export const VolleyballFixtures = ({ league, season, fixturesType, team }: Props) => {
+export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }: Props) => {
   const navigate = useNavigate()
-  const { data: fixturesData, isLoading } = useVolleyballGames(undefined, league, season, team, undefined)
-  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useVolleyballGames(undefined, league, season, team, undefined)
+  const { data: fixturesData, isLoading } = useVolleyballGames(sport, undefined, league, season, team, undefined)
+  const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useVolleyballGames(sport, undefined, league, season, team, undefined)
   const [fixtures, setFixtures] = useState<VolleyballFixtureMatch>()
 
   useEffect(() => {
