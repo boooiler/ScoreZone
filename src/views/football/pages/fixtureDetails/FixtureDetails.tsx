@@ -17,6 +17,14 @@ export const FixtureDetails = () => {
   const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'standings'>('events')
   const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
   const breakStatus = ['HT', 'BT', 'INT']
+  const goalEvent = [
+    'Normal Goal',
+    'Penalty'
+  ]
+  const varEvent = [
+    'Goal Disallowed - offside',
+    'Penalty confirmed'
+  ]
 
   const eventIcon = (eventDetail: string) => {
     if(eventDetail.includes('Substitution')){
@@ -25,12 +33,16 @@ export const FixtureDetails = () => {
       return <div style={{ width: "10px", background: "yellow", borderRadius: "2px" }}></div>
     } else if (eventDetail.includes('Red Card')){
       return <div style={{ width: "10px", background: "red", borderRadius: "2px" }}></div>
-    } else if (eventDetail.includes('Normal Goal')){
+    } else if(eventDetail.includes('Own Goal')){
+      return <Icon name='IconFootball' variant="outlined" />
+    } else if (goalEvent.includes(eventDetail)){
       return <Icon name='IconFootball' variant='filled' />
-    } else if (eventDetail.includes('Goal Disallowed')){
+    } else if (eventDetail.includes('Missed Penalty')){
+      return <div style={{ width: "8px", fontSize: "12px" }}>X</div>
+    } else if (varEvent.includes(eventDetail)){
       return <div style={{ width: "15px", fontSize: "8px" }}>VAR</div>
     } 
-    return ''
+    return '' 
   }
 
   return (
