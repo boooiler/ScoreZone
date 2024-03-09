@@ -80,7 +80,7 @@ export const Football = () => {
                       />
                       <span>{fixture.teams.home.name}</span>
                     </div>
-                    <div className="score">
+                    <div className={`score${liveStatus.includes(fixture.fixture.status.short) ? ' live' : ''}`}>
                       {fixture.fixture.status.short === 'NS' ? (
                         <><div>-</div> : <div>-</div></>
                       ) : (

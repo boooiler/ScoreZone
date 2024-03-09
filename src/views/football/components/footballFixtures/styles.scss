@@ -147,6 +147,12 @@
                     width: 82px;
                     font-family: $font-header;
 
+                    &.live {
+                        div {
+                            color: var(--main-color);
+                        }
+                    }
+
                     div {
                         min-width: 26px;
                         font-size: 18px;
