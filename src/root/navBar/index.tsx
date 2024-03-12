@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
-import LanguageChanger from '@/shared/components/LanguageChanger'
+import LanguageChanger from '@/shared/components/languageChanger'
 import Icon from '@/shared/icons/Icon'
 import './styles.scss'
 
