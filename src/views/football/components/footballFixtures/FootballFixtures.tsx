@@ -59,7 +59,9 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
                   <div className="match-date">
                     {liveStatus.includes(fixture.fixture.status.short) ? (
                       <div className="live-match">
-                        <b>{breakStatus.includes(fixture.fixture.status.short) ? 'PRZERWA' : <>{fixture.fixture.status.elapsed}<div>&#8242;</div></>}</b>
+                        {breakStatus.includes(fixture.fixture.status.short) 
+                          ? <b style={{ fontSize: '12px' }}>PRZERWA</b> 
+                          : <b>{fixture.fixture.status.elapsed}<div>&#8242;</div></b>}
                       </div>
                     ) : (
                       <>
@@ -75,8 +77,8 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
                     />
                     <span>{fixture.teams.home.name}</span>
                   </div>
-                  <div className="score">
-                    {['NS','TBD'].includes(fixture.fixture.status.short) ? (
+                  <div className={`score${liveStatus.includes(fixture.fixture.status.short) ? ' live' : ''}`}>
+                    {['NS','TBD', 'PST'].includes(fixture.fixture.status.short) ? (
                       <><div>-</div> : <div>-</div></>
                     ) : (
                       <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>

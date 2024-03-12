@@ -4,6 +4,7 @@ import Loader from '@/shared/components/loader'
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles.scss'
+import moment from 'moment'
 
 export const News = () => {
   const { data: topNews, isLoading } = useNews('sport', 'sport.interia.pl, sport.pl, sport.onet.pl, polsatsport.pl, sportowefakty.wp.pl, meczyki.pl, sport.tvp.pl, sport.se.pl, przegladsportowy.onet.pl', 64)
@@ -46,6 +47,7 @@ export const News = () => {
                     <img src={news.urlToImage} alt='image' />
                   </div>
                   <a className='slide-text' href={news.url} target='_blank' rel="noreferrer">
+                    <span>{moment(news.publishedAt).format('DD/MM/YYYY')}</span>
                     {news.title}
                   </a>
                 </div>
@@ -59,7 +61,10 @@ export const News = () => {
                 <div className="img-wrapper">
                   <img src={news.urlToImage} alt='image' />
                 </div>
-                <span>{news.title}</span>
+                <div className='text-wrapper'>
+                  <span>{moment(news.publishedAt).format('DD/MM/YYYY')}</span>
+                  <b>{news.title}</b>
+                </div>
               </a>
             ))}
           </section>

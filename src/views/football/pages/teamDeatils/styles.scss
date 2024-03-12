@@ -98,9 +98,14 @@
             width: 30%;
             min-width: 470px;
 
+            @media #{$mxxxl} {
+                padding: 60px 20px;
+            }
+
             @media #{$mxl} {
                 min-width: unset;
                 width: 100%;
+                padding: 60px 60px 0;
                 padding-bottom: 0;
             }
 
@@ -176,6 +181,10 @@
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
+
+            @media #{$mxxxl} {
+                padding: 60px 20px;
+            }
 
             @media #{$mmd} {
                 padding: 20px 12px;
