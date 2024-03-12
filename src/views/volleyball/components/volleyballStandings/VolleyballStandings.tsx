@@ -76,7 +76,7 @@ export const VolleyballStandings = ({ sport, league, season }: Props) => {
                 {standing && standing.length > 0 ? standing.map(({ position, stage, group, team, points, league, country, form, games, description, goals }) => (
                   <tr key={position}>
                     <td className={`td-rank ${rankColor(description)}`}>{position}</td>
-                    <td className="td-team" onClick={() => navigate(`/volleyball/teams/${team.id}`)}>
+                    <td className="td-team" onClick={() => navigate(`/${sport}/teams/${team.id}`)}>
                       <div className="team">
                         <img src={team.logo} alt="logo" />
                         <span>{team.name}</span>

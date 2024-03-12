@@ -157,7 +157,7 @@ export const LeagueDetails = () => {
               <section className="teams">
                 {teams.response && teams.response.map((t: any) => {
                   const { team } = t
-                  return <TeamBox id={team.id} name={team.name} photo={team.logo} />
+                  return <TeamBox sport="football" id={team.id} name={team.name} photo={team.logo} />
                 })}
               </section>
             )}

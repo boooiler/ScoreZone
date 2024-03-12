@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-// import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
-// import FootballTopLeagues from "../../components/footballTopLeagues/FootballTopLeagues"
-// import { FootballStandings } from "../../components/footballStandings/FootballStandings"
-// import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
 import Loader from "@/shared/components/loader"
-// import { FootballLeague } from "../../model/league"
-import './styles.scss'
 import { TeamBox } from "@/shared/components/teamBox"
 import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
 import TopLeagues from "@/shared/components/topLeagues"
-import { FootballLeague } from "@/views/football/model/league"
 import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
-import { VolleyballLeagueInfo } from "../../model/league"
 import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
+import { VolleyballLeagueInfo } from "../../model/league"
+import './styles.scss'
 
 interface Props {
   sport: "volleyball" | "handball"
@@ -35,9 +29,9 @@ export const LeagueDetails = ({ sport }: Props) => {
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues leagueIds={sport === 'volleyball' ? [97, 113, 120] : [127, 81, 82, 39, 103]} sport={sport} />
+        <TopLeagues leagueIds={sport === 'volleyball' ? [97, 113, 120] : [78, 82, 39, 103]} sport={sport} />
       </section>
-      <section className="page-wrapper football-league-details">
+      <section className="page-wrapper league-details">
         {isLoadingTeams || isLoadingLeague || !leagueInfo || !teams ? (
           <Loader fullscreen />
         ) : (
@@ -165,7 +159,7 @@ export const LeagueDetails = ({ sport }: Props) => {
             ) : (
               <section className="teams">
                 {teams.response && teams.response.map((t: any) => {
-                  return <TeamBox id={t.id} name={t.name} photo={t.logo} />
+                  return <TeamBox sport={sport} id={t.id} name={t.name} photo={t.logo} />
                 })}
               </section>
             )}

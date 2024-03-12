@@ -116,6 +116,7 @@ export const TeamDetails = () => {
                 ) : (
                   squad[0].players.map((p:any) => (
                     <TeamBox 
+                      sport="football"
                       id={p.id} 
                       name={p.name} 
                       photo={p.photo} 

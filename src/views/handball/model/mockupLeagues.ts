@@ -1,6 +1,93 @@
 import { League } from "@/shared/model/league"
 
 export const topHandballLeagues: League[] = [
+  { //78
+    id: 78,
+    name: "Superliga",
+    type: "League",
+    logo: "https://media.api-sports.io/handball/leagues/78.png",
+    country: {
+      id: 26,
+      name: "Poland",
+      code: "PL",
+      flag: "https://media.api-sports.io/flags/pl.svg"
+    },
+    seasons: [
+      {
+        season: 2021,
+        current: false,
+        start: "2021-09-03",
+        end: "2022-05-24"
+      },
+      {
+        season: 2018,
+        current: false,
+        start: "2018-08-31",
+        end: "2019-05-25"
+      },
+      {
+        season: 2017,
+        current: false,
+        start: "2017-09-01",
+        end: "2018-06-03"
+      },
+      {
+        season: 2016,
+        current: false,
+        start: "2016-09-09",
+        end: "2017-05-27"
+      },
+      {
+        season: 2015,
+        current: false,
+        start: "2015-09-02",
+        end: "2016-06-01"
+      },
+      {
+        season: 2022,
+        current: false,
+        start: "2022-09-02",
+        end: "2023-05-31"
+      },
+      {
+        season: 2010,
+        current: false,
+        start: "2010-09-04",
+        end: "2011-06-01"
+      },
+      {
+        season: 2011,
+        current: false,
+        start: "2011-09-03",
+        end: "2012-05-19"
+      },
+      {
+        season: 2012,
+        current: false,
+        start: "2012-09-01",
+        end: "2013-05-29"
+      },
+      {
+        season: 2013,
+        current: false,
+        start: "2013-09-07",
+        end: "2014-05-25"
+      },
+      {
+        season: 2014,
+        current: false,
+        start: "2014-09-03",
+        end: "2015-05-30"
+      },
+      {
+        season: 2023,
+        current: true,
+        start: "2023-08-30",
+        end: "2024-04-01"
+      }
+    ]
+    
+  },
   { // 127
     id: 127,
     name: "Central League",

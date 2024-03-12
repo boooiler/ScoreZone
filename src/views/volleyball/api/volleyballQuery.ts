@@ -28,30 +28,11 @@ export function useVolleyballLeagues (
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {
-      // if (!id || id.length === 0) {
       const data = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })
       return data.data.response
-      // }
-      // const promises = id.map((leagueId) => {
-      //   return axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
-      //     headers,
-      //     params: { id: leagueId }
-      //   })
-      // })
-
-      // const responses: AxiosResponse<any>[] = await Promise.all(promises)
-      // const leagueDatas: any[] = []
-
-      // responses.forEach((response) => {
-      //   if (response.data.response && response.data.response.length > 0) {
-      //     leagueDatas.push(response.data.response[0]) 
-      //   }
-      // })
-
-      // return leagueDatas
     }
   })
 }
@@ -59,12 +40,14 @@ export function useVolleyballLeagues (
 export function useVolleyballStandings (
   sport: "volleyball" | "handball",
   season: number,
-  league: number
+  league: number,
+  team?: number
 ) {
   return useQuery({
     queryKey: [`${sport}_standings`, { 
       season, 
-      league
+      league,
+      team
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {

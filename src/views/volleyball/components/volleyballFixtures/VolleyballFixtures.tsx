@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react"
-// import { useVolleyballFixtures } from "../../api/footballQuery"
-import Loader from "@/shared/components/loader"
-// import { FootballFixture, FootballFixtureMatchDay } from "../../model/fixtures"
-import "./styles.scss"
-import moment from "moment"
 import { useNavigate } from "react-router-dom"
+import moment from "moment"
+import Loader from "@/shared/components/loader"
 import { useVolleyballGames } from "../../api/volleyballQuery"
 import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "../../model/fixtures"
+import "./styles.scss"
 
 interface Props {
   sport: "volleyball" | "handball"
-  league: number
+  league?: number
   season: number
   fixturesType: "planned" | "finished"
   team?: number
 }
 export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }: Props) => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { data: fixturesData, isLoading } = useVolleyballGames(sport, undefined, league, season, team, undefined)
-  // const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useVolleyballGames(sport, undefined, league, season, team, undefined)
   const [fixtures, setFixtures] = useState<VolleyballFixtureMatchDay>()
 
   useEffect(() => {
     if(fixturesData && fixturesType) {
-      console.log(fixturesData.filter((f: any) => f.status.short === 'FT').sort().reverse())
       const sortedFinishedFixtures = fixturesData.filter((f: any) => f.status.short === 'FT')
       const plannedFixtures = fixturesData.filter((f: any) => f.status.short === 'NS')
       const fixtures = fixturesType === "planned" ? plannedFixtures : sortedFinishedFixtures
@@ -57,7 +53,7 @@ export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }
                 <div 
                   key={fixture.id} 
                   className="fixtures-wrapper--round__score"
-                  onClick={() => navigate(`/football/fixtures/${fixture.id}`)}
+                  // onClick={() => navigate(`/${sport}/fixtures/${fixture.id}`)}
                 >
                   <div className="match-date">
                     <b>{moment(fixture.date).format("HH:mm")}</b>

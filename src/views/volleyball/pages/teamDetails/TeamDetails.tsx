@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-// import { useFootballLeagues, useFootballSquads, useFootballTeams } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
-// import { FootballTeam } from "../../model/team"
-// import FootballTopLeagues from "../../components/footballTopLeagues/FootballTopLeagues"
-// import { FootballStandings } from "../../components/footballStandings/FootballStandings"
-// import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
-import { TeamBox } from "@/shared/components/teamBox"
-import './styles.scss'
-import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
+import { useVolleyballTeams } from "../../api/volleyballQuery"
 import TopLeagues from "@/shared/components/topLeagues"
-import { FootballTeam } from "@/views/football/model/team"
-import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
 import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
+import { Team } from "../../model/team"
+import './styles.scss'
 
 interface Props {
   sport: "volleyball" | "handball"
@@ -20,9 +13,8 @@ interface Props {
 export const TeamDetails = ({ sport }: Props) => {
   const { teamId } = useParams()
   const { data, isLoading } = useVolleyballTeams(sport, Number(teamId))
-  // const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, Number(teamId), "league")
-  const [teamDetails, setTeamDetails] = useState<FootballTeam>()
-  const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures'>('standings')
+  const [teamDetails, setTeamDetails] = useState<Team>()
+  const [activeTab, setActiveTab] = useState<'plannedFixtures' | 'finishedFixtures'>('finishedFixtures')
 
   useEffect(() => {
     if(data && data.response){
@@ -33,71 +25,32 @@ export const TeamDetails = ({ sport }: Props) => {
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues leagueIds={[97, 113, 120]} sport="volleyball" />
+        <TopLeagues leagueIds={sport === 'volleyball' ? [97, 113, 120] : [78, 82, 39, 103]} sport={sport} />
       </section>
-      <section className="page-wrapper football-team-details">
+      <section className="page-wrapper team-details">
         {isLoading || !teamDetails 
-        // || !leagueDetails || !leagueDetails.length 
           ? (
             <Loader fullscreen />
           ) : (
             <>
               <section className="team-details-header">
-                <div className="team-details-header--bg-image">
+                <div className="team-country">
                   <img
-                    src={teamDetails.venue.image}
-                    alt="logo"
-                    className="team-logo"
+                    src={teamDetails.country.flag}
+                    alt="country flag"
+                    className="country-flag"
                   />
+                  <p>{teamDetails.country.name}</p>
                 </div>
-                <div className="team-details-header--left">
-                  <img
-                    src={teamDetails.team.logo}
-                    alt="logo"
-                    className="team-logo"
-                  />
-                  <h1 className="team-name">{teamDetails.team.name}</h1>
-                  <div className="team-info-wrapper">
-                    <div className="team-info">
-                      <span>Rok założenia</span>
-                      <h4>{teamDetails.team.founded}</h4>
-                    </div>
-                    <div className="team-info">
-                      <span>Kraj</span>
-                      <h4>{teamDetails.team.country}</h4>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="team-details-header--right">
-                  <div className="team-info-wrapper">
-                    <div className="team-info fluid">
-                      <span>Stadion</span>
-                      <h4>{teamDetails.venue.name}</h4>
-                    </div>
-                    <div className="team-info">
-                      <span>Pojemność</span>
-                      <h4>{teamDetails.venue.capacity}</h4>
-                    </div>
-                    <div className="team-info">
-                      <span>Miasto</span>
-                      <h4>{teamDetails.venue.city}</h4>
-                    </div>
-                    <div className="team-info">
-                      <span>Adres</span>
-                      <h4>{teamDetails.venue.address}</h4>
-                    </div>
-                  </div>
-                </div>
+                <img
+                  src={teamDetails.logo}
+                  alt="logo"
+                  className="team-logo"
+                />
+                <h1 className="team-name">{teamDetails.name}</h1>
               </section>
             
               <section className="tabs">
-                <span 
-                  className={`tab ${activeTab === 'standings' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('standings')}
-                >
-                  Tabela
-                </span>
                 <span 
                   className={`tab ${activeTab === 'finishedFixtures' ? 'active' : ''}`} 
                   onClick={() => setActiveTab('finishedFixtures')}
@@ -112,28 +65,25 @@ export const TeamDetails = ({ sport }: Props) => {
                 </span>
               </section>
 
-              {/* {activeTab === 'standings' ? (
-                <VolleyballStandings league={leagueDetails[0].league.id} season={leagueDetails[0].seasons[leagueDetails[0].seasons.length - 1].year} />
-                // <VolleyballStandings league={leagueDetails[0].league.id} season={leagueDetails[0].seasons[leagueDetails[0].seasons.length - 1].year} />
-              ) : activeTab === "plannedFixtures" ? (
+              { activeTab === "plannedFixtures" ? (
                 <section className="fixtures">
                   <VolleyballFixtures 
-                    fixturesType="planned" 
-                    league={leagueDetails[0].league.id} 
-                    season={leagueDetails[0].seasons[leagueDetails[0].seasons.length - 1].year} 
+                    fixturesType="planned"
+                    season={2023}
                     team={Number(teamId)} 
+                    sport={sport}
                   />
                 </section>
               ) : (
                 <section className="fixtures">
                   <VolleyballFixtures 
-                    fixturesType="finished" 
-                    league={leagueDetails[0].league.id} 
-                    season={leagueDetails[0].seasons[leagueDetails[0].seasons.length - 1].year} 
+                    fixturesType="finished"
+                    season={2023}
                     team={Number(teamId)} 
+                    sport={sport}
                   />
                 </section>
-              )} */}
+              )}
 
             </>
           )}
