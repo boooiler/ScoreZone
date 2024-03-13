@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
+import axios, { AxiosRequestConfig } from "axios"
+import { ArticlesResponse } from "../model/article"
 
 const apiKey = import.meta.env.VITE_NEWS_API_KEY
 const apiUrl = 'https://newsapi.org/v2'
@@ -58,7 +59,7 @@ export function useNews (
     }],
     retry: 3,
     queryFn: async ({ queryKey }) => {
-      const { data } = await axios.get(`${apiUrl}/everything`, {
+      const { data } = await axios.get<ArticlesResponse>(`${apiUrl}/everything`, {
         headers,
         params: queryKey[1] as AxiosRequestConfig<any>
       })
