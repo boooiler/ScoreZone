@@ -13,26 +13,25 @@ export const News = () => {
   const [sliderNews, setSliderNews] = useState<Article[]>()
   const [otherNews, setOtherNews] = useState<Article[]>()
 
+  const sortArticlesByPublishedAt = (articles: Article[]): Article[] => {
+    return articles.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  }
+
   useEffect(() => {
     console.log('topNews', topNews)
-    if(topNews && topNews.articles.length > 0) {
-      const { articles } = topNews
-      setSliderNews(articles.slice(0,4))
-      setOtherNews(articles.slice(4))
-    } else {
-      const { articles } = allArticles
-      console.log('articles', articles)
-      setSliderNews(articles.slice(0,4))
-      setOtherNews(articles.slice(4))
-    }
+    const articles = topNews?.articles || allArticles.articles
+    const sortedArticles = sortArticlesByPublishedAt(articles)
+    console.log('articles', sortedArticles)
+    setSliderNews(sortedArticles.slice(0, 4))
+    setOtherNews(sortedArticles.slice(4))
   }, [topNews])
 
   return (
     <section className="page-wrapper articles-wrapper">
       {isLoading ? (
         <Loader fullscreen />
-      ) : !topNews || !topNews.articles.length ? (
-        <>Błąd połączenia</>
+      ) : (!topNews || !topNews.articles.length) && !otherNews ? (
+        <div className='center'>Błąd połączenia</div>
       ) : (
         <>
           {sliderNews && (
