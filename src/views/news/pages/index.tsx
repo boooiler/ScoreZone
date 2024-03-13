@@ -34,7 +34,7 @@ export const News = () => {
           {sliderNews && (
             <Carousel
               showArrows={false}
-              autoPlay={false}
+              autoPlay
               emulateTouch
               infiniteLoop
               interval={6000}
