@@ -18,10 +18,8 @@ export const News = () => {
   }
 
   useEffect(() => {
-    console.log('topNews', topNews)
     const articles = topNews?.articles || allArticles.articles
     const sortedArticles = sortArticlesByPublishedAt(articles)
-    console.log('articles', sortedArticles)
     setSliderNews(sortedArticles.slice(0, 4))
     setOtherNews(sortedArticles.slice(4))
   }, [topNews])
@@ -60,7 +58,7 @@ export const News = () => {
           <section className="articles">
             <h1>Aktualności ze świata sportu</h1>
             {otherNews && otherNews.map((news: Article) => (
-              <a className='article-box' href={news.url} target='_blank' rel="noreferrer">
+              <a className='article-box' key={news.url} href={news.url} target='_blank' rel="noreferrer">
                 <div className="img-wrapper">
                   <img src={news.urlToImage} alt='image' />
                 </div>
