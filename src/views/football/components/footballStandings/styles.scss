@@ -1,0 +1,176 @@
+@import '@/root/theme/variables';
+
+.standings {
+    position: relative;
+    padding: 20px;
+    overflow-x: auto;
+
+    @media #{$msm} {
+        padding: 20px 0;
+    }
+
+    table {
+        width: 100%;
+        padding: 20px 0px;
+        border-collapse: collapse;
+
+        thead {
+            position: sticky;
+            top: -20px;
+            z-index: 2;
+
+            th {
+                padding: 20px 0;
+                background-color: $gray-light-color;
+
+                &:first-of-type {
+                    border-radius: 10px 0 0 0;
+                    overflow: hidden;
+                }
+
+                &:last-of-type {
+                    border-radius: 0 10px 0 0;
+                }
+
+                &.th-team {
+                    text-align: left;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid $gray-light-color;
+                }
+
+                &:last-of-type {
+                    td {
+                        &:first-of-type {
+                            border-radius: 0 0 0 10px;
+                            overflow: hidden;
+                        }
+
+                        &:last-of-type {
+                            border-radius: 0 0 10px 0;
+                        }
+                    }
+                }
+
+                &:hover {
+                    td {
+                        background: lighten($gray-medium-color, 10);
+                    }
+                }
+
+                td {
+                    padding: 10px 14px;
+                    text-align: center;
+                    background: $gray-medium-color;
+                    font-family: $font-header;
+
+                    @media #{$msm} {
+                        font-size: 14px;
+                    }
+
+                    &.td-rank {
+                        position: relative;
+
+                        &.bg-red {
+                            &:before {
+                                background: red;
+                            }
+                        }
+
+                        &.bg-blue {
+                            &:before {
+                                background: blue;
+                            }
+                        }
+
+                        &.bg-orange {
+                            &:before {
+                                background: orange;
+                            }
+                        }
+
+                        &.bg-green {
+                            &:before {
+                                background: green;
+                            }
+                        }
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 4px;
+                            height: 100%;
+                            background: $gray-light-color;
+                        }
+                    }
+
+                    &.td-team {
+                        padding: 18px 20px 18px 0;
+
+                        .team {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                            // margin: 10px 0;
+
+                            &:hover {
+                                text-decoration: underline;
+                                cursor: pointer;
+                            }
+
+                            img {
+                                width: 30px;
+                                height: 30px;
+                                object-fit: contain;
+                            }
+
+                            span {
+                                font-size: 17px;
+                                font-weight: 500;
+
+                                @media #{$msm} {
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+
+                    &.td-points {
+                        font-weight: 700;
+                        color: var(--main-color);
+                        text-shadow: 0 0 21px var(--main-color);
+                    }
+
+                    &.td-form {
+                        div {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 4px;
+
+                            span {
+                                width: 20px;
+                                height: 20px;
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 12px;
+                                font-weight: 600;
+                                font-family: $font-header;
+                                border-radius: 6px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

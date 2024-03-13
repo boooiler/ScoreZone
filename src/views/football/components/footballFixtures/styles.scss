@@ -1,0 +1,169 @@
+@import '@/root/theme/variables';
+
+.fixtures {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+
+    @media #{$msm} {
+        padding: 20px 0;
+    }
+
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+
+        &--round {
+            h4 {
+                margin: 0;
+                background: $gray-light-color;
+                border-radius: 6px 6px 0 0;
+                padding: 10px 40px;
+
+                @media #{$mlg} {
+                    padding: 10px 20px;
+                }
+            }
+
+            &__score {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 15px 40px;
+                background: $gray-medium-color;
+
+                @media #{$mlg} {
+                    padding: 15px 20px;
+                    flex-wrap: wrap;
+                }
+
+                @media #{$msm} {
+                    padding: 12px 10px;
+                }
+
+                &:hover {
+                    background: lighten($gray-medium-color, 10);
+                    cursor: pointer;
+                }
+
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid $gray-light-color;
+                }
+
+                &:last-of-type {
+                    border-radius: 0 0 6px 6px;
+                }
+
+                .match-date {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    gap: 2px;
+                    // margin-right: 100px;
+                    width: 150px;
+
+                    @media #{$mlg} {
+                        width: 100%;
+                        align-items: center;
+                    }
+
+                    .live-match {
+                        color: var(--main-color);
+
+                        b {
+                            display: flex;
+                            align-items: center;
+
+                            div {
+                                @include blinking-animation(1s)
+                            }
+                        }
+                    }
+
+                    b {
+                        letter-spacing: .5px;
+                    }
+
+                    p {
+                        margin: 0;
+                        font-size: 10px;
+                        font-weight: 600;
+                        color: $gray-light-color;
+                    }
+                }
+
+                .team {
+                    display: flex;
+                    align-items: center;
+                    font-size: 17px;
+                    width: calc(50% - 51px);
+                    gap: 10px;
+
+                    @media #{$mlg} {
+                        font-size: 16px;
+                        flex-direction: column;
+                        text-align: center;
+                        padding: 0 !important;
+                    }
+
+                    @media #{$msm} {
+                        font-size: 14px;
+                    }
+
+                    @media #{$mxs} {
+                        font-size: 12px;
+                    }
+
+                    &:first-of-type {
+                        padding-right: 40px;
+                    }
+
+                    &:last-of-type {
+                        padding-left: 40px;
+                        justify-content: flex-end;
+                        text-align: right;
+
+                        @media #{$mlg} {
+                            flex-direction: column-reverse;
+                            text-align: center;
+                        }
+                    }
+
+                    img {
+                        width: 25px;
+                        height: 25px;
+                        object-fit: contain;
+                    }
+                }
+
+                .score {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    width: 82px;
+                    font-family: $font-header;
+
+                    &.live {
+                        div {
+                            color: var(--main-color);
+                        }
+                    }
+
+                    div {
+                        min-width: 26px;
+                        font-size: 18px;
+                        padding: 4px 6px;
+                        border-radius: 6px;
+                        background: $primary-color;
+                        text-align: center;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

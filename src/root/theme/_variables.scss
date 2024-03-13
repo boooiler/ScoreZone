@@ -1,0 +1,78 @@
+$primary-color: #191d26;
+
+$purple-light-color: #9539C0;
+$purple-dark-color: #0c0311;
+$green-dark-color: #020e07;
+$green-light-color: #0bbe35;
+$gray-medium-color: #30343c;
+$gray-light-color: #5e6167;
+$white-color: #fff;
+$black-color: #000;
+
+$font-header: "Onest";
+$font-text: "Exo2";
+// $font-text: "Inter";
+
+
+/* VARIABLES FOR MEDIA QUERIES */
+$mxs: "only screen and (max-width : 400px)";
+$msm: "only screen and (max-width : 575px)";
+$sm: "only screen and (min-width : 576px)";
+$mmd: "only screen and (max-width : 767px)";
+$md: "only screen and (min-width : 768px)";
+$mlg: "only screen and (max-width : 991px)";
+$lg: "only screen and (min-width : 992px)";
+$mxl: "only screen and (max-width : 1199px)";
+$xl: "only screen and (min-width : 1200px)";
+$msl: "only screen and (max-width : 1299px)";
+$sl: "only screen and (min-width : 1300px)";
+$mxxl: "only screen and (max-width : 1429px)";
+$xxl: "only screen and (min-width : 1430px)";
+$mxxxl: "only screen and (max-width : 1499px)";
+$xxxl: "only screen and (min-width : 1500px)";
+$mhlg: "only screen and (max-width : 1799px)";
+$hlg: "only screen and (min-width : 1800px)";
+$hxlg: "only screen and (min-width : 1921px)";
+
+@font-face {
+    font-family: "Onest";
+    src: url("/fonts/Onest-variable.ttf");
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-variable.ttf");
+}
+
+@font-face {
+    font-family: "Exo2";
+    src: url("/fonts/Exo2-variable.ttf");
+}
+
+@font-face {
+    font-family: "KodeMono";
+    src: url("/fonts/KodeMono-variable.ttf");
+}
+
+@font-face {
+    font-family: "GemunuLibre";
+    src: url("/fonts/GemunuLibre-variable.ttf");
+}
+
+@mixin blinking-animation($duration: 1s) {
+    @keyframes blinking {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    animation: blinking $duration infinite;
+}

@@ -1,0 +1,259 @@
+@import '@/root/theme/variables';
+
+
+.page-wrapper.articles-wrapper {
+    overflow: unset;
+    padding: 0;
+
+    h1,
+    h2 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .carousel.carousel-slider {
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        column-gap: 20px;
+
+        .slide {
+            padding: 0;
+
+            .article-box {
+                position: relative;
+
+                .img-wrapper {
+                    position: relative;
+                    pointer-events: none;
+                    height: 90vh;
+
+                    @media #{$msm} {
+                        height: auto;
+                        aspect-ratio: 4/3;
+                        min-height: 45vh;
+                    }
+
+                    @media #{$mxs} {
+                        min-height: 40vh;
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(0deg, rgba($black-color, 0.5) 0%, rgba(25, 29, 38, .85) 100%);
+                        pointer-events: none;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                        pointer-events: none;
+
+                        &::selection {
+                            background: none;
+                        }
+                    }
+                }
+
+                .slide-text {
+                    position: absolute;
+                    bottom: 40px;
+                    right: 40px;
+                    max-width: 50%;
+                    font-size: 54px;
+                    line-height: 1.5;
+                    font-weight: 600;
+                    background: rgba($purple-light-color, .65);
+                    backdrop-filter: blur(12px);
+                    padding: 40px 60px;
+                    border-radius: 10px;
+                    color: $white-color;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+
+                    @media #{$mhlg} {
+                        line-height: inherit;
+                        font-size: 40px;
+                    }
+
+                    @media #{$msl} {
+                        font-size: 30px;
+                        padding: 30px 60px;
+                    }
+
+                    @media #{$mlg} {
+                        max-width: 70%;
+                        bottom: 20px;
+                        right: 20px;
+                        font-size: 26px;
+                        border-radius: 6px;
+                    }
+
+                    @media #{$mmd} {
+                        max-width: 80%;
+                        bottom: 10px;
+                        right: 10px;
+                        padding: 20px 40px;
+                    }
+
+                    @media #{$msm} {
+                        max-width: calc(100% - 20px);
+                        padding: 12px 20px;
+                        font-size: 23px;
+                    }
+
+                    @media #{$mxs} {
+                        max-width: calc(100% - 10px);
+                        bottom: 5px;
+                        right: 5px;
+                        padding: 10px;
+                        font-size: 20px;
+                    }
+
+                    span {
+                        font-size: 12px;
+                        display: block;
+                        margin-bottom: 20px;
+
+                        @media #{$msm} {
+                            margin-bottom: 6px;
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .control-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            width: auto;
+
+            @media #{$mxl} {
+                position: static;
+                width: 100%;
+            }
+
+            .dot {
+                width: 5vw;
+                height: 8px;
+                box-shadow: unset;
+                transition: all .2s;
+                border-radius: 2px;
+                opacity: .6;
+
+                @media #{$mxl} {
+                    width: 12vw;
+                    height: 6px;
+                }
+
+                &.selected {
+                    box-shadow: 0 0 5px $purple-light-color;
+                    background: $purple-light-color;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .articles {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 30px;
+        row-gap: 50px;
+        padding: 0 40px;
+
+        @media #{$mxl} {
+            padding: 0 20px;
+        }
+
+        @media #{$mlg} {
+            padding: 0 12px;
+        }
+
+        @media #{$msm} {
+            row-gap: 20px;
+        }
+
+        .article-box {
+            width: calc(100% / 4 - 90px / 4);
+            color: $white-color;
+            text-decoration: none;
+            transition: all .5s;
+
+            @media #{$mxxxl} {
+                width: calc(100% / 3 - 60px / 3);
+            }
+
+            @media #{$mlg} {
+                width: calc(100% / 2 - 30px / 2);
+            }
+
+            @media #{$msm} {
+                width: 100%;
+            }
+
+            &:hover {
+                text-decoration: underline;
+
+                img {
+                    transform: scale(1.05);
+                    opacity: .6;
+                }
+            }
+
+            .img-wrapper {
+                aspect-ratio: 4/3;
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+                background-color: $purple-light-color;
+
+                @media #{$mlg} {
+                    aspect-ratio: 16/9;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    transition: all .6s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .text-wrapper {
+                padding: 20px 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                @media #{$msm} {
+                    padding: 14px 10px 20px;
+                }
+
+                span {
+                    font-size: 12px;
+                    color: var(--main-color);
+                }
+
+                b {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}

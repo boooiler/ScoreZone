@@ -1,5 +1,17 @@
-.team {
+@import '@/root/theme/variables';
+
+.football-main-page {
     display: flex;
-    align-items: center;
-    margin: 10px 0;
+    flex-direction: column;
+    gap: 20px;
+
+    h2 {
+        margin: 0;
+    }
+
+    .live {
+        div {
+            color: var(--main-color);
+        }
+    }
 }

@@ -1,0 +1,126 @@
+@import './variables';
+@import './basic';
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background: $primary-color;
+  --main-color: $black-color;
+  color: $white-color;
+
+  &.page-news {
+    --main-color: #{$purple-light-color};
+
+    .app-outlet {
+      padding-top: 0 !important;
+    }
+  }
+
+  &.page-football {
+    // background-color: #191204;
+    --main-color: #{$green-light-color};
+  }
+
+  &.page-volleyball {
+    // background-color: #191204;
+    --main-color: rgb(0, 168, 240);
+  }
+
+  &.page-handball {
+    // background-color: #110314;
+    --main-color: rgb(255, 92, 119);
+  }
+
+  .app-outlet {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    // overflow: hidden;
+
+    @media #{$mlg} {
+      flex-direction: column;
+    }
+  }
+}
+
+.left-sidebar {
+  width: 240px;
+  min-width: 240px;
+  border-right: 1px solid $gray-light-color;
+  padding: 20px 12px;
+
+  @media #{$mlg} {
+    width: 100%;
+    border: unset;
+  }
+}
+
+.page-wrapper {
+  flex-grow: 1;
+  padding: 20px 12px;
+
+  @media #{$mlg} {
+    width: 100%;
+  }
+
+  .tabs {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    overflow-x: auto;
+
+    @media #{$mlg} {
+      justify-content: flex-start;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    @media #{$msm} {
+      padding: 20px 0;
+    }
+
+    .tab {
+      cursor: pointer;
+      padding: 10px 16px 8px;
+      background: $gray-medium-color;
+      border-radius: 6px;
+      transition: all .3s;
+      font-family: $font-header;
+      font-size: 14px;
+
+      @media #{$msm} {
+        font-size: 12px;
+      }
+
+      &:hover {
+        background: $gray-light-color;
+      }
+
+      &.active {
+        box-shadow: 0 0px 12px -2px var(--main-color);
+        border: 1px solid var(--main-color);
+        background: var(--main-color);
+      }
+    }
+  }
+}
+
+.favorite-teams {
+  width: 60px;
+  min-width: 60px;
+  border-left: 1px solid $gray-light-color;
+  padding: 20px 6px;
+
+  @media #{$mlg} {
+    width: 100%;
+    border: unset;
+  }
+}
