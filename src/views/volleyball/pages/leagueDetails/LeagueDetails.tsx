@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
-import { FootballStandings } from "../../components/footballStandings/FootballStandings"
-import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
 import Loader from "@/shared/components/loader"
-import { FootballLeague } from "../../model/league"
 import { TeamBox } from "@/shared/components/teamBox"
+import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
 import TopLeagues from "@/shared/components/topLeagues"
+import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
+import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
+import { VolleyballLeagueInfo } from "../../model/league"
 import './styles.scss'
 
-export const LeagueDetails = () => {
+interface Props {
+  sport: "volleyball" | "handball"
+}
+export const LeagueDetails = ({ sport }: Props) => {
   const { leagueId } = useParams()
-  const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(undefined, [Number(leagueId)])
-  const [leagueInfo, setLeagueInfo] = useState<FootballLeague | undefined>()
+  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, Number(leagueId))
+  const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
   useEffect(() => {
@@ -21,14 +24,14 @@ export const LeagueDetails = () => {
     }
   }, [leagueDetails])
   
-  const { data: teams, isLoading: isLoadingTeams } = useFootballTeams(undefined, leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].year, Number(leagueId))
+  const { data: teams, isLoading: isLoadingTeams } = useVolleyballTeams(sport, undefined, leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].season, Number(leagueId))
 
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
+        <TopLeagues leagueIds={sport === 'volleyball' ? [97, 113, 120] : [78, 82, 39, 103]} sport={sport} />
       </section>
-      <section className="page-wrapper football-league-details">
+      <section className="page-wrapper league-details">
         {isLoadingTeams || isLoadingLeague || !leagueInfo || !teams ? (
           <Loader fullscreen />
         ) : (
@@ -36,20 +39,20 @@ export const LeagueDetails = () => {
             <section className="league-details-header">
               <div className="league-details-header--top">
                 <img
-                  src={leagueInfo.league.logo}
+                  src={leagueInfo.logo}
                   alt="logo"
                   className="league-logo"
                 />
-                <h1 className="league-name">{leagueInfo.league.name}</h1>
+                <h1 className="league-name">{leagueInfo.name}</h1>
               </div>
 
               <div className="league-details-header--bottom">
                 <div className="league-info">
                   <span>Season</span>
                   <h4>
-                    {leagueInfo.seasons[leagueInfo.seasons.length - 1].year}
+                    {leagueInfo.seasons[leagueInfo.seasons.length - 1].season}
                   /
-                    {leagueInfo.seasons[leagueInfo.seasons.length - 1].year + 1}
+                    {leagueInfo.seasons[leagueInfo.seasons.length - 1].season + 1}
                   </h4>
                 </div>
                 <div className="league-info">
@@ -144,20 +147,19 @@ export const LeagueDetails = () => {
             </section>
 
             {activeTab === 'standings' ? (
-              <FootballStandings league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
+              <VolleyballStandings sport={sport} league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
             ) : activeTab === "plannedFixtures" ? (
               <section className="fixtures">
-                <FootballFixtures fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
+                <VolleyballFixtures sport={sport} fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
               </section>
             ) : activeTab === "finishedFixtures" ? (
               <section className="fixtures">
-                <FootballFixtures fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].year} />
+                <VolleyballFixtures sport={sport} fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
               </section>
             ) : (
               <section className="teams">
                 {teams.response && teams.response.map((t: any) => {
-                  const { team } = t
-                  return <TeamBox sport="football" id={team.id} name={team.name} photo={team.logo} />
+                  return <TeamBox sport={sport} id={t.id} name={t.name} photo={t.logo} />
                 })}
               </section>
             )}

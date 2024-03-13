@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import LanguageChanger from '@/shared/components/languageChanger'
 import Icon from '@/shared/icons/Icon'
 import './styles.scss'
@@ -9,6 +9,7 @@ interface NavigationBarProps {
   setNavHeight?: (height: number) => void
 }
 const NavigationBar = ({ setNavHeight }: NavigationBarProps) => {
+  const { pathname } = useLocation()
   const { t, i18n } = useTranslation()
   const headerRef = useRef<HTMLDivElement>(null)
   const parentRef = useRef<HTMLDivElement>(null)
@@ -62,7 +63,7 @@ const NavigationBar = ({ setNavHeight }: NavigationBarProps) => {
     if(_activeButton && isFontLoaded) {
       setIndicatorPosition(calculatePosition(_activeButton))
     }
-  }, [isFontLoaded, i18n.resolvedLanguage])
+  }, [isFontLoaded, i18n.resolvedLanguage, pathname])
 
   const findActiveButton = (): string | null => {
     const buttons = document.querySelectorAll('.app-navlist ul li a')

@@ -3,43 +3,115 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
 const apiHost = import.meta.env.VITE_API_HOST_VOLLEYBALL
-const apiUrl = 'https://v1.volleyball.api-sports.io/'
+const apiUrl = 'https://v1.volleyball.api-sports.io'
+const apiUrl2 = 'https://v1.handball.api-sports.io'
 const headers = {
   "x-rapidapi-key": apiKey,
   "x-rapidapi-host": apiHost
 }
 
 export function useVolleyballLeagues (
-  id?: number[], 
+  sport: "volleyball" | "handball",
+  id?: number, 
   season?: number,
   name?: string,
   country?: string, 
-  country_id?: string, 
   type?: string
 ) {
   return useQuery({
-    queryKey: ['volleyball_leagues', { 
+    queryKey: [`${sport}_leagues`, { 
       id, 
       name,
       country, 
-      country_id,
       season,
       type
     }],
-    queryFn: async () => {
-      if (!id || id.length === 0) {
-        return []
-      }
-      const promises = id.map((leagueId) => {
-        return axios.get(`${apiUrl}/leagues`, {
-          headers,
-          params: { id: leagueId }
-        })
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const data = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/leagues`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
       })
-
-      const responses: AxiosResponse<any>[] = await Promise.all(promises)
-      console.log(responses.map(response => response.data))
-      return responses.map(response => response.data).filter(data => data.response.length > 0)
+      return data.data.response
     }
+  })
+}
+
+export function useVolleyballStandings (
+  sport: "volleyball" | "handball",
+  season: number,
+  league: number,
+  team?: number
+) {
+  return useQuery({
+    queryKey: [`${sport}_standings`, { 
+      season, 
+      league,
+      team
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/standings`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data.response
+    }
+  })
+}
+
+export function useVolleyballTeams (
+  sport: "volleyball" | "handball",
+  id?: number,
+  season?: number,
+  league?: number,
+  name?: string,
+  country_id?: number,
+  country?: string
+) {
+  return useQuery({
+    queryKey: [`${sport}_teams`, { 
+      id,
+      season,
+      league,
+      name,
+      country_id,
+      country
+    }],
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/teams`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data
+    }
+  })
+}
+
+export function useVolleyballGames (
+  sport: "volleyball" | "handball",
+  id?: number,
+  league?: number,
+  season?: number,
+  team?: number,
+  date?: string
+) {
+  return useQuery({
+    queryKey: [`${sport}_games`, { 
+      id,
+      season, 
+      league,
+      team,
+      date
+    }],
+    retry: 3,
+    queryFn: async ({ queryKey }) => {
+      const { data } = await axios.get(`${sport === 'volleyball' ? apiUrl : apiUrl2}/games`, {
+        headers,
+        params: queryKey[1] as AxiosRequestConfig<any>
+      })
+      return data.response
+    },
+    refetchInterval: 30000
   })
 }
