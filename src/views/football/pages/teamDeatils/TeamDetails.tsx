@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom"
 import { useFootballLeagues, useFootballSquads, useFootballTeams } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
 import { FootballTeam } from "../../model/team"
-import FootballTopLeagues from "../../components/footballTopLeagues/FootballTopLeagues"
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
 import { TeamBox } from "@/shared/components/teamBox"
+import TopLeagues from "@/shared/components/topLeagues"
 import './styles.scss'
 
 export const TeamDetails = () => {
@@ -26,7 +26,7 @@ export const TeamDetails = () => {
   return (
     <>
       <section className="left-sidebar">
-        <FootballTopLeagues />
+        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper football-team-details">
         {isLoading || !teamDetails || !leagueDetails || !leagueDetails.length ? (

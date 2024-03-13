@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import moment from "moment"
 import { useFootballFixtures } from "../api/footballQuery"
-import FootballTopLeagues from "../components/footballTopLeagues/FootballTopLeagues"
+import TopLeagues from "@/shared/components/topLeagues"
 import Loader from "@/shared/components/loader"
 import { FootballFixture } from "../model/fixtures"
 import '../components/footballFixtures/styles.scss'
@@ -40,7 +40,7 @@ export const Football = () => {
   return (
     <>
       <section className="left-sidebar">
-        <FootballTopLeagues />
+        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper">
         <h1>Piłka nożna</h1>

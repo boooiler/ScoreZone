@@ -1,3 +1,10 @@
+export type Sports = 'football' | 'volleyball' | 'handball'
+
+export interface TopLeaguesData{
+    volleyball: League[]
+    handball: League[]
+}
+
 export interface League {
     id: number
     name: string

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
-import FootballTopLeagues from "../../components/footballTopLeagues/FootballTopLeagues"
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
 import Loader from "@/shared/components/loader"
 import { FootballLeague } from "../../model/league"
-import './styles.scss'
 import { TeamBox } from "@/shared/components/teamBox"
+import TopLeagues from "@/shared/components/topLeagues"
+import './styles.scss'
 
 export const LeagueDetails = () => {
   const { leagueId } = useParams()
@@ -26,7 +26,7 @@ export const LeagueDetails = () => {
   return (
     <>
       <section className="left-sidebar">
-        <FootballTopLeagues />
+        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper football-league-details">
         {isLoadingTeams || isLoadingLeague || !leagueInfo || !teams ? (
