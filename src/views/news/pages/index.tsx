@@ -10,17 +10,18 @@ import './styles.scss'
 
 export const News = () => {
   const { data: topNews, isLoading } = useNews('sport', 'sport.interia.pl, sport.pl, sport.onet.pl, polsatsport.pl, sportowefakty.wp.pl, meczyki.pl, sport.tvp.pl, sport.se.pl, przegladsportowy.onet.pl', 64)
-  // const topNews = articles
   const [sliderNews, setSliderNews] = useState<Article[]>()
   const [otherNews, setOtherNews] = useState<Article[]>()
 
   useEffect(() => {
-    if(!isLoading && topNews && topNews.articles.length > 0) {
+    console.log('topNews', topNews)
+    if(topNews && topNews.articles.length > 0) {
       const { articles } = topNews
       setSliderNews(articles.slice(0,4))
       setOtherNews(articles.slice(4))
     } else {
       const { articles } = allArticles
+      console.log('articles', articles)
       setSliderNews(articles.slice(0,4))
       setOtherNews(articles.slice(4))
     }
