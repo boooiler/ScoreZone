@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react'
+import moment from 'moment'
 import { useNews } from '../api/newsQuery'
 import Loader from '@/shared/components/loader'
+import { Article } from '../model/article'
+import { allArticles } from '../model/mockupArticles'
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles.scss'
-import moment from 'moment'
 
 export const News = () => {
   const { data: topNews, isLoading } = useNews('sport', 'sport.interia.pl, sport.pl, sport.onet.pl, polsatsport.pl, sportowefakty.wp.pl, meczyki.pl, sport.tvp.pl, sport.se.pl, przegladsportowy.onet.pl', 64)
-  const [sliderNews, setSliderNews] = useState<any>()
-  const [otherNews, setOtherNews] = useState<any>()
+  // const topNews = articles
+  const [sliderNews, setSliderNews] = useState<Article[]>()
+  const [otherNews, setOtherNews] = useState<Article[]>()
 
   useEffect(() => {
-    if(topNews && topNews.articles.length > 0) {
+    if(!isLoading && topNews && topNews.articles.length > 0) {
       const { articles } = topNews
+      setSliderNews(articles.slice(0,4))
+      setOtherNews(articles.slice(4))
+    } else {
+      const { articles } = allArticles
       setSliderNews(articles.slice(0,4))
       setOtherNews(articles.slice(4))
     }
   }, [topNews])
-
-  useEffect(() => {
-    console.log(sliderNews)
-  }, [sliderNews])
 
   return (
     <section className="page-wrapper articles-wrapper">
@@ -41,7 +44,7 @@ export const News = () => {
               showStatus={false}
               showThumbs={false}
             >
-              {sliderNews.map((news: any, index: number) => (
+              {sliderNews.map((news: Article, index: number) => (
                 <div className='article-box' key={index}>
                   <div className="img-wrapper">
                     <img src={news.urlToImage} alt='image' />
@@ -56,7 +59,7 @@ export const News = () => {
           )}
           <section className="articles">
             <h1>Aktualności ze świata sportu</h1>
-            {otherNews && otherNews.map((news: any) => (
+            {otherNews && otherNews.map((news: Article) => (
               <a className='article-box' href={news.url} target='_blank' rel="noreferrer">
                 <div className="img-wrapper">
                   <img src={news.urlToImage} alt='image' />
