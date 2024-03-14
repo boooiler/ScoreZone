@@ -1,3 +1,7 @@
 export const errors = {
-  title: 'Ups... Something went wrong!'
+  title: 'Oops... Something went wrong!',
+  connectionError: 'Connection error',
+  status: {
+    404: "Page not found"
+  }
 }

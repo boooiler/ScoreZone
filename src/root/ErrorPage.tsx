@@ -11,10 +11,11 @@ const ErrorPage = () => {
   return (
     <main className="app-wrapper">
       <NavigationBar />
-      <div className="error-page">
+      <div className="error-page center">
         {t('errors.title')}
-        <h1>Oops!</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
+        <h1>{error.status}</h1>
+        <h2>Oops!</h2>
+        <p>{t(`errors.status.${error.status}`)}</p>
         <p>
           <i>{error.statusText || error.message}</i>
         </p>
