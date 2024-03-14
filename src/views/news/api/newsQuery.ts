@@ -57,7 +57,7 @@ export function useNews (
       pageSize,
       page
     }],
-    retry: 2,
+    retry: 1,
     queryFn: async ({ queryKey }) => {
       const controller = new AbortController()
       const { data } = await axios.get<ArticlesResponse>(`${apiUrl}/everything`, {
