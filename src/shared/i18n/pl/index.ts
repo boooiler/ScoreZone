@@ -1,5 +1,50 @@
 const shared = {
-  topLeagues: "Popularne ligi:"
+  topLeagues: "Popularne ligi:",
+  newsHeader: "Aktualności ze świata sportu",
+  todaysMatches: "Dzisiejsze mecze:",
+  browseSelectedLeagues: "Przeglądaj wybrane ligi",
+  season: "Sezon",
+  country: "Kraj",
+  teams: "Drużyny",
+  standings: "Tabela",
+  results: "Wyniki",
+  matches: "Mecze",
+  break: "Przerwa",
+  week: "Kolejka",
+  table: {
+    team: "Drużyna",
+    points: "PKT",
+    allMatches: "M",
+    win: "W",
+    lose: "P",
+    draw: "R",
+    goals: "B",
+    diff: "+/-",
+    form: "Forma",
+    formLetters: {
+      D: "R",
+      W: "W",
+      L: "P"
+    }
+  },
+  referee: "Sędzia",
+  highlights: "Skrót meczu",
+  lineups: "Składy",
+  stadium: "Stadion",
+  foundationYear: "Rok założenia",
+  capacity: "Pojemność",
+  city: "Miasto",
+  address: "Adres",
+  goalkeeper: "Bramkarz",
+  defender: "Obrońca",
+  midfielder: "Pomocnik",
+  attacker: "Napastnik",
+  yearOld: "lat",
+  formation: "Ustawienie",
+  startingLineups: "Składy wyjściowe",
+  substitutes: "Rezerwowi",
+  coaches: "Trenerzy",
+  notLineups: "Składy nie zostały jeszcze podane."
 }
 
 export default shared

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import Loader from "@/shared/components/loader"
 import { useVolleyballTeams } from "../../api/volleyballQuery"
 import TopLeagues from "@/shared/components/topLeagues"
@@ -11,6 +12,7 @@ interface Props {
   sport: "volleyball" | "handball"
 }
 export const TeamDetails = ({ sport }: Props) => {
+  const { t } = useTranslation()
   const { teamId } = useParams()
   const { data, isLoading } = useVolleyballTeams(sport, Number(teamId))
   const [teamDetails, setTeamDetails] = useState<Team>()
@@ -55,13 +57,13 @@ export const TeamDetails = ({ sport }: Props) => {
                   className={`tab ${activeTab === 'finishedFixtures' ? 'active' : ''}`} 
                   onClick={() => setActiveTab('finishedFixtures')}
                 >
-                Wyniki
+                  {t('shared.results')}
                 </span>
                 <span 
                   className={`tab ${activeTab === 'plannedFixtures' ? 'active' : ''}`} 
                   onClick={() => setActiveTab('plannedFixtures')}
                 >
-                Mecze
+                  {t('shared.matches')}
                 </span>
               </section>
 

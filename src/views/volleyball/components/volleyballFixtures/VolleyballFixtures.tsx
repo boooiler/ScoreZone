@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import moment from "moment"
 import Loader from "@/shared/components/loader"
 import { useVolleyballGames } from "../../api/volleyballQuery"
@@ -14,7 +15,7 @@ interface Props {
   team?: number
 }
 export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }: Props) => {
-  // const navigate = useNavigate()
+  const { t } = useTranslation()
   const { data: fixturesData, isLoading } = useVolleyballGames(sport, undefined, league, season, team, undefined)
   const [fixtures, setFixtures] = useState<VolleyballFixtureMatchDay>()
 
@@ -46,7 +47,7 @@ export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }
           <Loader />
         ) : Object.keys(fixtures).sort().reverse().map((round: string, index: number) => (
           <div key={index} className="fixtures-wrapper--round">
-            <h4>Week {round}</h4>
+            <h4>{t('shared.week')} {round}</h4>
             {fixtures[round]
               .sort((a: VolleyballFixtureMatch, b: VolleyballFixtureMatch) => new Date(a.date).getTime() - new Date(b.date).getTime())
               .map((fixture: VolleyballFixtureMatch) => (

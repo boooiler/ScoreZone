@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from 'react-i18next'
 import moment from "moment"
 import { useFootballFixtures } from "../api/footballQuery"
 import TopLeagues from "@/shared/components/topLeagues"
@@ -10,7 +11,7 @@ import './styles.scss'
 
 export const Football = () => {
   const navigate = useNavigate()
-  
+  const { t } = useTranslation()  
   const { data: fixturesData, isLoading } = useFootballFixtures(undefined, undefined, 2023, undefined, undefined, undefined, undefined, moment().format('YYYY-MM-DD'))
   const leagueIds = [2, 3, 848, 39, 78, 106, 107, 135, 140]
   const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
@@ -43,9 +44,9 @@ export const Football = () => {
         <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper">
-        <h1>Piłka nożna</h1>
+        <h1>{t('root.menu.football')}</h1>
         <section className="football-main-page">
-          <h2>Dziesiejsze mecze:</h2>
+          <h2>{t('shared.todaysMatches')}</h2>
           {isLoading || !fixtures ?(
             <Loader fullscreen />
           ) : (

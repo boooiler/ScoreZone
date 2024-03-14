@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import moment from "moment"
 import { useFootballFixtures } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
-import './styles.scss'
 import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
-import moment from "moment"
 import Icon from "@/shared/icons/Icon"
 import { FootballLineups } from "../../components/footballLineups/FootballLineups"
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
+import './styles.scss'
 
 export const FixtureDetails = () => {
   const { fixtureId } = useParams()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { data: fixture, isLoading } = useFootballFixtures(Number(fixtureId))
   const fixtureDetails: FootballMatch = fixture && fixture[0]
   const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'standings'>('events')
@@ -68,7 +70,7 @@ export const FixtureDetails = () => {
                   {liveStatus.includes(fixtureDetails.fixture.status.short) ? (
                     <div className="live-match">
                       {breakStatus.includes(fixtureDetails.fixture.status.short) 
-                        ? <b style={{ fontSize: '12px' }}>PRZERWA</b> 
+                        ? <b style={{ fontSize: '12px' }}>{t('shared.break')}</b> 
                         : <b>{fixtureDetails.fixture.status.elapsed}<div>&#8242;</div></b>}
                     </div>
                   ) : (
@@ -108,7 +110,7 @@ export const FixtureDetails = () => {
                     <p>{fixtureDetails.teams.away.name}</p>
                   </div>
                 </div>
-                <p className="fixture-referee">Sędzia: <b>{fixtureDetails.fixture.referee}</b></p>
+                <p className="fixture-referee">{t('shared.referee')}: <b>{fixtureDetails.fixture.referee}</b></p>
               </section>
             </section>
 
@@ -118,19 +120,19 @@ export const FixtureDetails = () => {
                   className={`tab ${activeTab === 'events' ? 'active' : ''}`}
                   onClick={() => setActiveTab('events')}
                 >
-                  Skrót meczu
+                  {t('shared.highlights')}
                 </span>
                 <span 
                   className={`tab ${activeTab === 'squads' ? 'active' : ''}`} 
                   onClick={() => setActiveTab('squads')}
                 >
-                Składy
+                  {t('shared.lineups')}
                 </span>
                 <span 
                   className={`tab ${activeTab === 'standings' ? 'active' : ''}`} 
                   onClick={() => setActiveTab('standings')}
                 >
-                Tabela
+                  {t('shared.standings')}
                 </span>
               </section>
 

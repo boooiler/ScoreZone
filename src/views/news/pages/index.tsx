@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 import { useNews } from '../api/newsQuery'
 import Loader from '@/shared/components/loader'
@@ -9,6 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles.scss'
 
 export const News = () => {
+  const { t } = useTranslation()
   const { data: topNews, isLoading } = useNews('sport', 'sport.interia.pl, sport.pl, sport.onet.pl, polsatsport.pl, sportowefakty.wp.pl, meczyki.pl, sport.tvp.pl, sport.se.pl, przegladsportowy.onet.pl', 64)
   const [sliderNews, setSliderNews] = useState<Article[]>()
   const [otherNews, setOtherNews] = useState<Article[]>()
@@ -29,7 +31,7 @@ export const News = () => {
       {isLoading ? (
         <Loader fullscreen />
       ) : (!topNews || !topNews.articles.length) && !otherNews ? (
-        <div className='center'>Błąd połączenia</div>
+        <div className='center'>{t('errors.connectionError')}</div>
       ) : (
         <>
           {sliderNews && (
@@ -56,7 +58,7 @@ export const News = () => {
             </Carousel>
           )}
           <section className="articles">
-            <h1>Aktualności ze świata sportu</h1>
+            <h1>{t('shared.newsHeader')}</h1>
             {otherNews && otherNews.map((news: Article) => (
               <a className='article-box' key={news.url} href={news.url} target='_blank' rel="noreferrer">
                 <div className="img-wrapper">

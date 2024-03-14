@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import moment from "moment"
 import { useFootballFixtures } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
 import { FootballFixture, FootballFixtureMatchDay } from "../../model/fixtures"
 import "./styles.scss"
-import moment from "moment"
-import { useNavigate } from "react-router-dom"
 
 interface Props {
     league: number
@@ -14,6 +15,7 @@ interface Props {
 }
 export const FootballFixtures = ({ league, season, fixturesType, team }: Props) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { data: fixturesData, isLoading } = useFootballFixtures(undefined, league, season, "TBD-NS-PST-CANC-ABD-AWD", undefined, team)
   const { data: finishedFixturesData, isLoading: isLoadingFinishedFixtures } = useFootballFixtures(undefined, league, season, "FT-AET-PEN-LIVE-WO-1H-HT-2H-ET-BT-P-INT-HT-BT-INT", undefined, team)
   const [fixtures, setFixtures] = useState<FootballFixtureMatchDay>()
@@ -60,7 +62,7 @@ export const FootballFixtures = ({ league, season, fixturesType, team }: Props) 
                     {liveStatus.includes(fixture.fixture.status.short) ? (
                       <div className="live-match">
                         {breakStatus.includes(fixture.fixture.status.short) 
-                          ? <b style={{ fontSize: '12px' }}>PRZERWA</b> 
+                          ? <b style={{ fontSize: '12px' }}>{t('shared.break')}</b> 
                           : <b>{fixture.fixture.status.elapsed}<div>&#8242;</div></b>}
                       </div>
                     ) : (

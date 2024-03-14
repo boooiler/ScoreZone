@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import Loader from "@/shared/components/loader"
 import { TeamBox } from "@/shared/components/teamBox"
 import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
@@ -13,6 +14,7 @@ interface Props {
   sport: "volleyball" | "handball"
 }
 export const LeagueDetails = ({ sport }: Props) => {
+  const { t } = useTranslation()
   const { leagueId } = useParams()
   const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, Number(leagueId))
   const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
@@ -48,7 +50,7 @@ export const LeagueDetails = ({ sport }: Props) => {
 
               <div className="league-details-header--bottom">
                 <div className="league-info">
-                  <span>Season</span>
+                  <span>{t('shared.season')}</span>
                   <h4>
                     {leagueInfo.seasons[leagueInfo.seasons.length - 1].season}
                   /
@@ -56,11 +58,11 @@ export const LeagueDetails = ({ sport }: Props) => {
                   </h4>
                 </div>
                 <div className="league-info">
-                  <span>Country</span>
+                  <span>{t('shared.country')}</span>
                   <h4>{leagueInfo.country.name}</h4>
                 </div>
                 <div className="league-info">
-                  <span>Teams</span>
+                  <span>{t('shared.teams')}</span>
                   <h4>{teams.response.length}</h4>
                 </div>
               </div>
@@ -124,25 +126,25 @@ export const LeagueDetails = ({ sport }: Props) => {
                 className={`tab ${activeTab === 'standings' ? 'active' : ''}`}
                 onClick={() => setActiveTab('standings')}
               >
-                  Tabela
+                {t('shared.standings')}
               </span>
               <span 
                 className={`tab ${activeTab === 'finishedFixtures' ? 'active' : ''}`} 
                 onClick={() => setActiveTab('finishedFixtures')}
               >
-                Wyniki
+                {t('shared.results')}
               </span>
               <span 
                 className={`tab ${activeTab === 'plannedFixtures' ? 'active' : ''}`} 
                 onClick={() => setActiveTab('plannedFixtures')}
               >
-                Mecze
+                {t('shared.matches')}
               </span>
               <span 
                 className={`tab ${activeTab === 'teams' ? 'active' : ''}`} 
                 onClick={() => setActiveTab('teams')}
               >
-                Drużyny
+                {t('shared.teams')}
               </span>
             </section>
 

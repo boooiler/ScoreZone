@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import moment from "moment"
 import Loader from "@/shared/components/loader"
 import { useVolleyballGames } from "../../api/volleyballQuery"
@@ -10,6 +11,7 @@ interface Props {
 }
 export const FixtureDetails = ({ sport }: Props) => {
   const { fixtureId } = useParams()
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { data: fixture, isLoading } = useVolleyballGames(sport, Number(fixtureId))
   const fixtureDetails: Match = fixture && fixture[0]
@@ -39,7 +41,7 @@ export const FixtureDetails = ({ sport }: Props) => {
                   {liveStatus.includes(fixtureDetails.status.short) ? (
                     <div className="live-match">
                       {breakStatus.includes(fixtureDetails.status.short) 
-                        ? <b style={{ fontSize: '12px' }}>PRZERWA</b> 
+                        ? <b style={{ fontSize: '12px' }}>{t('shared.break')}</b> 
                         : <b>{fixtureDetails.time}<div>&#8242;</div></b>}
                     </div>
                   ) : (

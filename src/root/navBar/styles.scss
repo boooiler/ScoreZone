@@ -56,6 +56,7 @@
         appearance: none;
         background: unset;
         border: none;
+        padding: 0;
 
         @media #{$mxl} {
             display: block;
