@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useFootballLineups } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
 import Icon from "@/shared/icons/Icon"
@@ -8,6 +9,7 @@ interface Props {
   fixtureId: string
 }
 export const FootballLineups = ({ fixtureId }: Props) => {
+  const { t } = useTranslation()
   const { data, isLoading } = useFootballLineups(Number(fixtureId))
 
   const mapPlayers = (players: any) => {
@@ -58,7 +60,7 @@ export const FootballLineups = ({ fixtureId }: Props) => {
     isLoading ? (
       <Loader />
     ) : !data[0] || !data[1] ? (
-      <>Składy nie zostały jeszcze podane.</>
+      <>{t('shared.notLineups')}</>
     ) : (
       <section style={{
         "--home-shirt-color": `#${data[0].team.colors && data[0].team.colors.player.primary}`,
@@ -77,7 +79,7 @@ export const FootballLineups = ({ fixtureId }: Props) => {
         <section className="lineups-wrapper">
           {data[0].formation || data[1].formation ? (
             <>
-              <p>Ustawienie</p>
+              <p>{t('shared.formation')}</p>
               <section className="lineups-field">
                 <div className="lineups-formation team-home">
                   {data[0].formation && renderFormation(data[0])}
@@ -89,7 +91,7 @@ export const FootballLineups = ({ fixtureId }: Props) => {
             </>
           ) : (
             <>
-              <p>Składy wyjściowe</p>
+              <p>{t('shared.startingLineups')}</p>
               <div className="lineups-wrapper--team team-home">
                 {data[0].startXI && mapPlayers(data[0].startXI)}
               </div>
@@ -99,7 +101,7 @@ export const FootballLineups = ({ fixtureId }: Props) => {
             </>
           )}
 
-          <p>Ławki rezerwowych</p>
+          <p>{t('shared.substitutes')}</p>
           <div className="lineups-wrapper--team team-home">
             {data[0].substitutes && mapPlayers(data[0].substitutes)}
           </div>
@@ -107,7 +109,7 @@ export const FootballLineups = ({ fixtureId }: Props) => {
             {data[1].substitutes && mapPlayers(data[1].substitutes)}
           </div>
 
-          <p>Trenerzy</p>
+          <p>{t('shared.coaches')}</p>
           <div className="lineups-wrapper--team team-home coach">
             {data[0].coach.photo && <img src={data[0].coach.photo} alt="coach photo" width={30} /> }
             {data[0].coach.name}

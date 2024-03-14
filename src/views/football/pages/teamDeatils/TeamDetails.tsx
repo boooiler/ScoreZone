@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { useFootballLeagues, useFootballSquads, useFootballTeams } from "../../api/footballQuery"
 import Loader from "@/shared/components/loader"
 import { FootballTeam } from "../../model/team"
@@ -11,6 +12,7 @@ import './styles.scss'
 
 export const TeamDetails = () => {
   const { teamId } = useParams()
+  const { t } = useTranslation()
   const { data, isLoading } = useFootballTeams(Number(teamId))
   const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(true, undefined, undefined, undefined, undefined, undefined, Number(teamId), "league")
   const { data: squad, isLoading: isLoadingSquad } = useFootballSquads(Number(teamId))
@@ -50,11 +52,11 @@ export const TeamDetails = () => {
                 <h1 className="team-name">{teamDetails.team.name}</h1>
                 <div className="team-info-wrapper">
                   <div className="team-info">
-                    <span>Rok założenia</span>
+                    <span>{t('shared.foundationYear')}</span>
                     <h4>{teamDetails.team.founded}</h4>
                   </div>
                   <div className="team-info">
-                    <span>Kraj</span>
+                    <span>{t('shared.country')}</span>
                     <h4>{teamDetails.team.country}</h4>
                   </div>
                 </div>
@@ -63,19 +65,19 @@ export const TeamDetails = () => {
               <div className="team-details-header--right">
                 <div className="team-info-wrapper">
                   <div className="team-info fluid">
-                    <span>Stadion</span>
+                    <span>{t('shared.stadium')}</span>
                     <h4>{teamDetails.venue.name}</h4>
                   </div>
                   <div className="team-info">
-                    <span>Pojemność</span>
+                    <span>{t('shared.capacity')}</span>
                     <h4>{teamDetails.venue.capacity}</h4>
                   </div>
                   <div className="team-info">
-                    <span>Miasto</span>
+                    <span>{t('shared.city')}</span>
                     <h4>{teamDetails.venue.city}</h4>
                   </div>
                   <div className="team-info">
-                    <span>Adres</span>
+                    <span>{t('shared.address')}</span>
                     <h4>{teamDetails.venue.address}</h4>
                   </div>
                 </div>
@@ -87,25 +89,25 @@ export const TeamDetails = () => {
                 className={`tab ${activeTab === 'squad' ? 'active' : ''}`}
                 onClick={() => setActiveTab('squad')}
               >
-                  Skład
+                {t('shared.table.team')}
               </span>
               <span 
                 className={`tab ${activeTab === 'standings' ? 'active' : ''}`}
                 onClick={() => setActiveTab('standings')}
               >
-                  Tabela
+                {t('shared.standings')}
               </span>
               <span 
                 className={`tab ${activeTab === 'finishedFixtures' ? 'active' : ''}`} 
                 onClick={() => setActiveTab('finishedFixtures')}
               >
-                Wyniki
+                {t('shared.results')}
               </span>
               <span 
                 className={`tab ${activeTab === 'plannedFixtures' ? 'active' : ''}`} 
                 onClick={() => setActiveTab('plannedFixtures')}
               >
-                Mecze
+                {t('shared.matches')}
               </span>
             </section>
 

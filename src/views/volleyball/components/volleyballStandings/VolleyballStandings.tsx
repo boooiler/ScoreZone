@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import Loader from "@/shared/components/loader"
 import { useVolleyballStandings } from "../../api/volleyballQuery"
 import { VolleyballStandingInfo } from "../../model/standings"
@@ -12,13 +13,12 @@ interface Props {
 }
 export const VolleyballStandings = ({ sport, league, season }: Props) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { data: standingsData, isLoading } = useVolleyballStandings(sport, season, league)
   const [_standings, setStandings] = useState<VolleyballStandingInfo[][]>()
 
   useEffect(() => {
     if(standingsData) {
-      // const { league: { standings } } = standingsData
-      console.log(standingsData)
       setStandings(standingsData)
     }
   }, [standingsData])
@@ -31,7 +31,7 @@ export const VolleyballStandings = ({ sport, league, season }: Props) => {
           background: letter === "W" ? "green" : letter === "L" ? "red" : "orange"
         }}
       >
-        {letter}
+        {t(`shared.table.formLetters.${letter}`)}
       </span>
     ))
   }
@@ -63,13 +63,13 @@ export const VolleyballStandings = ({ sport, league, season }: Props) => {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th className="th-team">Drużyna</th>
-                  <th>PKT</th>
-                  <th>M</th>
-                  <th>W</th>
-                  <th>P</th>
-                  <th>S</th>
-                  <th>Forma</th>
+                  <th className="th-team">{t('shared.table.team')}</th>
+                  <th>{t('shared.table.points')}</th>
+                  <th>{t('shared.table.allMatches')}</th>
+                  <th>{t('shared.table.win')}</th>
+                  <th>{t('shared.table.lose')}</th>
+                  <th>{t('shared.table.goals')}</th>
+                  <th>{t('shared.table.form')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,7 +94,7 @@ export const VolleyballStandings = ({ sport, league, season }: Props) => {
                     </td>
                   </tr>
                 )) : (
-                  <div>Brak danych</div>
+                  <div>{t('common.noResults')}</div>
                 )}
               </tbody>
             </table>
