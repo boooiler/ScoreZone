@@ -20,8 +20,11 @@ export const TeamBox = ({ sport, id, name, photo, isClickable = true, position, 
   return (
     <div className={`team-box ${isClickable ? 'clickable' : ''}`} onClick={() => isClickable && navigate(`/${sport}/teams/${id}`)}>
       <img src={photo} alt="photo" />
-      <p className="name">{number && <div className="number">{number}</div>}{name}</p>
-      {(age || position) && <p className="age">({t(`shared.${position?.toLowerCase()}`)}{age && `, ${age} ${t('shared.yearOld')}`})</p>}
+      <div>
+        <p className="name">{number && <div className="number">{number}</div>}{name}</p>
+        
+        {(age || position) && <p className="age">({t(`shared.${position?.toLowerCase()}`)}{age && `, ${age} ${t('shared.yearOld')}`})</p>}
+      </div>
     </div>
   )
 }

@@ -50,6 +50,7 @@ export const TopLeagues = ({ leagueIds, sport }: Props) => {
           return (
             <LeagueBox 
               sport={sport}
+              key={id}
               leagueId={id}
               name={name}
               logo={logo}

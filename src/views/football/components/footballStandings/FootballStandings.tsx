@@ -59,8 +59,8 @@ export const FootballStandings = ({ league, season }: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        _standings && _standings.length > 0 && _standings.map((standing: FootballStandingInfo[]) => (
-          <section className="standings">
+        _standings && _standings.length > 0 && _standings.map((standing: FootballStandingInfo[], index: number) => (
+          <section className="standings" key={index}>
             <table>
               <thead>
                 <tr>
