@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import moment from "moment"
 
-import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "../../model/fixtures"
 import { useGames } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
+import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "@/shared/model/fixtures"
 
 import "./styles.scss"
 
@@ -15,7 +15,7 @@ interface Props {
   fixturesType: "planned" | "finished"
   team?: number
 }
-export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }: Props) => {
+export const Fixtures = ({ sport, league, season, fixturesType, team }: Props) => {
   const { t } = useTranslation()
   const { data: fixturesData, isLoading } = useGames(sport, undefined, league, season, team, undefined)
   const [fixtures, setFixtures] = useState<VolleyballFixtureMatchDay>()

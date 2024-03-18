@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
 
-import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
-import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
-import { FootballStandings } from "../../components/footballStandings/FootballStandings"
-import { FootballLeague } from "../../model/league"
 import Loader from "@/shared/components/loader"
 import { TeamBox } from "@/shared/components/teamBox"
 import TopLeagues from "@/shared/components/topLeagues"
+import { useFootballLeagues, useFootballTeams } from "@/views/football/api/footballQuery"
+import { FootballFixtures } from "@/views/football/components/footballFixtures/FootballFixtures"
+import { FootballStandings } from "@/views/football/components/footballStandings/FootballStandings"
+import { FootballLeague } from "@/views/football/model/league"
 
 import './styles.scss'
 
@@ -16,7 +16,7 @@ export const LeagueDetails = () => {
   const { leagueId } = useParams()
   const { t } = useTranslation()
   const { data: leagueDetails, isLoading: isLoadingLeague } = useFootballLeagues(undefined, [Number(leagueId)])
-  const [leagueInfo, setLeagueInfo] = useState<FootballLeague | undefined>()
+  const [leagueInfo, setLeagueInfo] = useState<FootballLeague>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
   useEffect(() => {

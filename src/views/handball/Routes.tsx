@@ -4,9 +4,9 @@ import { RouteObject } from "react-router-dom"
 import Loader from "@/shared/components/loader"
 
 const Handball = React.lazy(() => import('./pages'))
-const LeagueDetails = React.lazy(() => import('../volleyball/pages/leagueDetails/LeagueDetails'))
-const TeamDetails = React.lazy(() => import('../volleyball/pages/teamDetails/TeamDetails'))
-const FixtureDetails = React.lazy(() => import('../volleyball/pages/fixtureDetails/FixtureDetails'))
+const LeagueDetails = React.lazy(() => import('@/shared/pages/leagueDetails/LeagueDetails'))
+const TeamDetails = React.lazy(() => import('@/shared/pages/teamDetails/TeamDetails'))
+const FixtureDetails = React.lazy(() => import('@/shared/pages/fixtureDetails/FixtureDetails'))
 
 const routes: RouteObject[] = [
   {

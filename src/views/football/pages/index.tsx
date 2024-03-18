@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from "react-router-dom"
 import moment from "moment"
 
-import { useFootballFixtures } from "../api/footballQuery"
-import { FootballFixture } from "../model/fixtures"
 import Loader from "@/shared/components/loader"
 import { SportPage } from "@/shared/components/sportPage"
 import TopLeagues from "@/shared/components/topLeagues"
+import { useFootballFixtures } from "@/views/football/api/footballQuery"
+import { FootballFixture } from "@/views/football/model/fixtures"
 
-import '../components/footballFixtures/styles.scss'
+import '@/views/football/components/footballFixtures/styles.scss'
 import './styles.scss'
 
 export const Football = () => {

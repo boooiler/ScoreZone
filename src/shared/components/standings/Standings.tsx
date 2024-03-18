@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 
-import { VolleyballStandingInfo } from "../../model/standings"
 import { useStandings } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
+import { VolleyballStandingInfo } from "@/shared/model/standings"
 
 import './styles.scss'
 
@@ -13,7 +13,7 @@ interface Props {
   league: number
   season: number
 }
-export const VolleyballStandings = ({ sport, league, season }: Props) => {
+export const Standings = ({ sport, league, season }: Props) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { data: standingsData, isLoading } = useStandings(sport, season, league)

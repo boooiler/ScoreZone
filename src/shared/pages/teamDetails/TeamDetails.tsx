@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
 
-import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
-import { Team } from "../../model/team"
 import { useTeams } from "@/shared/api/sportQuery"
+import { Fixtures } from "@/shared/components/fixtures"
 import Loader from "@/shared/components/loader"
 import TopLeagues from "@/shared/components/topLeagues"
+import { Team } from "@/shared/model/team"
 
 import './styles.scss'
 
@@ -71,7 +71,7 @@ export const TeamDetails = ({ sport }: Props) => {
 
               { activeTab === "plannedFixtures" ? (
                 <section className="fixtures">
-                  <VolleyballFixtures 
+                  <Fixtures 
                     fixturesType="planned"
                     season={2023}
                     team={Number(teamId)} 
@@ -80,7 +80,7 @@ export const TeamDetails = ({ sport }: Props) => {
                 </section>
               ) : (
                 <section className="fixtures">
-                  <VolleyballFixtures 
+                  <Fixtures 
                     fixturesType="finished"
                     season={2023}
                     team={Number(teamId)} 

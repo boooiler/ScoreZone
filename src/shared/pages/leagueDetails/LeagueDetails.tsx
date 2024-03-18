@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
 
-import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
-import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
-import { VolleyballLeagueInfo } from "../../model/league"
 import { useLeagues, useTeams } from "@/shared/api/sportQuery"
+import { Fixtures } from "@/shared/components/fixtures"
 import Loader from "@/shared/components/loader"
+import { Standings } from "@/shared/components/standings/Standings"
 import { TeamBox } from "@/shared/components/teamBox"
 import TopLeagues from "@/shared/components/topLeagues"
+import { League } from "@/shared/model/league"
 
 import './styles.scss'
 
@@ -19,7 +19,7 @@ export const LeagueDetails = ({ sport }: Props) => {
   const { t } = useTranslation()
   const { leagueId } = useParams()
   const { data: leagueDetails, isLoading: isLoadingLeague } = useLeagues(sport, Number(leagueId))
-  const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
+  const [leagueInfo, setLeagueInfo] = useState<League>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
   useEffect(() => {
@@ -151,14 +151,14 @@ export const LeagueDetails = ({ sport }: Props) => {
             </section>
 
             {activeTab === 'standings' ? (
-              <VolleyballStandings sport={sport} league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+              <Standings sport={sport} league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
             ) : activeTab === "plannedFixtures" ? (
               <section className="fixtures">
-                <VolleyballFixtures sport={sport} fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+                <Fixtures sport={sport} fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
               </section>
             ) : activeTab === "finishedFixtures" ? (
               <section className="fixtures">
-                <VolleyballFixtures sport={sport} fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+                <Fixtures sport={sport} fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
               </section>
             ) : (
               <section className="teams">

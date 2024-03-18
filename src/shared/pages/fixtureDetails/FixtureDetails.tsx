@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
 
-import { Match } from "../../model/fixtureDetails"
 import { useGames } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
+import { Match } from "@/shared/model/fixtureDetails"
 
 import './styles.scss'
 
