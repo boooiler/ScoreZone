@@ -40,7 +40,7 @@ export const News = () => {
               autoPlay
               emulateTouch
               infiniteLoop
-              interval={6000}
+              interval={3500}
               showStatus={false}
               showThumbs={false}
             >
