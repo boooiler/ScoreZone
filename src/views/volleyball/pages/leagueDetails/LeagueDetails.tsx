@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import Loader from "@/shared/components/loader"
 import { TeamBox } from "@/shared/components/teamBox"
-import { useVolleyballLeagues, useVolleyballTeams } from "../../api/volleyballQuery"
+import { useLeagues, useTeams } from "@/shared/api/sportQuery"
 import TopLeagues from "@/shared/components/topLeagues"
 import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
 import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
@@ -16,7 +16,7 @@ interface Props {
 export const LeagueDetails = ({ sport }: Props) => {
   const { t } = useTranslation()
   const { leagueId } = useParams()
-  const { data: leagueDetails, isLoading: isLoadingLeague } = useVolleyballLeagues(sport, Number(leagueId))
+  const { data: leagueDetails, isLoading: isLoadingLeague } = useLeagues(sport, Number(leagueId))
   const [leagueInfo, setLeagueInfo] = useState<VolleyballLeagueInfo | undefined>()
   const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
@@ -26,7 +26,7 @@ export const LeagueDetails = ({ sport }: Props) => {
     }
   }, [leagueDetails])
   
-  const { data: teams, isLoading: isLoadingTeams } = useVolleyballTeams(sport, undefined, leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].season, Number(leagueId))
+  const { data: teams, isLoading: isLoadingTeams } = useTeams(sport, undefined, leagueInfo && leagueInfo.seasons[leagueInfo.seasons.length - 1].season, Number(leagueId))
 
   return (
     <>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import Loader from "@/shared/components/loader"
-import { useVolleyballTeams } from "../../api/volleyballQuery"
+import { useTeams } from "@/shared/api/sportQuery"
 import TopLeagues from "@/shared/components/topLeagues"
 import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
 import { Team } from "../../model/team"
@@ -14,7 +14,7 @@ interface Props {
 export const TeamDetails = ({ sport }: Props) => {
   const { t } = useTranslation()
   const { teamId } = useParams()
-  const { data, isLoading } = useVolleyballTeams(sport, Number(teamId))
+  const { data, isLoading } = useTeams(sport, Number(teamId))
   const [teamDetails, setTeamDetails] = useState<Team>()
   const [activeTab, setActiveTab] = useState<'plannedFixtures' | 'finishedFixtures'>('finishedFixtures')
 

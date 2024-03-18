@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import moment from "moment"
 import Loader from "@/shared/components/loader"
-import { useVolleyballGames } from "../../api/volleyballQuery"
+import { useGames } from "@/shared/api/sportQuery"
 import { Match } from "../../model/fixtureDetails"
 import './styles.scss'
 
@@ -13,7 +13,7 @@ export const FixtureDetails = ({ sport }: Props) => {
   const { fixtureId } = useParams()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { data: fixture, isLoading } = useVolleyballGames(sport, Number(fixtureId))
+  const { data: fixture, isLoading } = useGames(sport, Number(fixtureId))
   const fixtureDetails: Match = fixture && fixture[0]
   const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'PT', 'INT', 'INTR']
   const breakStatus = ['HT', 'BT', 'INT']

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import moment from "moment"
 import Loader from "@/shared/components/loader"
-import { useVolleyballGames } from "../../api/volleyballQuery"
+import { useGames } from "@/shared/api/sportQuery"
 import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "../../model/fixtures"
 import "./styles.scss"
 
@@ -16,7 +15,7 @@ interface Props {
 }
 export const VolleyballFixtures = ({ sport, league, season, fixturesType, team }: Props) => {
   const { t } = useTranslation()
-  const { data: fixturesData, isLoading } = useVolleyballGames(sport, undefined, league, season, team, undefined)
+  const { data: fixturesData, isLoading } = useGames(sport, undefined, league, season, team, undefined)
   const [fixtures, setFixtures] = useState<VolleyballFixtureMatchDay>()
 
   useEffect(() => {
