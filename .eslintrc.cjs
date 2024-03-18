@@ -9,7 +9,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', "simple-import-sort"],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -19,6 +19,19 @@ module.exports = {
       "warn",
       "never"
     ],
+    "simple-import-sort/imports": ["error", {
+      groups: [
+        // Importy zewnętrzne
+        ['^\\u0000'],
+        // Importy modułów z node_modules
+        ['^react', '^@?\\w'],
+        // Inne importy
+        ['^'],
+        // Importy styli
+        ['^.+\\.s?css$'],
+      ],
+    }],
+    "simple-import-sort/exports": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/react-in-jsx-scope": "off",
     "prefer-const": "warn",
@@ -201,6 +214,10 @@ module.exports = {
         "argsIgnorePattern": "^_"
       }
     ]
+  },
+  parserOptions: {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
   },
   overrides: [
     {
