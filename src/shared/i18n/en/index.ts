@@ -10,6 +10,9 @@ const shared = {
   results: "Results",
   matches: "Matches",
   break: "Break",
+  finished: "Finished",
+  postponed: "Postponed",
+  matchPostponed: "Match Postponed",
   week: "Week",
   table: {
     team: "Team",

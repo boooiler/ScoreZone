@@ -75,8 +75,14 @@ export const FixtureDetails = () => {
                     </div>
                   ) : (
                     <>
-                      <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
-                      <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("HH:mm")}</p>
+                      {fixtureDetails.fixture.status.short === 'PST' ? (
+                        <p className="fixture-match-info--date">{t('shared.matchPostponed')}</p>
+                      ) : (
+                        <>
+                          <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
+                          <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("HH:mm")}</p>
+                        </>
+                      )}
                       <p className="fixture-match-info--stadium">
                         {fixtureDetails.fixture.venue.name}, {fixtureDetails.fixture.venue.city}
                       </p>
