@@ -1,8 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useLocation } from 'react-router-dom'
+
 import LanguageChanger from '@/shared/components/languageChanger'
 import Icon from '@/shared/icons/Icon'
+
 import './styles.scss'
 
 interface NavigationBarProps {

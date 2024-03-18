@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
 import { Translations } from "./Translations"
 
 const client = new QueryClient()

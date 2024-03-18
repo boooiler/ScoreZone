@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Carousel } from 'react-responsive-carousel'
 import moment from 'moment'
+
 import { useNews } from '../api/newsQuery'
-import Loader from '@/shared/components/loader'
 import { Article } from '../model/article'
 import { allArticles } from '../model/mockupArticles'
-import { Carousel } from 'react-responsive-carousel'
+import Loader from '@/shared/components/loader'
+
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles.scss'
 

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useParams } from "react-router-dom"
+
 import { useFootballLeagues, useFootballTeams } from "../../api/footballQuery"
-import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballFixtures } from "../../components/footballFixtures/FootballFixtures"
-import Loader from "@/shared/components/loader"
+import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballLeague } from "../../model/league"
+import Loader from "@/shared/components/loader"
 import { TeamBox } from "@/shared/components/teamBox"
 import TopLeagues from "@/shared/components/topLeagues"
+
 import './styles.scss'
 
 export const LeagueDetails = () => {

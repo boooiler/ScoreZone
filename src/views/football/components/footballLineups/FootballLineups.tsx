@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next"
+
 import { useFootballLineups } from "../../api/footballQuery"
+import { Player } from "../../model/lineups"
 import Loader from "@/shared/components/loader"
 import Icon from "@/shared/icons/Icon"
-import { Player } from "../../model/lineups"
+
 import "./styles.scss"
 
 interface Props {

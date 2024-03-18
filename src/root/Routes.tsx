@@ -1,11 +1,12 @@
 import React, { Suspense } from "react"
 import { Navigate, RouteObject } from "react-router-dom"
+
 import ErrorPage from "./ErrorPage"
+import Loader from "@/shared/components/loader"
 import FootballRoutes from '@/views/football/Routes'
-import VolleyballRoutes from '@/views/volleyball/Routes'
 import HandballRoutes from '@/views/handball/Routes'
 import NewsRoutes from '@/views/news/Routes'
-import Loader from "@/shared/components/loader"
+import VolleyballRoutes from '@/views/volleyball/Routes'
 
 const AppWrapper = React.lazy(() => import('./App'))
 

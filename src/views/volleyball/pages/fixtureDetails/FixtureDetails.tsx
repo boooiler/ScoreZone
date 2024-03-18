@@ -1,9 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
-import Loader from "@/shared/components/loader"
-import { useGames } from "@/shared/api/sportQuery"
+
 import { Match } from "../../model/fixtureDetails"
+import { useGames } from "@/shared/api/sportQuery"
+import Loader from "@/shared/components/loader"
+
 import './styles.scss'
 
 interface Props {

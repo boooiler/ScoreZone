@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import moment from "moment"
-import Loader from "@/shared/components/loader"
-import { useGames } from "@/shared/api/sportQuery"
+
 import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "../../model/fixtures"
+import { useGames } from "@/shared/api/sportQuery"
+import Loader from "@/shared/components/loader"
+
 import "./styles.scss"
 
 interface Props {

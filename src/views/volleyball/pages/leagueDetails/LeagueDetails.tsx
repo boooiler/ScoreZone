@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useParams } from "react-router-dom"
+
+import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
+import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
+import { VolleyballLeagueInfo } from "../../model/league"
+import { useLeagues, useTeams } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
 import { TeamBox } from "@/shared/components/teamBox"
-import { useLeagues, useTeams } from "@/shared/api/sportQuery"
 import TopLeagues from "@/shared/components/topLeagues"
-import { VolleyballStandings } from "../../components/volleyballStandings/VolleyballStandings"
-import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
-import { VolleyballLeagueInfo } from "../../model/league"
+
 import './styles.scss'
 
 interface Props {

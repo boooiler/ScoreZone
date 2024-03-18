@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import Loader from "@/shared/components/loader"
-import { useTeams } from "@/shared/api/sportQuery"
-import TopLeagues from "@/shared/components/topLeagues"
+import { useParams } from "react-router-dom"
+
 import { VolleyballFixtures } from "../../components/volleyballFixtures/VolleyballFixtures"
 import { Team } from "../../model/team"
+import { useTeams } from "@/shared/api/sportQuery"
+import Loader from "@/shared/components/loader"
+import TopLeagues from "@/shared/components/topLeagues"
+
 import './styles.scss'
 
 interface Props {

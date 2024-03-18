@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from "react-router-dom"
 import moment from "moment"
+
 import { useFootballFixtures } from "../api/footballQuery"
-import TopLeagues from "@/shared/components/topLeagues"
-import Loader from "@/shared/components/loader"
 import { FootballFixture } from "../model/fixtures"
+import Loader from "@/shared/components/loader"
+import { SportPage } from "@/shared/components/sportPage"
+import TopLeagues from "@/shared/components/topLeagues"
+
 import '../components/footballFixtures/styles.scss'
 import './styles.scss'
-import { SportPage } from "@/shared/components/sportPage"
 
 export const Football = () => {
   const navigate = useNavigate()

@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import TopLeagues from '@/shared/components/topLeagues'
+
 import { SportPage } from '@/shared/components/sportPage'
+import TopLeagues from '@/shared/components/topLeagues'
+
 import './styles.scss'
 
 export const Handball = () => {

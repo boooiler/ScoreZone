@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom"
+
 import { Sports } from "@/shared/model/league"
+
 import "./styles.scss"
 
 interface Props {

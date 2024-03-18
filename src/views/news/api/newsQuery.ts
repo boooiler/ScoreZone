@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import axios, { AxiosRequestConfig } from "axios"
+
 import { ArticlesResponse } from "../model/article"
 
 const apiKey = import.meta.env.VITE_NEWS_API_KEY

@@ -1,13 +1,15 @@
 import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
+
 import { useFootballFixtures } from "../../api/footballQuery"
-import Loader from "@/shared/components/loader"
-import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
-import Icon from "@/shared/icons/Icon"
 import { FootballLineups } from "../../components/footballLineups/FootballLineups"
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
+import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
+import Loader from "@/shared/components/loader"
+import Icon from "@/shared/icons/Icon"
+
 import './styles.scss'
 
 export const FixtureDetails = () => {

@@ -1,6 +1,7 @@
-import Loader from "@/shared/components/loader"
 import React, { Suspense } from "react"
 import { RouteObject } from "react-router-dom"
+
+import Loader from "@/shared/components/loader"
 
 const Volleyball = React.lazy(() => import('./pages'))
 const LeagueDetails = React.lazy(() => import('./pages/leagueDetails/LeagueDetails'))
