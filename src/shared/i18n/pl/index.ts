@@ -26,6 +26,7 @@ const shared = {
     form: "Forma",
     formLetters: {
       D: "R",
+      O: "O",
       W: "W",
       L: "P"
     }
