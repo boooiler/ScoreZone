@@ -43,10 +43,7 @@ export interface FixtureMatch {
         home: FixtureTeam
         away: FixtureTeam
     }
-    scores: {
-        home: number
-        away: number
-    }
+    scores: FixturePeriodScores
     periods: {
         first: FixturePeriodScores
         second: FixturePeriodScores

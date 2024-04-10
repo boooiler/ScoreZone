@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
-import moment from "moment"
 
+import { FixturesRound } from "./fixturesRound/FixturesRound"
 import { useGames } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
 import { FixtureMatch, FixtureMatchDay } from "@/shared/model/fixtures"
@@ -16,7 +15,6 @@ interface Props {
   team?: number
 }
 export const Fixtures = ({ sport, league, season, fixturesType, team }: Props) => {
-  const { t } = useTranslation()
   const { data: fixturesData, isLoading } = useGames(sport, undefined, league, season, team, undefined)
   const [fixtures, setFixtures] = useState<FixtureMatchDay>()
 
@@ -42,51 +40,17 @@ export const Fixtures = ({ sport, league, season, fixturesType, team }: Props) =
   }
 
   return (
-    <>
-      <section className="fixtures-wrapper">
-        {isLoading || !fixtures ? (
-          <Loader />
-        ) : Object.keys(fixtures).sort().reverse().map((round: string, index: number) => (
-          <div key={index} className="fixtures-wrapper--round">
-            <h4>{t('shared.week')} {round}</h4>
-            {fixtures[round]
-              .sort((a: FixtureMatch, b: FixtureMatch) => new Date(a.date).getTime() - new Date(b.date).getTime())
-              .map((fixture: FixtureMatch) => (
-                <div 
-                  key={fixture.id} 
-                  className="fixtures-wrapper--round__score"
-                  // onClick={() => navigate(`/${sport}/fixtures/${fixture.id}`)}
-                >
-                  <div className="match-date">
-                    <b>{moment(fixture.date).format("HH:mm")}</b>
-                    <p>{moment(fixture.date).format("DD/MM/YY")}</p>
-                  </div>
-                  <div className="team">
-                    <img
-                      src={fixture.teams.home.logo}
-                      alt="team logo"
-                    />
-                    <span>{fixture.teams.home.name}</span>
-                  </div>
-                  <div className="score">
-                    {fixture.status.short === 'FT' ? (
-                      <><div>{fixture.scores.home}</div> : <div>{fixture.scores.away}</div></>
-                    ) : (
-                      <><div>-</div> : <div>-</div></>
-                    )}
-                  </div>
-                  <div className="team">
-                    <span>{fixture.teams.away.name}</span>
-                    <img
-                      src={fixture.teams.away.logo}
-                      alt="team logo"
-                    />
-                  </div>
-                </div>
-              ))}
-          </div>
-        ))}
-      </section>
-    </>
+    <section className="fixtures-wrapper">
+      {isLoading || !fixtures ? (
+        <Loader />
+      ) : Object.keys(fixtures).sort().reverse().map((round: string, index: number) => (
+        <FixturesRound 
+          key={index}
+          fixtures={fixtures}
+          round={round}
+          sport={sport}
+        />
+      ))}
+    </section>
   )
 }

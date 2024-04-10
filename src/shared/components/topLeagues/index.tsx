@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import { LeagueBox } from "./LeagueBox"
-import { League, Sports, TopLeaguesData } from "@/shared/model/league"
+import { AllSports, League, TopLeaguesData } from "@/shared/model/league"
 import { FootballLeague } from "@/views/football/model/league"
 import { topFootballLeagues } from "@/views/football/model/mockupLeagues"
 import { topHandballLeagues } from "@/views/handball/model/mockupLeagues"
@@ -11,7 +11,7 @@ import "./styles.scss"
 
 interface Props {
   leagueIds: number[]
-  sport: Sports
+  sport: AllSports
 }
 export const TopLeagues = ({ leagueIds, sport }: Props) => {
   const { t } = useTranslation()

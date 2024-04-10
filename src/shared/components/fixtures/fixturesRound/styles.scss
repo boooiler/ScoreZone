@@ -1,0 +1,14 @@
+@import '@/root/theme/variables';
+
+.fixtures-round {
+    h4 {
+        margin: 0;
+        background: $gray-light-color;
+        border-radius: 6px 6px 0 0;
+        padding: 10px 40px;
+
+        @media #{$mlg} {
+            padding: 10px 20px;
+        }
+    }
+}
