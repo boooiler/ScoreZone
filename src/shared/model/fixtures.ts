@@ -1,11 +1,11 @@
-export interface VolleyballFixtureCountry {
+export interface FixtureCountry {
     id: number
     name: string
     code: string
     flag: string
 }
 
-export interface VolleyballFixtureLeague {
+export interface FixtureLeague {
     id: number
     name: string
     type: string
@@ -13,49 +13,49 @@ export interface VolleyballFixtureLeague {
     season: number
 }
 
-export interface VolleyballFixtureTeam {
+export interface FixtureTeam {
     id: number
     name: string
     logo: string
 }
 
-export interface VolleyballFixtureStatus {
+export interface FixtureStatus {
     long: string
     short: string
 }
 
-export interface VolleyballFixturePeriodScores {
+export interface FixturePeriodScores {
     home: number
     away: number
 }
 
-export interface VolleyballFixtureMatch {
+export interface FixtureMatch {
     id: number
     date: string
     time: string
     timestamp: number
     timezone: string
     week: string
-    status: VolleyballFixtureStatus
-    country: VolleyballFixtureCountry
-    league: VolleyballFixtureLeague
+    status: FixtureStatus
+    country: FixtureCountry
+    league: FixtureLeague
     teams: {
-        home: VolleyballFixtureTeam
-        away: VolleyballFixtureTeam
+        home: FixtureTeam
+        away: FixtureTeam
     }
     scores: {
         home: number
         away: number
     }
     periods: {
-        first: VolleyballFixturePeriodScores
-        second: VolleyballFixturePeriodScores
-        third: VolleyballFixturePeriodScores
-        fourth: VolleyballFixturePeriodScores
-        fifth: VolleyballFixturePeriodScores
+        first: FixturePeriodScores
+        second: FixturePeriodScores
+        third: FixturePeriodScores
+        fourth: FixturePeriodScores
+        fifth: FixturePeriodScores
     }
 }
 
-export interface VolleyballFixtureMatchDay {
-    [round: string]: VolleyballFixtureMatch[]
+export interface FixtureMatchDay {
+    [round: string]: FixtureMatch[]
 }

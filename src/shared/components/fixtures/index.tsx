@@ -4,7 +4,7 @@ import moment from "moment"
 
 import { useGames } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
-import { VolleyballFixtureMatch, VolleyballFixtureMatchDay } from "@/shared/model/fixtures"
+import { FixtureMatch, FixtureMatchDay } from "@/shared/model/fixtures"
 
 import "./styles.scss"
 
@@ -18,19 +18,19 @@ interface Props {
 export const Fixtures = ({ sport, league, season, fixturesType, team }: Props) => {
   const { t } = useTranslation()
   const { data: fixturesData, isLoading } = useGames(sport, undefined, league, season, team, undefined)
-  const [fixtures, setFixtures] = useState<VolleyballFixtureMatchDay>()
+  const [fixtures, setFixtures] = useState<FixtureMatchDay>()
 
   useEffect(() => {
     if(fixturesData && fixturesType) {
-      const sortedFinishedFixtures = fixturesData.filter((f: any) => f.status.short === 'FT')
-      const plannedFixtures = fixturesData.filter((f: any) => f.status.short === 'NS')
+      const sortedFinishedFixtures: FixtureMatch[] = fixturesData.filter((f: FixtureMatch) => f.status.short === 'FT')
+      const plannedFixtures: FixtureMatch[] = fixturesData.filter((f: FixtureMatch) => f.status.short === 'NS')
       const fixtures = fixturesType === "planned" ? plannedFixtures : sortedFinishedFixtures
       setFixtures(groupFixtures(fixtures))
     }
   }, [fixturesData, fixturesType])
 
-  const groupFixtures = (fixtures: VolleyballFixtureMatch[]) => {
-    const groupedFixtures = fixtures.reduce((acc: any, fixture: VolleyballFixtureMatch) => {
+  const groupFixtures = (fixtures: FixtureMatch[]): FixtureMatchDay => {
+    const groupedFixtures: FixtureMatchDay = fixtures.reduce((acc: any, fixture: FixtureMatch) => {
       const { week } = fixture
       if (!acc[week]) {
         acc[week] = []
@@ -50,8 +50,8 @@ export const Fixtures = ({ sport, league, season, fixturesType, team }: Props) =
           <div key={index} className="fixtures-wrapper--round">
             <h4>{t('shared.week')} {round}</h4>
             {fixtures[round]
-              .sort((a: VolleyballFixtureMatch, b: VolleyballFixtureMatch) => new Date(a.date).getTime() - new Date(b.date).getTime())
-              .map((fixture: VolleyballFixtureMatch) => (
+              .sort((a: FixtureMatch, b: FixtureMatch) => new Date(a.date).getTime() - new Date(b.date).getTime())
+              .map((fixture: FixtureMatch) => (
                 <div 
                   key={fixture.id} 
                   className="fixtures-wrapper--round__score"

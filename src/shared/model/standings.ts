@@ -1,14 +1,14 @@
-export interface VolleyballStandingGroup {
+export interface StandingGroup {
     name: string
 }
 
-export interface VolleyballStandingTeam {
+export interface StandingTeam {
     id: number
     name: string
     logo: string
 }
 
-export interface VolleyballStandingLeague {
+export interface StandingLeague {
     id: number
     name: string
     type: string
@@ -16,38 +16,38 @@ export interface VolleyballStandingLeague {
     season: number
 }
 
-export interface VolleyballStandingCountry {
+export interface StandingCountry {
     id: number
     name: string
     code: string
     flag: string
 }
 
-export interface VolleyballStandingWinLossStats {
+export interface StandingWinLossStats {
     total: number
     percentage: string
 }
 
-export interface VolleyballStandingGameStats {
+export interface StandingGameStats {
     played: number
-    win: VolleyballStandingWinLossStats
-    lose: VolleyballStandingWinLossStats
+    win: StandingWinLossStats
+    lose: StandingWinLossStats
 }
 
-export interface VolleyballStandingGoals {
+export interface StandingGoals {
     for: number
     against: number
 }
 
-export interface VolleyballStandingInfo {
+export interface StandingInfo {
     position: number
     stage: string
-    group: VolleyballStandingGroup
-    team: VolleyballStandingTeam
-    league: VolleyballStandingLeague
-    country: VolleyballStandingCountry
-    games: VolleyballStandingGameStats
-    goals: VolleyballStandingGoals
+    group: StandingGroup
+    team: StandingTeam
+    league: StandingLeague
+    country: StandingCountry
+    games: StandingGameStats
+    goals: StandingGoals
     points: number
     form: string
     description: string

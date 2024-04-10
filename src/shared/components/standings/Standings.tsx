@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useStandings } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
-import { VolleyballStandingInfo } from "@/shared/model/standings"
+import { StandingInfo } from "@/shared/model/standings"
 
 import './styles.scss'
 
@@ -17,7 +17,7 @@ export const Standings = ({ sport, league, season }: Props) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { data: standingsData, isLoading } = useStandings(sport, season, league)
-  const [_standings, setStandings] = useState<VolleyballStandingInfo[][]>()
+  const [_standings, setStandings] = useState<StandingInfo[][]>()
 
   useEffect(() => {
     if(standingsData) {
@@ -59,7 +59,7 @@ export const Standings = ({ sport, league, season }: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        _standings && _standings.length > 0 && _standings.map((standing: VolleyballStandingInfo[]) => (
+        _standings && _standings.length > 0 && _standings.map((standing: StandingInfo[]) => (
           <section className="standings">
             <table>
               <thead>
