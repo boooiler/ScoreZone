@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
+
+import { useStandings } from "@/shared/api/sportQuery"
 import Loader from "@/shared/components/loader"
-import { useVolleyballStandings } from "../../api/volleyballQuery"
-import { VolleyballStandingInfo } from "../../model/standings"
+import { StandingInfo } from "@/shared/model/standings"
+
 import './styles.scss'
 
 interface Props {
@@ -11,11 +13,11 @@ interface Props {
   league: number
   season: number
 }
-export const VolleyballStandings = ({ sport, league, season }: Props) => {
+export const Standings = ({ sport, league, season }: Props) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { data: standingsData, isLoading } = useVolleyballStandings(sport, season, league)
-  const [_standings, setStandings] = useState<VolleyballStandingInfo[][]>()
+  const { data: standingsData, isLoading } = useStandings(sport, season, league)
+  const [_standings, setStandings] = useState<StandingInfo[][]>()
 
   useEffect(() => {
     if(standingsData) {
@@ -57,7 +59,7 @@ export const VolleyballStandings = ({ sport, league, season }: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        _standings && _standings.length > 0 && _standings.map((standing: VolleyballStandingInfo[]) => (
+        _standings && _standings.length > 0 && _standings.map((standing: StandingInfo[]) => (
           <section className="standings">
             <table>
               <thead>

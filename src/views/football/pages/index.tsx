@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from "react-router-dom"
 import moment from "moment"
-import { useFootballFixtures } from "../api/footballQuery"
-import TopLeagues from "@/shared/components/topLeagues"
+
 import Loader from "@/shared/components/loader"
-import { FootballFixture } from "../model/fixtures"
-import '../components/footballFixtures/styles.scss'
+import { SportPage } from "@/shared/components/sportPage"
+import TopLeagues from "@/shared/components/topLeagues"
+import { useFootballFixtures } from "@/views/football/api/footballQuery"
+import { FootballFixture } from "@/views/football/model/fixtures"
+
+import '@/views/football/components/footballFixtures/styles.scss'
 import './styles.scss'
 
 export const Football = () => {
@@ -46,60 +49,66 @@ export const Football = () => {
       <section className="page-wrapper">
         <h1>{t('root.menu.football')}</h1>
         <section className="football-main-page">
-          <h2>{t('shared.todaysMatches')}</h2>
-          {isLoading || !fixtures ?(
+          {isLoading ?(
             <Loader fullscreen />
+          ) : !fixtures || !Object.keys(fixtures).length ? (
+            <SportPage />
           ) : (
-            Object.keys(fixtures).map((leagueName: string, index: number) => (
-              <div key={index} className="fixtures-wrapper--round">
-                <h4>{leagueName}</h4>
-                {fixtures[leagueName].map((fixture: FootballFixture) => (
-                  <div 
-                    key={fixture.fixture.id} 
-                    className="fixtures-wrapper--round__score"
-                    onClick={() => navigate(`/football/fixtures/${fixture.fixture.id}`)}
-                  >
-                    <div className="match-date">
-                      {liveStatus.includes(fixture.fixture.status.short) ? (
-                        <div className="live-match">
-                          {breakStatus.includes(fixture.fixture.status.short) 
-                            ? <b style={{ fontSize: '12px' }}>PRZERWA</b> 
-                            : <b>{fixture.fixture.status.elapsed}<div>&#8242;</div></b>}
-                        </div>
-                      ) : fixture.fixture.status.short === 'FT' ? (
-                        <b style={{ fontSize: '12px' }}>KONIEC</b>
-                      ) : (
-                        <>
-                          <b>{moment(fixture.fixture.date).format("HH:mm")}</b>
-                          <p>{moment(fixture.fixture.date).format("DD/MM/YY")}</p>
-                        </>
-                      )}
+            <>
+              <h2>{t('shared.todaysMatches')}</h2>
+              {Object.keys(fixtures).map((leagueName: string, index: number) => (
+                <div key={index} className="fixtures-wrapper--round">
+                  <h4>{leagueName}</h4>
+                  {fixtures[leagueName].map((fixture: FootballFixture) => (
+                    <div 
+                      key={fixture.fixture.id} 
+                      className="fixtures-wrapper--round__score"
+                      onClick={() => navigate(`/football/fixtures/${fixture.fixture.id}`)}
+                    >
+                      <div className="match-date">
+                        {liveStatus.includes(fixture.fixture.status.short) ? (
+                          <div className="live-match">
+                            {breakStatus.includes(fixture.fixture.status.short) 
+                              ? <b style={{ fontSize: '12px' }}>{t('shared.break')}</b> 
+                              : <b>{fixture.fixture.status.elapsed}<div>&#8242;</div></b>}
+                          </div>
+                        ) : fixture.fixture.status.short === 'FT' ? (
+                          <b style={{ fontSize: '12px' }}>{t('shared.finished')}</b>
+                        ) : fixture.fixture.status.short === 'PST' ? (
+                          <b style={{ fontSize: '12px' }}>{t('shared.postponed')}</b>
+                        ) : (
+                          <>
+                            <b>{moment(fixture.fixture.date).format("HH:mm")}</b>
+                            <p>{moment(fixture.fixture.date).format("DD/MM/YY")}</p>
+                          </>
+                        )}
+                      </div>
+                      <div className="team">
+                        <img
+                          src={fixture.teams.home.logo}
+                          alt="team logo"
+                        />
+                        <span>{fixture.teams.home.name}</span>
+                      </div>
+                      <div className={`score${liveStatus.includes(fixture.fixture.status.short) ? ' live' : ''}`}>
+                        {['NS','TBD', 'PST'].includes(fixture.fixture.status.short) ? (
+                          <><div>-</div> : <div>-</div></>
+                        ) : (
+                          <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>
+                        )}
+                      </div>
+                      <div className="team">
+                        <span>{fixture.teams.away.name}</span>
+                        <img
+                          src={fixture.teams.away.logo}
+                          alt="team logo"
+                        />
+                      </div>
                     </div>
-                    <div className="team">
-                      <img
-                        src={fixture.teams.home.logo}
-                        alt="team logo"
-                      />
-                      <span>{fixture.teams.home.name}</span>
-                    </div>
-                    <div className={`score${liveStatus.includes(fixture.fixture.status.short) ? ' live' : ''}`}>
-                      {['NS','TBD', 'PST'].includes(fixture.fixture.status.short) ? (
-                        <><div>-</div> : <div>-</div></>
-                      ) : (
-                        <><div>{fixture.goals.home}</div> : <div>{fixture.goals.away}</div></>
-                      )}
-                    </div>
-                    <div className="team">
-                      <span>{fixture.teams.away.name}</span>
-                      <img
-                        src={fixture.teams.away.logo}
-                        alt="team logo"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))
+                  ))}
+                </div>
+              ))}
+            </>
           )}
         </section>
       </section>

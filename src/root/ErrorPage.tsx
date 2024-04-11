@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { useRouteError } from "react-router-dom"
+
 import NavigationBar from "./navBar"
 
 const ErrorPage = () => {

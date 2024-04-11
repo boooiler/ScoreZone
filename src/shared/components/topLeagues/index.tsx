@@ -1,15 +1,17 @@
 import { useTranslation } from "react-i18next"
-import { topVolleyballLeagues } from "@/views/volleyball/model/mockupLeagues"
-import { topHandballLeagues } from "@/views/handball/model/mockupLeagues"
-import { League, Sports, TopLeaguesData } from "@/shared/model/league"
+
+import { LeagueBox } from "./LeagueBox"
+import { AllSports, League, TopLeaguesData } from "@/shared/model/league"
 import { FootballLeague } from "@/views/football/model/league"
 import { topFootballLeagues } from "@/views/football/model/mockupLeagues"
-import { LeagueBox } from "./LeagueBox"
+import { topHandballLeagues } from "@/views/handball/model/mockupLeagues"
+import { topVolleyballLeagues } from "@/views/volleyball/model/mockupLeagues"
+
 import "./styles.scss"
 
 interface Props {
   leagueIds: number[]
-  sport: Sports
+  sport: AllSports
 }
 export const TopLeagues = ({ leagueIds, sport }: Props) => {
   const { t } = useTranslation()
@@ -48,6 +50,7 @@ export const TopLeagues = ({ leagueIds, sport }: Props) => {
           return (
             <LeagueBox 
               sport={sport}
+              key={id}
               leagueId={id}
               name={name}
               logo={logo}

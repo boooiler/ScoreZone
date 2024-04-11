@@ -1,6 +1,8 @@
+import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+
 import Providers from './providers/Providers'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import routes from './Routes'
+
 import './theme/normalize.css'
 import './theme/main.scss'
 

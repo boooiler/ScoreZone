@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 import moment from "moment"
+
 import { useFootballFixtures } from "../../api/footballQuery"
-import Loader from "@/shared/components/loader"
 import { FootballFixture, FootballFixtureMatchDay } from "../../model/fixtures"
+import Loader from "@/shared/components/loader"
+
 import "./styles.scss"
 
 interface Props {

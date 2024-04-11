@@ -1,13 +1,15 @@
-import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
+
 import { useFootballFixtures } from "../../api/footballQuery"
-import Loader from "@/shared/components/loader"
-import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
-import Icon from "@/shared/icons/Icon"
 import { FootballLineups } from "../../components/footballLineups/FootballLineups"
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
+import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
+import Loader from "@/shared/components/loader"
+import { Tab, TabGroup } from "@/shared/components/tabs"
+import Icon from "@/shared/icons/Icon"
+
 import './styles.scss'
 
 export const FixtureDetails = () => {
@@ -16,7 +18,6 @@ export const FixtureDetails = () => {
   const { t } = useTranslation()
   const { data: fixture, isLoading } = useFootballFixtures(Number(fixtureId))
   const fixtureDetails: FootballMatch = fixture && fixture[0]
-  const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'standings'>('events')
   const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
   const breakStatus = ['HT', 'BT', 'INT']
   const goalEvent = [
@@ -75,8 +76,14 @@ export const FixtureDetails = () => {
                     </div>
                   ) : (
                     <>
-                      <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
-                      <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("HH:mm")}</p>
+                      {fixtureDetails.fixture.status.short === 'PST' ? (
+                        <p className="fixture-match-info--date">{t('shared.matchPostponed')}</p>
+                      ) : (
+                        <>
+                          <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("DD/MM/YYYY")}</p>
+                          <p className="fixture-match-info--date">{moment(fixtureDetails.fixture.date).format("HH:mm")}</p>
+                        </>
+                      )}
                       <p className="fixture-match-info--stadium">
                         {fixtureDetails.fixture.venue.name}, {fixtureDetails.fixture.venue.city}
                       </p>
@@ -115,29 +122,8 @@ export const FixtureDetails = () => {
             </section>
 
             <section className="fixture-details-wrapper">
-              <section className="tabs">
-                <span 
-                  className={`tab ${activeTab === 'events' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('events')}
-                >
-                  {t('shared.highlights')}
-                </span>
-                <span 
-                  className={`tab ${activeTab === 'squads' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('squads')}
-                >
-                  {t('shared.lineups')}
-                </span>
-                <span 
-                  className={`tab ${activeTab === 'standings' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('standings')}
-                >
-                  {t('shared.standings')}
-                </span>
-              </section>
-
-              {activeTab === 'events' ? (
-                <section className="tab-content">
+              <TabGroup>
+                <Tab label={t('shared.highlights')}>
                   <section className="match-report">
                     {fixtureDetails.events.map((e: FootballFixtureEvent, index: number) => (
                       <div 
@@ -150,16 +136,14 @@ export const FixtureDetails = () => {
                       </div>
                     ))}
                   </section>
-                </section>
-              ) : activeTab === "squads" ? (
-                fixtureId && (
-                  <section className="tab-content">
-                    <FootballLineups fixtureId={fixtureId} />
-                  </section>
-                )
-              ) : (
-                <FootballStandings league={fixtureDetails.league.id} season={fixtureDetails.league.season} />
-              )}
+                </Tab>
+                <Tab label={t('shared.lineups')}>
+                  {fixtureId && <FootballLineups fixtureId={fixtureId} />}
+                </Tab>
+                <Tab label={t('shared.standings')}>
+                  <FootballStandings league={fixtureDetails.league.id} season={fixtureDetails.league.season} />
+                </Tab>
+              </TabGroup>
             </section>
           </>
         )}

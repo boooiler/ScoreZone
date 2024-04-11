@@ -10,6 +10,9 @@ const shared = {
   results: "Wyniki",
   matches: "Mecze",
   break: "Przerwa",
+  finished: "Zakończone",
+  postponed: "Przełożone",
+  matchPostponed: "Mecz przełożony",
   week: "Kolejka",
   table: {
     team: "Drużyna",
@@ -23,6 +26,7 @@ const shared = {
     form: "Forma",
     formLetters: {
       D: "R",
+      O: "O",
       W: "W",
       L: "P"
     }

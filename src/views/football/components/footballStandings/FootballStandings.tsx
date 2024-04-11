@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import Loader from "@/shared/components/loader"
+import { useNavigate } from "react-router-dom"
+
 import { useFootballStandings } from "../../api/footballQuery"
 import { FootballStandingInfo } from "../../model/standings"
+import Loader from "@/shared/components/loader"
+
 import './styles.scss'
 
 interface Props {
@@ -57,8 +59,8 @@ export const FootballStandings = ({ league, season }: Props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        _standings && _standings.length > 0 && _standings.map((standing: FootballStandingInfo[]) => (
-          <section className="standings">
+        _standings && _standings.length > 0 && _standings.map((standing: FootballStandingInfo[], index: number) => (
+          <section className="standings" key={index}>
             <table>
               <thead>
                 <tr>

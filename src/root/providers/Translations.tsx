@@ -1,7 +1,8 @@
 import { I18nextProvider, initReactI18next } from "react-i18next"
-import LanguageDetector from 'i18next-browser-languagedetector'
-import { translations } from "../../i18n"
 import i18next from "i18next"
+import LanguageDetector from 'i18next-browser-languagedetector'
+
+import { translations } from "../../i18n"
 
 i18next
   .use(LanguageDetector)

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
+
 import { FootballStandings } from "../model/standings"
 
 const apiKey = import.meta.env.VITE_API_KEY

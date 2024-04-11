@@ -1,9 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { Sports } from "@/shared/model/league"
+
+import { AllSports } from "@/shared/model/league"
+
 import "./styles.scss"
 
 interface Props {
-    sport: Sports
+    sport: AllSports
     leagueId: number
     logo: string
     name: string

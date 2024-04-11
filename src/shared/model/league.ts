@@ -1,4 +1,5 @@
-export type Sports = 'football' | 'volleyball' | 'handball'
+export type AllSports = 'football' | 'volleyball' | 'handball'
+export type OtherSports = Omit<AllSports, "football">
 
 export interface TopLeaguesData{
     volleyball: League[]

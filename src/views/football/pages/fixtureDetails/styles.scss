@@ -122,6 +122,7 @@
                     b {
                         display: flex;
                         align-items: center;
+                        text-transform: uppercase;
 
                         div {
                             @include blinking-animation(1s)
@@ -136,6 +137,7 @@
                 &--date {
                     font-weight: 600;
                     font-size: 16px;
+                    text-transform: uppercase;
 
                     @media #{$msm} {
                         font-size: 12px;
