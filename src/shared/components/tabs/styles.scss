@@ -1,0 +1,60 @@
+@import '@/root/theme/variables';
+
+.tab {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+
+    &-headers {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        overflow-x: auto;
+
+        @media #{$mlg} {
+            justify-content: flex-start;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        @media #{$msm} {
+            padding: 20px 0;
+        }
+
+        &--label {
+            cursor: pointer;
+            padding: 10px 16px 8px;
+            background: $gray-medium-color;
+            border-radius: 6px;
+            transition: all .3s;
+            font-family: $font-header;
+            font-size: 14px;
+
+            @media #{$msm} {
+                font-size: 12px;
+            }
+
+            &:hover {
+                background: $gray-light-color;
+            }
+
+            &.active {
+                box-shadow: 0 0px 12px -2px var(--main-color);
+                border: 1px solid var(--main-color);
+                background: var(--main-color);
+            }
+        }
+    }
+
+    &-content {
+        width: 100%;
+    }
+}

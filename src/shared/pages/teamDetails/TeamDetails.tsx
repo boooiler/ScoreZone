@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { useTeams } from "@/shared/api/sportQuery"
 import { Fixtures } from "@/shared/components/fixtures"
 import Loader from "@/shared/components/loader"
+import { Tab, TabGroup } from "@/shared/components/tabs"
 import TopLeagues from "@/shared/components/topLeagues"
 import { Team } from "@/shared/model/team"
 
@@ -18,7 +19,6 @@ export const TeamDetails = ({ sport }: Props) => {
   const { teamId } = useParams()
   const { data, isLoading } = useTeams(sport, Number(teamId))
   const [teamDetails, setTeamDetails] = useState<Team>()
-  const [activeTab, setActiveTab] = useState<'plannedFixtures' | 'finishedFixtures'>('finishedFixtures')
 
   useEffect(() => {
     if(data && data.response){
@@ -53,42 +53,29 @@ export const TeamDetails = ({ sport }: Props) => {
                 />
                 <h1 className="team-name">{teamDetails.name}</h1>
               </section>
-            
-              <section className="tabs">
-                <span 
-                  className={`tab ${activeTab === 'finishedFixtures' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('finishedFixtures')}
-                >
-                  {t('shared.results')}
-                </span>
-                <span 
-                  className={`tab ${activeTab === 'plannedFixtures' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('plannedFixtures')}
-                >
-                  {t('shared.matches')}
-                </span>
-              </section>
 
-              { activeTab === "plannedFixtures" ? (
-                <section className="fixtures">
-                  <Fixtures 
-                    fixturesType="planned"
-                    season={2023}
-                    team={Number(teamId)} 
-                    sport={sport}
-                  />
-                </section>
-              ) : (
-                <section className="fixtures">
-                  <Fixtures 
-                    fixturesType="finished"
-                    season={2023}
-                    team={Number(teamId)} 
-                    sport={sport}
-                  />
-                </section>
-              )}
-
+              <TabGroup>
+                <Tab label={t('shared.results')}>
+                  <section className="fixtures">
+                    <Fixtures 
+                      fixturesType="finished"
+                      season={2023}
+                      team={Number(teamId)} 
+                      sport={sport}
+                    />
+                  </section>
+                </Tab>
+                <Tab label={t('shared.matches')}>
+                  <section className="fixtures">
+                    <Fixtures 
+                      fixturesType="planned"
+                      season={2023}
+                      team={Number(teamId)} 
+                      sport={sport}
+                    />
+                  </section>
+                </Tab>
+              </TabGroup>
             </>
           )}
       </section>

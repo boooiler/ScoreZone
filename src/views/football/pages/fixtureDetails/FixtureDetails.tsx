@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router-dom"
 import moment from "moment"
@@ -8,6 +7,7 @@ import { FootballLineups } from "../../components/footballLineups/FootballLineup
 import { FootballStandings } from "../../components/footballStandings/FootballStandings"
 import { FootballFixtureEvent, FootballMatch } from "../../model/fixtureDetails"
 import Loader from "@/shared/components/loader"
+import { Tab, TabGroup } from "@/shared/components/tabs"
 import Icon from "@/shared/icons/Icon"
 
 import './styles.scss'
@@ -18,7 +18,6 @@ export const FixtureDetails = () => {
   const { t } = useTranslation()
   const { data: fixture, isLoading } = useFootballFixtures(Number(fixtureId))
   const fixtureDetails: FootballMatch = fixture && fixture[0]
-  const [activeTab, setActiveTab] = useState<'events' | 'squads' | 'standings'>('events')
   const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
   const breakStatus = ['HT', 'BT', 'INT']
   const goalEvent = [
@@ -123,29 +122,8 @@ export const FixtureDetails = () => {
             </section>
 
             <section className="fixture-details-wrapper">
-              <section className="tabs">
-                <span 
-                  className={`tab ${activeTab === 'events' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('events')}
-                >
-                  {t('shared.highlights')}
-                </span>
-                <span 
-                  className={`tab ${activeTab === 'squads' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('squads')}
-                >
-                  {t('shared.lineups')}
-                </span>
-                <span 
-                  className={`tab ${activeTab === 'standings' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('standings')}
-                >
-                  {t('shared.standings')}
-                </span>
-              </section>
-
-              {activeTab === 'events' ? (
-                <section className="tab-content">
+              <TabGroup>
+                <Tab label={t('shared.highlights')}>
                   <section className="match-report">
                     {fixtureDetails.events.map((e: FootballFixtureEvent, index: number) => (
                       <div 
@@ -158,16 +136,14 @@ export const FixtureDetails = () => {
                       </div>
                     ))}
                   </section>
-                </section>
-              ) : activeTab === "squads" ? (
-                fixtureId && (
-                  <section className="tab-content">
-                    <FootballLineups fixtureId={fixtureId} />
-                  </section>
-                )
-              ) : (
-                <FootballStandings league={fixtureDetails.league.id} season={fixtureDetails.league.season} />
-              )}
+                </Tab>
+                <Tab label={t('shared.lineups')}>
+                  {fixtureId && <FootballLineups fixtureId={fixtureId} />}
+                </Tab>
+                <Tab label={t('shared.standings')}>
+                  <FootballStandings league={fixtureDetails.league.id} season={fixtureDetails.league.season} />
+                </Tab>
+              </TabGroup>
             </section>
           </>
         )}

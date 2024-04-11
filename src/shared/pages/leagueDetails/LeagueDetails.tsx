@@ -6,6 +6,7 @@ import { useLeagues, useTeams } from "@/shared/api/sportQuery"
 import { Fixtures } from "@/shared/components/fixtures"
 import Loader from "@/shared/components/loader"
 import { Standings } from "@/shared/components/standings/Standings"
+import { Tab, TabGroup } from "@/shared/components/tabs"
 import { TeamBox } from "@/shared/components/teamBox"
 import TopLeagues from "@/shared/components/topLeagues"
 import { League } from "@/shared/model/league"
@@ -20,7 +21,6 @@ export const LeagueDetails = ({ sport }: Props) => {
   const { leagueId } = useParams()
   const { data: leagueDetails, isLoading: isLoadingLeague } = useLeagues(sport, Number(leagueId))
   const [leagueInfo, setLeagueInfo] = useState<League>()
-  const [activeTab, setActiveTab] = useState<'standings' | 'plannedFixtures' | 'finishedFixtures' | 'teams'>('standings')
   
   useEffect(() => {
     if(leagueDetails){
@@ -70,103 +70,28 @@ export const LeagueDetails = ({ sport }: Props) => {
               </div>
             </section>
 
-            {/* <section className="live-fixtures-wrapper">
-              <div className="live-fixture-item">
-                <div className="live-fixture-item--top">
-                  <span className="live-fixture-item--top__time">`13</span>
-                  <div className="live-fixture-item--top__teams">
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                  </div>
-                </div>
-                <div className="live-fixture-item--middle">
-                  <div className="live-fixture-item--middle__line">
-                    <div className="line-dot" style={{ left: `${13/90*100 > 90 ? 100 : 13/90*100}%` }}></div>
-                  </div>
-                </div>
-                <div className="live-fixture-item--bottom">
-                  <span className="live-fixture-item--bottom__live">LIVE</span>
-                  <div className="team winner">
-                    <span>Wisła Kraków</span>
-                    <span className="score">2</span>
-                  </div>
-                  <div className="team lost">
-                    <span>Cracovia</span>
-                    <span className="score">0</span>
-                  </div>
-                </div>
-              </div>
-              <div className="live-fixture-item">
-                <div className="live-fixture-item--top">
-                  <span className="live-fixture-item--top__time">`58</span>
-                  <div className="live-fixture-item--top__teams">
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                  </div>
-                </div>
-                <div className="live-fixture-item--middle">
-                  <div className="live-fixture-item--middle__line">
-                    <div className="line-dot" style={{ left: `${58/90*100 > 90 ? 100 : 58/90*100}%` }}></div>
-                  </div>
-                </div>
-                <div className="live-fixture-item--bottom">
-                  <span className="live-fixture-item--bottom__live">LIVE</span>
-                  <div className="team">
-                    <span>Legia Warszawa</span>
-                    <span className="score">0</span>
-                  </div>
-                  <div className="team">
-                    <span>Lech Poznań</span>
-                    <span className="score">0</span>
-                  </div>
-                </div>
-              </div>
-            </section> */}
-
-            <section className="tabs">
-              <span 
-                className={`tab ${activeTab === 'standings' ? 'active' : ''}`}
-                onClick={() => setActiveTab('standings')}
-              >
-                {t('shared.standings')}
-              </span>
-              <span 
-                className={`tab ${activeTab === 'finishedFixtures' ? 'active' : ''}`} 
-                onClick={() => setActiveTab('finishedFixtures')}
-              >
-                {t('shared.results')}
-              </span>
-              <span 
-                className={`tab ${activeTab === 'plannedFixtures' ? 'active' : ''}`} 
-                onClick={() => setActiveTab('plannedFixtures')}
-              >
-                {t('shared.matches')}
-              </span>
-              <span 
-                className={`tab ${activeTab === 'teams' ? 'active' : ''}`} 
-                onClick={() => setActiveTab('teams')}
-              >
-                {t('shared.teams')}
-              </span>
-            </section>
-
-            {activeTab === 'standings' ? (
-              <Standings sport={sport} league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
-            ) : activeTab === "plannedFixtures" ? (
-              <section className="fixtures">
-                <Fixtures sport={sport} fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
-              </section>
-            ) : activeTab === "finishedFixtures" ? (
-              <section className="fixtures">
-                <Fixtures sport={sport} fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
-              </section>
-            ) : (
-              <section className="teams">
-                {teams.response && teams.response.map((t: any) => {
-                  return <TeamBox sport={sport} id={t.id} name={t.name} photo={t.logo} />
-                })}
-              </section>
-            )}
+            <TabGroup>
+              <Tab label={t('shared.standings')}>
+                <Standings sport={sport} league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+              </Tab>
+              <Tab label={t('shared.results')}>
+                <section className="fixtures">
+                  <Fixtures sport={sport} fixturesType="finished" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+                </section>
+              </Tab>
+              <Tab label={t('shared.matches')}>
+                <section className="fixtures">
+                  <Fixtures sport={sport} fixturesType="planned" league={Number(leagueId)} season={leagueInfo.seasons[leagueInfo.seasons.length - 1].season} />
+                </section>
+              </Tab>
+              <Tab label={t('shared.teams')}>
+                <section className="teams">
+                  {teams.response && teams.response.map((t: any) => {
+                    return <TeamBox sport={sport} id={t.id} name={t.name} photo={t.logo} />
+                  })}
+                </section>
+              </Tab>
+            </TabGroup>
           </>
         )}
       </section>

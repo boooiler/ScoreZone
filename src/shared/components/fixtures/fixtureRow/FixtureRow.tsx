@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom"
 import moment from "moment"
 
 import { FixturePeriodScores } from "@/shared/model/fixtures"
-import { AllSports } from "@/shared/model/league"
+import { OtherSports } from "@/shared/model/league"
 
 import "./styles.scss"
 
 interface Props {
-  sport: AllSports
+  sport: OtherSports
   id: number
   date: string
   teamHome: {
