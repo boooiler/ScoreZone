@@ -15,8 +15,8 @@ import './styles.scss'
 export const Football = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()  
-  const { data: fixturesData, isLoading } = useFootballFixtures(undefined, undefined, 2023, undefined, undefined, undefined, undefined, moment().format('YYYY-MM-DD'))
-  const leagueIds = [2, 3, 848, 39, 78, 106, 107, 135, 140]
+  const { data: fixturesData, isLoading } = useFootballFixtures(undefined, undefined, 2024, undefined, undefined, undefined, undefined, moment().format('YYYY-MM-DD'))
+  const leagueIds = [2, 3, 4, 848, 39, 78, 106, 107, 135, 140]
   const liveStatus = ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'INT']
   const breakStatus = ['HT', 'BT', 'INT']
   const [fixtures, setFixtures] = useState<any>()
@@ -44,7 +44,7 @@ export const Football = () => {
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
+        <TopLeagues sport="football" leagueIds={[4, 39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper">
         <h1>{t('root.menu.football')}</h1>

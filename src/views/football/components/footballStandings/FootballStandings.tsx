@@ -26,6 +26,7 @@ export const FootballStandings = ({ league, season }: Props) => {
   }, [standingsData])
 
   const splitForm = (form: string) => {
+    if(!form) return <></>
     return form.split("").map((letter: string, index: number) => (
       <span 
         key={index} 

@@ -30,7 +30,7 @@ export const TeamDetails = () => {
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
+        <TopLeagues sport="football" leagueIds={[4, 39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper football-team-details">
         {isLoading || !teamDetails || !leagueDetails || !leagueDetails.length ? (

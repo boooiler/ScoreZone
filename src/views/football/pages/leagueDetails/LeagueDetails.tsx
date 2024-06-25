@@ -30,7 +30,7 @@ export const LeagueDetails = () => {
   return (
     <>
       <section className="left-sidebar">
-        <TopLeagues sport="football" leagueIds={[39, 78, 106, 107, 135, 140]} />
+        <TopLeagues sport="football" leagueIds={[4, 39, 78, 106, 107, 135, 140]} />
       </section>
       <section className="page-wrapper football-league-details">
         {isLoadingTeams || isLoadingLeague || !leagueInfo || !teams ? (
@@ -82,10 +82,12 @@ export const LeagueDetails = () => {
                 </section>
               </Tab>
               <Tab label={t('shared.teams')}>
-                {teams.response && teams.response.map((t: any) => {
-                  const { team } = t
-                  return <TeamBox sport="football" key={team.id} id={team.id} name={team.name} photo={team.logo} />
-                })}
+                <section className="teams">
+                  {teams.response && teams.response.map((t: any) => {
+                    const { team } = t
+                    return <TeamBox sport="football" key={team.id} id={team.id} name={team.name} photo={team.logo} />
+                  })}
+                </section>
               </Tab>
             </TabGroup>
           </>
